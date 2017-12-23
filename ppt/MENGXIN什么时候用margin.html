@@ -1,0 +1,225 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>葡萄藤PPT</title>
+
+		<link rel="stylesheet" href="../css/reveal/reveal.css">
+
+		<!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+		<link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+		<!-- syntax highlighting 代码高亮主题 -->
+		<link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+		<!-- 打印和PDF输出样式 -->
+		<script>
+			var link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild(link);
+		</script>
+		<style>
+			.reveal pre code {
+				background-color: #120;
+			}
+		</style>
+	</head>
+
+	<body>
+		<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+		<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h4>小课堂【萌新】</h4>
+					<h4>【CSS】什么时候用margin？什么时候用padding？</h4>
+					<h4>分享人：计翔于</h4>
+
+				</section>
+				<section>
+					<p>目录</p>
+					<p>1.背景介绍</p>
+					<p>2.知识剖析</p>
+					<p>3.常见问题</p>
+					<p>4.解决方案</p>
+					<p>5.编码实战</p>
+					<p>6.扩展思考</p>
+					<p>7.参考文献</p>
+					<p>8.更多讨论</p>
+				</section>
+				<section>
+					<section>
+						<h3>1.背景介绍</h3>
+					</section>
+					<section>
+						<p>
+							margin 简写属性在一个声明中设置所有外边距属性。该属性可以有 1 到 4 个值。这个简写属性设置一个元素所有外边距的宽度，或者设置各边上外边距的宽度。
+
+							块级元素的垂直相邻外边距会合并，而行内元素实际上不占上下外边距。行内元素的的左右外边距不会合并。同样地，浮动元素的外边距也不会合并。允许指定负的外边距值，不过使用时要小心。是允许负值的。<br>
+							margin(padding):10px;
+							所有 4 个外边距都是 10px<br>
+							margin(padding):10px 5px;
+							上外边距和下外边距是 10px
+							右外边距和左外边距是 5px<br>
+							margin(padding):10px 5px 15px;
+							上外边距是 10px
+							右外边距和左外边距是 5px
+							下外边距是 15px<br>
+							margin(padding):10px 5px 15px 20px;
+							上外边距是 10px
+							右外边距是 5px
+							下外边距是 15px
+							左外边距是 20px
+						</p>
+					</section>
+					<section>
+						<P>
+							padding 简写属性在一个声明中设置所有内边距属性。这个简写属性设置元素所有内边距的宽度，或者设置各边上内边距的宽度。行内非替换元素上设置的内边距不会影响行高计算；因此，如果一个元素既有内边距又有背景，从视觉上看可能会延伸到其他行，有可能还会与其他内容重叠。元素的背景会延伸穿过内边距。不允许指定负边距值。
+							是不允许负值的。
+						</P>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>2.知识剖析</h3>
+					</section>
+					<section>
+						<p>
+							边距属性定义元素周围的空间。通过使用单独的属性，可以对上、下、左、右的外边距进行设置。也可以使用简写的外边距属性同时改变所有的外边距。边界，元素周围生成额外的空白区。“空白区”
+							通常是指其它元素不能出现且父元素背景课件的区域。
+						</p>
+					</section>
+					<section>
+						<p>
+
+						</p>
+					</section>
+
+
+				</section>
+
+				<section>
+					<section>
+						<h3>3.常见问题</h3>
+					</section>
+					<section>
+						<p>
+							什么时候用margin？什么时候用padding？
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>4.解决方案</h3>
+					</section>
+					<section>
+						<p>
+							margin是透明的，是用来个开元素语元素的间距；padding是用来填充元素与内容的间隔。margin在布局中用于分开元素是元素与元素的距离；padding用于元素与内容之间的填充
+							，在不固定高度布局中，padding用来撑起元素高度。
+						</p>
+					</section>
+
+
+				</section>
+				<section>
+					<section>
+						<h3>5.编码实战</h3>
+					</section>
+
+					<section>demo</section>
+
+				</section>
+				<section>
+					<section>
+						<h3>6.扩展思考</h3>
+					</section>
+					<section>
+						<p>margin和padding有什么区别？</p>
+					</section>
+					<section>
+						<p>
+							比如一个盒子里有一个瓶子，瓶子与盒子之间的距离就称为padding，盒子与另一个盒子之间的距离就称为margin。
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>7.参考文献</h3>
+					</section>
+					<section>
+					</section>
+
+				</section>
+				<section>
+					<section>
+						<h3>8.更多讨论</h3>
+					</section>
+					<section>
+						<p>
+						</p>
+					</section>
+				</section>
+				<section>
+					<h4>鸣谢</h4>
+					<p>感谢大家观看</p>
+					<p>
+						By
+						<small style="vertical-align: middle">计翔于</small>
+					</p>
+				</section>
+			</div>
+		</div>
+		<script src="../lib/reveal/js/head.min.js"></script>
+		<script src="../lib/reveal/reveal.js"></script>
+		<script>
+			// 以下为常见配置属性的默认值
+			// {
+			// 	controls: true, // 是否在右下角展示控制条
+			// 	progress: true, // 是否显示演示的进度条
+			// 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+			// 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+			// 	keyboard: true, // 是否启用键盘快捷键来导航
+			// 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+			// 	center: true, // 是否将幻灯片垂直居中
+			// 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+			// 	loop: false, // 是否循环演示
+			// 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+			// 	fragments: true, // 全局开启和关闭碎片。
+			// 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+			// 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+			// 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+			// 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+			// }
+			// 初始化幻灯片
+			Reveal.initialize({
+				history: true,
+				dependencies: [{
+						src: '../plugin/markdown/marked.js'
+					},
+					{
+						src: '../plugin/markdown/markdown.js'
+					},
+					{
+						src: '../plugin/notes/notes.js',
+						async: true
+					},
+					{
+						src: '../plugin/highlight/highlight.js',
+						async: true,
+						callback: function() {
+							hljs.initHighlightingOnLoad();
+						}
+					}
+				]
+			});
+		</script>
+	</body>
+
+</html>
