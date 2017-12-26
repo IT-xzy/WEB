@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>AngularJS服务</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' :
+            '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+    <map name="pttmap">
+        <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank" />
+    </map>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h3>【JS-task06】AngularJS服务详解</h3>
+                <h3>小课堂【武汉-283期】</h3>
+                <p>分享人：熊凡</p>
+            </section>
+
+            <section>
+                <p>目录</p>
+                <p>1.背景介绍</p>
+                <p>2.知识剖析</p>
+                <p>3.常见问题</p>
+                <p>4.解决方案</p>
+                <p>5.编码实战</p>
+                <p>6.扩展思考</p>
+                <p>7.参考文献</p>
+                <p>8.更多讨论</p>
+            </section>
+
+            <section>
+                <section>
+                    <h3>1.背景介绍</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <p style="font-size:26px;">大家应该知道，AngularJS是后台人员在工作之余发明的，他主要应用了后台早就存在的分层思想。所以我们得了解下分层的作用。</p>
+                        <p style="font-size:26px;">dao层：就是Model层，在后台时，这一层的作用，就要是写与数据库交互数据的一层，在angularJS里就主要是写ajax的。 </p>
+                        <p style="font-size:26px;">service层：主查写逻辑代码的，但在angularJS里也可以持久化数据（充当数据容器），以供不同的controller使用。</p>
+                        <p style="font-size:26px;">controller层：即控制层，在angularJS里就是写控制器的。控制器里尽量不要写那些不必要的逻辑，尽量写在service层里。</p>
+                        <p style="font-size:26px;">所以，就有了创建自定义服务的几种方式。</p>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>2.知识剖析</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>一、constant服务:</h4>
+                        <p style="font-size:26px;">app.constant('name',obj)</p>
+                        <p style="font-size:26px;">name为服务的名字,obj为一个对象。</p>
+                        <p style="font-size:26px;"></p>
+                        <pre><code style="font-size:20px; line-height:1.2; background-color: #1c1e20">
+app.constant('APP_KEY', 'a1s2d3f4')
+                        </code></pre>
+                        <p style="font-size:26px;">constant 用于定义常量，一旦定义就不能被改变。可以被注入到任何地方，但是不能被装饰器(decorator)装饰。</p>
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>二、value服务:</h4>
+                        <p style="font-size:26px;">app.value('name',obj)</p>
+                        <p style="font-size:26px;">name为服务的名字,obj为一个对象。</p>
+                        <pre><code style="font-size:20px; line-height:1.2; background-color: #1c1e20">
+app.value('version', '1.0')
+                        </code></pre>
+                        <p style="font-size:26px;">与 constant 一样，可以用来定义值。但与 constant 的区别是：可以被修改，可以被 decorator 装饰，不能被注入到 config 中。</p>
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>三、factory服务:</h4>
+                        <p style="font-size:26px;">app.factory('name',function(){return obj})</p>
+                        <p style="font-size:26px;">name为服务的名字,第二个参数传入一个函数,函数需要有一个返回值obj,返回一个对象。实际被注入的服务就是这个对象。</p>
+                        <pre><code style="font-size:20px; line-height:1.2; background-color: #1c1e20">
+app.factory('myFactory', function(){
+    var fac = {};
+    fac.a = 'hello world';
+    fac.foo = function(){};
+    return fac;
+})
+                        </code></pre>
+                        <p style="font-size:26px;">factory服务是最常见最常用的服务类型,几乎可以满足90%的自己开发的需求,使用它可以编写一些逻辑,通过这些逻辑最后返回所需要的对象. 它和constant,value最大的区别是,factory服务是有一个处理过程,经过这个过程,才返回结果的.
+                        </p>
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>四、service服务</h4>
+                        <p style="font-size:26px;">app.service('name',constructor)</p>
+                        <p style="font-size:26px">name为服务的名字,constructor是一个构造函数。</p>
+                        <pre><code style="font-size:20px; line-height:1.2; background-color: #1c1e20">
+app.service('myService', function(){
+    var a = '';
+    this.setA = function(){};
+    this.getA = function(){};
+    this.foo = function(){};
+})
+                        </code></pre>
+                        <p style="font-size:26px">service和factory的区别在于,它第二个参数传入的是一个构造函数,最后被注入的服务是这个构造函数实例化以后的结果.所以基本上使用service创建的服务的,也都可以使用factory来创建。</p>
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>五、provider服务</h4>
+                        <p style="font-size:26px;">app.factory('name',function(){})</p>
+                        <p style="font-size:26px">name为服务的名字,第二个参数接受一个函数,函数由两部分组成。第一部分的变量和函数是可以在 app.config 函数中访问的。第二部分的变量和函数是通过 $get() 函数返回的</p>
+                        <pre><code style="font-size:20px; line-height:1.2; background-color: #1c1e20">
+app.provider('myProvider', function(){
+    var a = '';
+    var func = function(){};
+
+                        </code></pre>
+                        <pre><code style="font-size:20px; line-height:1.2; background-color: #1c1e20">
+    return{ 
+        $get:function(){
+            foo: function(){},
+            a: a
+        }
+    }
+})                   </code></pre>
+                        <p style="font-size:26px;">$get方法就相当于factory服务的第二个参数,最后要返回一个对象,这个对象就是真正被注入的服务。</p>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>3.常见问题</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>怎么选择这些服务的使用？</h4>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>4.解决办法</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <p style="font-size:26px">一些固定的参数和方法,使用constant</p>
+                        <p style="font-size:26px">可能被修改的参数和方法,使用value</p>
+                        <p style="font-size:26px">通过逻辑处理后得到的参数或方法,使用factory</p>
+                        <p style="font-size:26px">可以使用factory的也可以使用service,反之亦然(一般就是用factory)</p>
+                        <p style="font-size:26px">可以手动配置参数的服务,使用provider</p>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>5、编码实战</h3>
+                </section>
+                <section>
+                    <a href="https://segmentfault.com/a/1190000003096933">
+                        <img src="../img/js-06-angularJS-service/angularJS-service.png" alt="">
+                    </a>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>6、扩展思考</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>decorator是什么？</h4>
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <p style="font-size:26px">decorator比较特殊，它不是 provider 。它是$provider服务的一种方法,它是用来装饰其他 provider 的，不过 constant 除外，因为constant 不是通过
+                            provider() 方法创建的。
+                        </p>
+                        <pre><code style="font-size:20px; line-height:1.2; background-color: #1c1e20">
+app.value('version', '1.0');
+app.decorator('version', function ($delegate) {
+    return $delegate + '.1';
+})                </code></pre>
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <p style="font-size:26px">它接受两个参数,第一个参数'name',是要被装饰的服务的名字,第二个参数是一个函数,函数中注入$delegate,$delegate就是被装饰的服务的实例,然后在函数中操作$delegate,就相当于操作了该服务的实例.
+                        </p>
+                        <pre><code style="font-size:20px; line-height:1.2; background-color: #1c1e20">
+app.config(function($provide){
+    $provide.decorator('myFactory',function($delegate){  
+        $delegate.b = 'thank you';   
+        return $delegate
+    })
+});            </code></pre>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>7、参考文献：</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:34px">
+                        <p style="font-size:26px;">参考一：
+                            <a href=" http://blog.csdn.net/qq_29287973/article/details/74076537"> angularjs中的几种服务的详细分析</a>
+                        </p>
+                        <p style="font-size:26px;">参考二：
+                            <a href="http://www.cnblogs.com/liulangmao/p/4078246.html">angular五种服务详解</a>
+                        </p>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>8、更多讨论</h3>
+                </section>
+            </section>
+            <section>
+                <p>谢谢大家</p>
+                <p style="font-size:26px">制作人:熊凡</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="../lib/reveal/js/head.min.js"></script>
+    <script src="../lib/reveal/reveal.js"></script>
+
+    <script>
+        // 以下为常见配置属性的默认值
+        // {
+        // 	controls: true, // 是否在右下角展示控制条
+        // 	progress: true, // 是否显示演示的进度条
+        // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+        // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+        // 	keyboard: true, // 是否启用键盘快捷键来导航
+        // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+        // 	center: true, // 是否将幻灯片垂直居中
+        // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+        // 	loop: false, // 是否循环演示
+        // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+        // 	fragments: true, // 全局开启和关闭碎片。
+        // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+        // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+        // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+        // 	mouseWheel: false, //是否启用通过鼠标滚轮来切换幻灯片
+        // }
+
+        // 初始化幻灯片
+        Reveal.initialize({
+            history: true,
+            transition: 'convex',
+
+
+            dependencies: [{
+                    src: '../plugin/markdown/marked.js'
+                },
+                {
+                    src: '../plugin/markdown/markdown.js'
+                },
+                {
+                    src: '../plugin/notes/notes.js',
+                    async: true
+                },
+                {
+                    src: '../plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function () {
+                        hljs.initHighlightingOnLoad();
+                    }
+                }
+            ]
+        });
+
+    </script>
+</body>
+
+</html>
