@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //@
+    // instanceof运算符 --> 注意 o小写,非驼峰命名
+    //我一般会用它判断某个对象,是不是函数...
+    var fn1 = function () {
+    }
+    console.log({} instanceof Function);//false 测试
+    console.log(fn1 instanceof Function);//true
+    //判断一个函数是不是另一个函数的实例
+    var Fn = function () {
+    }
+    var fn2 = new Fn;
+    console.log(fn2 instanceof Fn);
+
+    //isPrototypeOf --> 判断一个对象是否继承了prototype属性,,既然继承了自己prototype,肯定就是自己的实例了
+    //以上面为例子
+    console.log(Fn.prototype.isPrototypeOf(fn2));//true
+    console.log(Fn.prototype.isPrototypeOf(fn1));//false 测试
+
+    //@
+    //fn.__proto__
+    //fn.constructor.prototype
+    //Object.getProtytypeOf() --> 对象__proto__,,因为__proto__是浏览器提供的,有的浏览器可能没有,,所以诞生了这个属性
+    console.log(fn2.constructor.prototype === Object.getPrototypeOf(fn2));//true
+    console.log(fn2.__proto__ === Object.getPrototypeOf(fn2));//true
+
+    //没有拓展思考
+</script>
+</body>
+</html>

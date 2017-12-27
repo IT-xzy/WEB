@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>return</title>
+</head>
+<body>
+<div onclick="alert(1)">
+    <a href="111.html" onclick="event.preventDefault();event.stopPropagation()">111</a>
+    <a href="111.html" onclick="event.stopPropagation();return false;">222</a>
+
+</div>
+</body>
+<script>
+    //return在全局作用域中
+    //return在所在的函数体中
+    //    function a(){
+    //        function b() {
+    //         return;
+    //        }
+    //        b();
+    //        console.log(1);
+    //    }
+    //    a();
+    //全局作用域中的for循环、函数体内中的for循环与return
+    //    function aa() {
+    //        for (var i = 0, j = 10; i < j; i++) {
+    //            if (i == 2) {
+    //                console.log(2);
+    //                return;
+    //            }
+    //        }
+    //        console.log(1);
+    //    }
+    //    aa();
+
+
+    //dom0级事件与return,比如阻止点击事件,复制、粘贴
+
+
+    //return与自动分号补齐
+    //    function a() {
+    //        return
+    //        {
+    //            name: 1;;;;;;;ss
+    //        }
+    //    }
+    //
+    //    var b = a();
+    //    console.log(b);
+
+    //return与构造器
+    //    function A(v) {
+    //        this.v = v;
+    //    }
+    //
+    //    var a = new A(1);
+    //    console.log(a);
+    //
+    //
+    //    function B(v) {
+    //        this.v = v;
+    //        return {name: 1};
+    //    }
+    //
+    //    var b = new B(1);
+    //    console.log(b);
+    //
+    //    function C(v) {
+    //        this.v = v;
+    //        return 111;
+    //    }
+
+    //    var c = new C(1);
+    //    console.log(c);
+
+
+    //其它的暂时没想起来,最后有空可以提一下
+</script>
+<script>
+</script>
+</html>

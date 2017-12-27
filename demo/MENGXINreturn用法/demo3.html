@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>return</title>
+</head>
+<body>
+</body>
+<script>
+    //break
+    //    var i = 0, j = 10;
+    //    var o = 0, p = 10;
+    //    for (; i < j; i++) {
+    //        for (; o < p; o++) {
+    //            console.log(o);
+    //            if (o == 4) {
+    //                break;
+    //            }
+    //        }
+    //        console.log('%c' + i, 'color:red;');
+    //    }
+    //continue
+    //    var i = 0, j = 10;
+    //    var o = 0, p = 10;
+    //    for (; i < j; i++) {
+    //        for (; o < p; o++) {
+    //            if (o == 4) {
+    //                continue;
+    //            }
+    //            console.log(o);
+    //        }
+    //        console.log('%c' + i, 'color:red;');
+    //    }
+    //如何结束整个循环,包括外层循环
+    var i = 0, j = 10;
+    var o = 0, p = 10;
+    end:
+        for (; i < j; i++) {
+            for (; o < p; o++) {
+                if (o == 4) {
+                    break end;
+                }
+                console.log(o);
+            }
+            console.log('%c' + i, 'color:red;');
+        }
+</script>
+<script>
+</script>
+</html>

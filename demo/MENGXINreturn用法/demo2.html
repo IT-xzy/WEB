@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>return</title>
+</head>
+<body>
+</body>
+<script>
+    //获取返回值
+    //    function getUrl() {
+    //        return '/a/login'
+    //    }
+    //    var a=getUrl();
+    //    console.log(a);
+
+    //配合流程控制语句,中止函数
+    //    function a() {
+    //        var i = 0;
+    //        for (; ; i++) {
+    //            console.log(i);
+    //            if (i == 10) {
+    //                return;
+    //            }
+    //        }
+    //    }
+    //    a();
+
+    //与闭包形成单例模式
+    //    var add = function () {
+    //        var res = 0;//闭包
+    //        return function (num, end) {
+    //            res += num;
+    //            if (!end) {
+    //                return arguments.callee;
+    //            } else {
+    //                return res;
+    //            }
+    //        }
+    //    }();
+    //    console.log(add(1)(2)(3)(4, true));
+</script>
+<script>
+</script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<a href="http://www.runoob.com/jsref/jsref-obj-global.html">JS的几大全局对象</a> <br>
+<script>
+    //包装类型
+    var str1 = 'string1';
+    var num1 = 121.111;
+    console.log(str1.indexOf('i'));// 3 --> indexOf() 在String里,查询指定字符的索引,没有返回 -1
+    console.log(num1.toFixed(2));// 12 --> toFixed() 在number里,主要用来规定保留几位小数.....
+    //例如上面一些看起来 不是对象的变量,但是我们却可以直接调用方法,
+    // --> 这个是因为它们是包装类型,调用这些方法的时候,JS帮你包装对象,调用完成销毁
+    //console.log(new Object('string1'));
+    //console.log(new Object(121.111));
+    //    console.log(new Object('string1'));
+    //    console.log(new Object(121.111));
+
+    //<a href="http://www.runoob.com/jsref/jsref-obj-global.html">JS的几大全局对象</a> <br>
+    //刚才也说过了,JS几大内置对象都是构造函数(从命名也可看出来了,第一个字母大写),我们常用的方法就是挂载到原型上的,
+    //*
+    //@通过prototype访问原型,其实主要是针对构造函数这种模式的,,,对象是没有prototype属性的...
+    //    var obj1 = {};
+    //    console.log(obj1.prototype);
+    //    var obj2 = new Object();
+    //    console.log(obj2.prototype);
+    var obj3 = Object.create(null);//虽然也是对象....但是这种生成的对象适合存储数据,因为没有任何方法,更别说prototype了
+    console.log(obj3);
+
+
+    //每个函数在创建之后都会有个[[prototype]]属性...那么[[prototype]]属性是怎么决定的？
+    var fn1 = function () {
+
+    }
+    console.log(fn1.prototype);//然后可以发现有个 constructor属性,这个属性一般默认指向自己...所以它作为构造函数的适合, new出来的实例可以通过 constructor获取是由谁创建的.
+    //                                                                                                          但是可以被更改....
+    //但是如果使用构造函数的方式,构造的函数,并没有生成 prototype属性,,,,,,
+    //比如
+    var fn2 = new Function;
+    console.log(fn2.prototype);//(匿名)anonymous...//因为我接下来会说,构造函数的实例没有prototype...但是new Function生成的函数确实由prototype ...
+
+    var Fn1 = function (F1) {
+    }
+    var fn22 = new Fn1;
+    console.log(fn22.prototype);//undefined -->42行
+    console.log(fn22.constructor);//自身没有,跑到原型链找 --> Fn1
+    Fn1.prototype.constructor = null;
+    console.log(fn22.constructor);//null ,fn22显然不是由null创建的
+
+    //@__proto__ 某些现代浏览器会暴露出来的属性...就是原型链,prototype只是原型...
+    //    在 javascript 中每个对象都会有一个 __proto__ 属性，
+    //    当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，
+    //    那么他就会去 __proto__ 里找这个属性，
+    //    这个 __proto__ 又会有自己的 __proto__，于是就这样一直向上寻找，也就是我们平时所说的原型链的概念。
+
+    //***它的作用,假如A是构造函数,B是A的实例,
+    // 那么B.__proto__ 就指向 A的prototype
+    var A = function () {
+    }
+    var B = new A;
+    console.log(B.__proto__);
+    console.log(B.constructor.prototype);//刚才说过constructor就可以访问到是谁构造自己的,为什么不使用 B.constructor.prototype
+    console.log(B.__proto__ === B.constructor.prototype);//一样的
+    //主要是因为 constructor是可变的
+    A.prototype.constructor = null;//对于A来说,先访问到原型上的属性constructor,然后更改它
+    console.log(B.__proto__);//正常获取
+    //console.log(B.constructor.prototype);//...不能正确访问,,因为 null没有任何属性,所以 null.prototype报错了
+
+    //对象没有prototype,但是由__proto__属性
+    console.log({}.__proto__);
+    console.log({}.__proto__ === Object.prototype);//true ==> {}是由Object构造的,
+
+    //知识剖析完了吧
+</script>
+</body>
+</html>
