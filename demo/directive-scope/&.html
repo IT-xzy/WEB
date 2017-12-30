@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>孤立作用域&符 调用父作用域方法</title>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <button ng-click='alert()'>点我</button><br>
+    <hello my-name="alert()"></hello>
+</div>
+<script>
+    var app = angular.module("app", []);
+    app.controller("myCtrl", function ($scope) {
+        $scope.alert = function(){
+            alert("hello")
+        }
+    });
+    app.directive("hello", function () {
+        return {
+            restrict: "AEC",
+            scope: {
+                alert: "&myName"
+            },
+            template: "<button ng-click='alert()'>点我</button>"
+        }
+    });
+</script>
+</body>
+</html>
