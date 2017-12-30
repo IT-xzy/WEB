@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <style>
+        * {
+            font-family: 'Microsoft JhengHei' !important;
+        }
+
+        .reveal pre code {
+            background-color: #120;
+        }
+
+        h5, h6 {
+            text-transform: none !important;
+        }
+
+        h6 {
+            text-align: start;
+            line-height: 50px !important;
+            font-size: 22px !important;
+        }
+
+        xmp {
+            margin: 0;
+            background: #120;
+            color: #fff;
+            margin-top: 16px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h4>小课堂[萌新分院]</h4>
+            <h4>如何理解js中的call和apply？</h4>
+            <h4>分享人：张晓琳</h4>
+        </section>
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section>
+            <section>
+                <h3>1.背景介绍</h3>
+            </section>
+            <section>
+                <h6>
+                    call 和 apply 都是为了改变某个函数运行时的 <br>
+                    context 即上下文而存在的，换句话说，<br>
+                    就是为了改变函数体内部 this 的指向。<br>
+                    因为 JavaScript 的函数存在<br>
+                    「定义时上下文」和「运行时上下文」<br>
+                    以及「上下文是可以改变的」这样的概念。<br>
+                </h6>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>2.知识剖析</h3>
+            </section>
+            <section>
+                <h6>
+                    1. apply: <br>
+                     方法能劫持另外一个对象的方法，继承另外一个对象的属性. <br>
+                    Function.apply(obj,args)方法能接收两个参数<br>
+                    obj：这个对象将代替Function类里this对象<br>
+                    args：这个是数组，它将作为参数传给Function（args-->arguments）<br>
+                </h6>
+            </section>
+            <section>
+                <h6>
+                    2. call <br>
+                    和apply的意思一样,只不过是参数列表不一样<br>
+                    Function.call(obj,[param1[,param2[,…[,paramN] ] ] ] )<br>
+                    obj：这个对象将代替Function类里this对象<br>
+                    params：这个是一个参数列表<br>
+                </h6>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>3.常见问题</h3>
+            </section>
+            <section>
+                如何使用call和apply？<br>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>4.解决方案</h3>
+            </section>
+            <section>
+                <h6>
+                    call 和 apply 的作用基本类似， <br>
+                    都是去执行function并将这个function <br>
+                    的context替换成第一个参数带入。 <br>
+                    两者的不同是call 必须将function 的参数一一带入，接受的是连续参数<br>
+                    而 apply 接受的是数组参数 只要在第二个参数带入一个数列。<br>
+                </h6>
+            </section>
+            <section>
+                <a href="../demo/call與apply/demo1.html" target="_blank">demo</a>
+                </pre>
+                </h6>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>5.编码实战</h3>
+                <h6>
+                    <a href="../demo/代替另一個對象/demo1.html" target="_blank">demo</a>
+                </h6>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>6.扩展思考</h3>
+            </section>
+            <section>
+                <h6>call()和apply()两种方法的区别？ <br>
+                </h6>
+            </section>
+            <section>
+                <h6>
+                    相同点:两个方法产生的作用是完全一样的<br>
+                    不同点:方法传递的参数不同<br>
+                    call()接受的是一个参数列表，而apply()接受一个参数数组。<br>
+                    func.call(this, arg1, arg2);<br>
+                    func.apply(this, [arg1, arg2])<br>
+                    其中 this 是你想指定的上下文，他可以是任何一个 JavaScript 对象(JavaScript 中一切皆对象)，<br>
+                    call 需要把参数按顺序传递进去，而 apply 则是把参数放在数组里。<br>
+                    因此要说适用条件的话，当你的参数是明确知道数量时用 call 。<br>
+                    而不确定的时候用 apply，然后把参数 push 进数组传递进去。<br>
+                </h6>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>7.参考文献</h3>
+            </section>
+            <section>
+                <a href="http://blog.csdn.net/ganyingxie123456/article/details/70855586" target="_blank">參考</a>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>8.更多讨论</h3>
+            </section>
+        </section>
+        <section>
+            <h4>鸣谢</h4>
+            <p>感谢大家观看</p>
+            <p>
+                By
+                <small style="vertical-align: middle">張曉琳</small>
+            </p>
+        </section>
+    </div>
+</div>
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: '../plugin/markdown/marked.js'},
+            {src: '../plugin/markdown/markdown.js'},
+            {src: '../plugin/notes/notes.js', async: true},
+            {
+                src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
