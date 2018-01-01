@@ -1,0 +1,60 @@
+一.今天完成的事情
+
+1.实现了详情页的图片预览和删除  在网上找的一个教程  试了下 能够实现本地的操作
+
+$scope.reader = new FileReader();  //创建一个FileReader接口
+$scope.thumb = {};   //用于存放图片的base64
+$scope.img_upload = function(files) {    //单次提交图片的函数
+   $scope.guid = (new Date()).valueOf();  //通过时间戳创建一个随机数，作为键名使用
+   $scope.reader.readAsDataURL(files[0]); //FileReader的方法，把图片转成base64
+   $scope.reader.onload = function(ev) {
+       $scope.$apply(function(){
+           $scope.thumb[$scope.guid] = {
+               img : ev.target.result //接收base64
+           }
+       });
+   };
+};
+
+删除本地预览
+
+
+$scope.img_del = function(key) {  
+   var guidArr = [];
+   for(var p in $scope.thumb){
+       guidArr.push(p);
+   }
+   delete $scope.thumb[guidArr[key]];
+   delete $scope.form.image[guidArr[key]];
+};
+
+
+
+
+二.明天计划的事情
+
+1.实现怎么上传图片到服务器 然后显示在列表页
+
+
+
+三.遇到的问题
+
+1.测试接口里面的这个图片地址是什么？ 应该是字符串   可是图片的base64格式的字符串自己试了下 特别的长
+
+
+<img src="data:image/gif;base64,R0lGODlhHAAmAKIHAKqqqsvLy0hISObm5vf394uLiwAA>
+
+
+
+
+
+
+
+
+四.收获
+
+1.了解了一下上传图片这方面的知识吧  
+
+图片的 base64 编码就是可以将一副图片数据编码成一串字符串，使用该字符串代替图像地址
+
+知道用原生js写这个功能 只是有一定的局限性  用angular的方式好一点
