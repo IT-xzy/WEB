@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>葡萄藤PPT</title>
+
+  <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/reveal.css">
+
+  <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+  <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/theme/ptt.css">
+
+  <!-- syntax highlighting 代码高亮主题 -->
+  <link rel="stylesheet" href="https://ptteng.github.io/PPT/lib/reveal/css/zenburn.css">
+
+  <!-- 打印和PDF输出样式 -->
+  <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'https://ptteng.github.io/PPT/css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+<img src="https://ptteng.github.io/PPT/img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+  <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+  <div class="slides">
+    <section>
+      <h3>北京分院小课堂</h3>
+      <h3>Bootstrap栅格布局使用</h3>
+      <p>分享人:吴昊杰</p>
+    </section>
+    <section>
+      <p>1.背景介绍</p>
+      <p>2.知识剖析</p>
+      <p>3.常见问题</p>
+      <p>4.解决方案</p>
+      <p>5.编码实战</p>
+      <p>6.扩展思考</p>
+      <p>7.参考文献</p>
+      <p>8.更多讨论</p>
+    </section>
+
+    <section>
+      <h3>1.背景介绍</h3>
+    </section>
+    <section>
+      <h3>Bootstrap的由来</h3>
+      <p>Bootstrap，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、javaScript 的，它简洁灵活，使得 Web 开发更加快捷。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。Bootstrap一经推出后颇受欢迎，一直是GitHub上的热门开源项目，国内一些移动开发者较为熟悉的框架，如WeX5前端开源框架等，也是基于Bootstrap源码进行性能优化而来。</p>
+    </section>
+    <section>
+      <h3>2.知识剖析</h3>
+    </section>
+    <section class="past" style="top: 82px; display: none;" hidden="" aria-hidden="true">
+      <b>2.1 原理</b>
+      <p>  网格系统的实现原理非常简单，仅仅是通过定义容器大小，平分12份(也有平分成24份或32份，但12份是最常见的)，再调整内外边距，最后结合媒体查询，就制作出了强大的响应式网格系统。Bootstrap框架中的网格系统就是将容器平分成12份。</p>
+      <p>在使用的时候大家可以根据实际情况重新编译LESS（或Sass）源码来修改12这个数值（也就是换成24或32，当然你也可以分成更多，但不建议这样使用）。</p>
+    </section>
+    <section class="past" style="top: 2px; display: none;" hidden="" aria-hidden="true">
+      <b>2.2 使用规则</b>
+      <p>1 行(.row)必须包含在容器（.container）中，以便为其赋予合适的对齐方式和内距(padding)。</p>
+      <p>2 在行(.row)中可以添加列(.column)，最多分配12。</p>
+      <p>3 具体内容应当放置在列容器（column）之内，而且只有列（column）才可以作为行容器(.row)的直接子元素</p>
+      <p>4 类似 .row 和 .col-sm-4 这种预定义的类，可以用来快速创建栅格布局。</p>
+      <p>5 通过为“列（column）”设置 padding 属性，从而创建列与列之间的间隔</p>
+    </section>
+
+    <section class="" style="top: 10px; display: none;" aria-hidden="true">
+      <b>2.3 栅格选项</b>
+      <p>当屏宽小于768px（即小屏）时，列的划分以.col-xs-后面的数字为准。如果没定义.col-xs-，就会变成单列且宽度和row相等。</p>
+      <p> 当屏宽在768px和992px之间（即平板屏）时，列的划分以.col-sm-后面的数字为准。如果没有定义col-sm-，以.col-xs-为准。</p>
+      <p>当屏宽在992px和1200px之间（即中屏）时，列的划分以.col-md-后面的数字为准。如果没有定义.col-md-，以col-sm-或col-xs-为准。</p>
+      <p>当屏宽大于1200px（即大屏）时，列的划分以.col-lg-后面的数字为准。如果没有定义.col-md-，以.col-md-或col-sm-或col-xs-为准。</p>
+    </section>
+    <section>
+      <h3>3.常见问题</h3>
+        <b>1.col-xs-1 必须放在.row之中吗 .row必须放在.container之中吗?</b><br>
+        <b>2.如何使用bootstrap栅格系统？</b>
+    </section>
+    <section>
+      <h3>4.解决方案</h3>
+    </section>
+    <section>
+      <p>行（row）”必须包含在 .container （固定宽度）或 .container-fluid （100% 宽度）中，以便为其赋予合适的排列（aligment）和内补（padding）。</p>
+      <p>通过“行（row）”在水平方向创建一组“列（column）。</p>
+      <p>你的内容应当放置于“列（column）”内，并且，只有“列（column）”可以作为行（row）”的直接子元素。</p>
+    </section>
+    <section>
+      <h3>5.编码实战</h3>
+    </section>
+    <section>
+      <h3>6.扩展思考</h3>
+    </section>
+    <section class="" style="top: 17px; display: none;" aria-hidden="true">
+      <b>Bootstrap 有哪些缺点？</b>
+      <p>个人认为，所谓优点和缺点，多数根据业务需求而定。比如 bootstrap 2以后的版本不支持IE6。当你的网站需要支持ie6的时候，这时是缺点。当网站不需要支持ie6.减少了兼容代码的处理，马上又变成了优点。总体而已，Bootstrap 属于前端 ui 库，通过现成的ui组件能够迅速搭建前端页面。同时还可以用less重新设计组件。对于前端技术一般的后台工程师，省去了很多编写前端处理时的痛苦。个人使用搭个博客什么的比较方便。相对于公司，直接使用 Bootstrap 感觉不多，大公司都有自己的前端开发设计人员，也会设计自己的css库。当然，Bootstrap开源，对于学习如何组织css还是很有必要。
+      </p>
+    </section>
+    <section>
+      <h3>7.参考文献</h3>
+      <p>参考文献：<a href="http://www.jb51.net/article/75386.htm" target="_blank">Bootstrap每天必学之栅格系统（布局）</a></p>
+      <p>参考文献：<a href="http://www.runoob.com/bootstrap/bootstrap-tutorial.html" target="_blank">Bootstrap菜鸟教程</a></p>
+    </section>
+
+    <section>
+      <h3>8.更多讨论</h3>
+      <p>1.bootstrap栅格系统所定义的breakpoint 为什么是480 768 992 1200？</p>
+      <p>2.bootstrap的栅格系统为什么是12列，有没有18列，24列等等啊，采用12列有什么好处？</p>
+      <p>3.bootstrap有哪些常用组件？</p>
+    </section>
+    <section>
+      <h4>感谢大家的收看!</h4>
+      <p></p>
+      <p>
+        <small>By:吴昊杰</small>
+      </p>
+    </section>
+  </div>
+</div>
+
+<script src="https://ptteng.github.io/PPT/lib/reveal/js/head.min.js"></script>
+<script src="https://ptteng.github.io/PPT/lib/reveal/reveal.js"></script>
+
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    //  controls: true, // 是否在右下角展示控制条
+    //  progress: true, // 是否显示演示的进度条
+    //  slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    //  history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    //  keyboard: true, // 是否启用键盘快捷键来导航
+    //  overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    //  center: true, // 是否将幻灯片垂直居中
+    //  touch: true, // 是否在触屏设备上启用触摸滑动切换
+    //  loop: false, // 是否循环演示
+    //  rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    //  fragments: true, // 全局开启和关闭碎片。
+    //  autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    //  transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    //  transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    //  mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/marked.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/markdown.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/notes/notes.js', async: true },
+            { src: 'https://ptteng.github.io/PPT/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+    });
+</script>
+</body>
+</html>
