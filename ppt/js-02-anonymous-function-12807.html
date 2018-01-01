@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>【JS-task2】JAVASCRIPT的匿名函数</h3>
+            <p>分享人：郭健锋</p>
+        </section>
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.扩展思考</p>
+            <p>6.参考文献</p>
+            <p>7.更多讨论</p>
+        </section>
+        <section>
+            <section>
+                <h3>1.背景介绍</h3>
+            </section>
+            <section>
+                <h3>在了解什么是匿名函数之前先要了解声明函数和函数表达式</h3>
+            </section>
+            <section>
+                <p>函数声明</p>
+                <pre><code>
+                function sum(x,y){
+                    alert(x+y);
+                }
+                sum(8,9); //17
+                </code></pre>
+                <p>关于函数声明，它最重要的一个特征就是函数声明提升，意思是执行代码之前先读取函数声明。
+                   这意味着可以把函数声明放在调用它的语句之后。如下代码可以正确执行</p>
+                <pre><code>
+                sum(1,2); //3
+                function sum(x,y){
+                    alert(x+y);
+                }
+                </code></pre>
+            </section>
+            <section>
+                <p>函数表达式</p>
+                <pre><code>
+                var ss = function(x,y){
+                    alert(x+y);
+                };
+                ss(4,6);//10
+                </code></pre>
+                <p> 这种形式看起来好像是常规的变量赋值语句。
+                    但是函数表达式和函数声明的区别在于，函数表达式在使用前必须先赋值。
+                    所以一下代码执行的时候就会出错：</p>
+                <pre><code>
+                ss(4,6); //报错，显示 ss is not a function
+                var ss = function(x,y){
+                    alert(x+y);
+                };
+                </code></pre>
+            </section>
+            <section>
+                <p>造成这种现象是因为解析器在向执行环境中加载数据时，解析器会率先读取函数声明，并使其在执行任何代码前可用；
+                   至于函数表达式，则必须等到解析器执行到它的所在的的代码行，才会真正的被解析。</p>
+                <p>函数表达式中，function关键字后面没有标识符，创建的函数叫做匿名函数。</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>2.知识剖析</h3>
+            </section>
+            <section>
+                <p>匿名函数的调用方式</p>
+                <p style="font-size: 20px">匿名函数，顾名思义就是没有名字的函数。例如我们在设定一个DOM元素事件处理函数的时候，我们通常都不会为他们定名字，而是赋予它的对应事件引用一个匿名函数。
+                   上面的函数表达式中的创建，即创建一个匿名函数，并将匿名函数赋值给变量ss，用ss来进行函数的调用，
+                   调用的方式就是在变量ss后面加上一对括号()，如果有参数传入的话就是ss(4,6)，这就是匿名函数的一种调用方式。
+                   还有一种匿名函数的调用方式是：使用()将匿名函数括起来，然后后面再加一对小括号（包含参数列表）。我们再看一下以下一个例子：
+                </p>
+                <pre><code>
+                alert((function(x,y){return x+y;})(2,3));//5
+                alert((new Function("x","y","return x+y;"))(2,3));//5
+                </code></pre>
+            </section>
+            <section style="text-align: left">
+                <p>在javascript中，是没有块级作用域这种说法的，以上代码的这种方式就是模仿了块级作用域(通常成为私有作用域)，语法如下所示：</p>
+                <p>语句结束函数执行，返回调用函数，而且把表达式的值作为函数的结果。</p>
+                <pre><code>
+                (function(){
+                //这里是块级作用域
+                })();
+                </code></pre>
+                <p>以上代码定义并立即调用了一个匿名函数。经函数声明包含在一对圆括号中，
+                   表示它实际上是一个函数表达式。而紧随其后的另一对圆括号会立即调用这个函数。</p>
+            </section>
+            <section style="text-align: left">
+                <h4>然而要注意一点：</h4>
+                <pre><code>
+                    function(){
+                    }();
+                </code></pre>
+                <p>上面的代码是错误的，因为Javascript将function关键字当作一个函数声明的开始，而函数声明后面不能加圆括号，
+                    如果你不显示告诉编译器，它会默认生成一个缺少名字的function，并且抛出一个语法错误，因为function声明需要一个名字。
+                    有趣的是，即便你为上面那个错误的代码加上一个名字，他也会提示语法错误，只不过和上面的原因不一样。
+                    在一个表达式后面加上括号()，该表达式会立即执行，但是在一个语句后面加上括号()，是完全不一样的意思，他的只是分组操作符。</p>
+            </section>
+            <section style="text-align: left">
+                <pre><code>
+// 下面这个function在语法上是没问题的，但是依然只是一个语句
+// 加上括号()以后依然会报错，因为分组操作符需要包含表达式
+
+function foo(){ /* code */ }(); // SyntaxError: Unexpected token )
+
+// 但是如果你在括弧()里传入一个表达式，将不会有异常抛出
+// 但是foo函数依然不会执行
+function foo(){ /* code */ }( 1 );
+
+// 因为它完全等价于下面这个代码，一个function声明后面，又声明了一个毫无关系的表达式：
+function foo(){ /* code */ }
+
+( 1 );
+                </code></pre>
+                <p>所以上面代码要是想要实现，就必须要实现赋值，如a = function(){}()，
+                   "a="这个告诉了编译器这个是一个函数表达式，而不是函数的声明。
+                   因为函数表达式后面可以跟圆括号。所以下面两段代码是等价的。</p>
+            </section>
+            <section>
+                <p>有上面对于函数和匿名函数的了解，我们引申出来了一个概念，即自执行函数，让我们更加深入的了解为什么。
+                   a = function(){}()这个表示可以让编译器认为这个是一个函数表达式而不是一个函数的声明。</p>
+                <pre><code>
+                var aa = function(x){
+                    alert(x);
+                }(5);//5
+                </code></pre>
+                <pre><code>
+                (function(x){alert(x);})(5);//5
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section style="text-align: center">
+                <h3>3.常见问题</h3>
+                <h3>大家看到这里会有疑问，刚刚那些不是自执行函数吗？</h3>
+                <p>接下来会为大家解答什么是自执行函数？</p>
+            </section>
+        </section>
+        <section>
+            <section style="text-align: center">
+                <h3>4 解决方案</h3>
+            </section>
+            <section>
+                <p>我们创建了一个匿名的函数，并立即执行它，由于外部无法引用它内部的变量，因此在执行完后很快就会被释放，关键是这种机制不会污染全局对象。
+                   自执行函数，即定义和调用合为一体。下面我们来看下一下自执行函数的表达方式</p>
+                <pre><code>
+// 下面2个括弧()都会立即执行
+
+(function () { /* code */ } ()); // 推荐使用这个
+(function () { /* code */ })(); // 但是这个也是可以用的
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3 style="text-align: center">5.扩展思考</h3>
+                <p>闭包</p>
+            </section>
+            <section>
+                <p style="font-size: 25px">闭包是什么？闭包是指某种程序语言中的代码块允许一级函数存在并且在一级函数中所定义的自由变量能不被释放，
+                    直到一级函数被释放前，一级函数外也能应用这些未释放的自由变量。</p>
+                <p>怎样？看得一头冒汗吧……没事。让我们换个更加简单的方法说明：闭包，其实是一种语言特性，
+                    它是指的是程序设计语言中，允许将函数看作对象，然后能像在对象中的操作搬在函数中定义实例（局部）变量，而这些变量能在函数中保存到函数的实例对象销毁为止，
+                    其它代码块能通过某种方式获取这些实例（局部）变量的值并进行应用扩展。
+                <p>不知道这么再解释后会否更加清晰，如果还是不明白，那么我们再简化一下：闭包，其实就是指程序语言中能让有权访问另一个函数作用域中的变量的函数。</p>
+            </section>
+            <section>
+                <pre><code>
+var abc=function(y){
+var x=y;// 这个是局部变量
+return function(){
+  console.log(x++);// 就是这里调用了闭包特性中的一级函数局部变量的x，并对它进行操作
+  console.log(y--);// 引用的参数变量也是自由变量
+}}(5);// 初始化
+abc();// "5" "5"
+abc();// "6" "4"
+abc();// "7" "3"
+alert(x);// x is not defined
+                </code></pre>
+            </section>
+        </section>
+        <section style="text-align: left">
+            <h3>6.参考文献</h3>
+            <p>参考1：<a href="https://www.cnblogs.com/chenxianbin89/archive/2010/01/28/1658392.html">对JAVASCRIPT匿名函数的理解（透彻版)</a></p>
+            <p>参考2：<a href="http://blog.csdn.net/xixiruyiruyi/article/details/54894404">杂七杂八JS ：深入理解 函数、匿名函数、自执行函数</a></p>
+        </section>
+        <section>
+            <h3>7.更多讨论</h3>
+        </section>
+        <section>
+            <h4>鸣谢</h4>
+            <p>感谢大家观看</p>
+            <p><small>BY :郭健锋</small></p>
+        </section>
+
+    </div>
+</div>
+
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+//        history: true,
+        transition: 'default',
+        transitionSpeed: 'slow',
+        dependencies: [
+            {src: '../plugin/markdown/marked.js'},
+            {src: '../plugin/markdown/markdown.js'},
+            {src: '../plugin/notes/notes.js', async: true},
+            {
+                src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
