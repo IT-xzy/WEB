@@ -1,60 +1,174 @@
-一.今天完成的事情
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-1.实现了详情页的图片预览和删除  在网上找的一个教程  试了下 能够实现本地的操作
+    <title>如何使用postman</title>
 
-$scope.reader = new FileReader();  //创建一个FileReader接口
-$scope.thumb = {};   //用于存放图片的base64
-$scope.img_upload = function(files) {    //单次提交图片的函数
-   $scope.guid = (new Date()).valueOf();  //通过时间戳创建一个随机数，作为键名使用
-   $scope.reader.readAsDataURL(files[0]); //FileReader的方法，把图片转成base64
-   $scope.reader.onload = function(ev) {
-       $scope.$apply(function(){
-           $scope.thumb[$scope.guid] = {
-               img : ev.target.result //接收base64
-           }
-       });
-   };
-};
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
 
-删除本地预览
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
 
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
 
-$scope.img_del = function(key) {  
-   var guidArr = [];
-   for(var p in $scope.thumb){
-       guidArr.push(p);
-   }
-   delete $scope.thumb[guidArr[key]];
-   delete $scope.form.image[guidArr[key]];
-};
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+</head>
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>【js-05】如何使用postman</h2>
 
+            <p style="text-align: center;">分享人：余佳贝</p>
+        </section>
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section>
+            <h3>1.背景介绍</h3>
+        </section>
+        <section>
+            <p style="text-align: left">当开发人员需要调试一个网页是否运行正常，并不是简简单单地调试网页的HTML、CSS、脚本等信息是否运行正常，更加重要的是网页能够正确是处理各种HTTP请求，毕竟网页的HTTP请求是网站与用户之间进行交互的非常重要的一种方式，在动态网站中，用户的大部分数据都需要通过HTTP请求来与服务器进行交互。Postman插件就充当着这种交互方式的“桥梁”。</p>
+        </section>
+        <section>
+            <h3>2.知识剖析</h3>
+        </section>
+        <section>
+            <section>
+                <p style="text-align: left">Postman 是一个非常棒的Chrome扩展，提供功能强大的API & HTTP 请求调试。</p>
+                <p style="text-align: left">-它能够发送任何类型的HTTP requests (GET, HEAD, POST, PUT..)，附带任何数量的参数+ headers;</p>
+                <p style="text-align: left">-支持不同的认证机制（basic, digest, OAuth），接收到的响应语法高亮（HTML，JSON或XML）;</p>
+                <p style="text-align: left">-Postman 能够保留了历史的请求，这样我们就可以很容易地重新发送请求，有一个“集合”功能，用于存储所有请求相同的API/域。</p>
+                <a href="https://segmentfault.com/a/1190000004883563" target="_blank">postman安装方法教程</a>
+            </section>
+            <section>
+                <p style="text-align: left">postman界面介绍：</p>
+                <img src="../img/js-05-HowusePostman/1.png">
+            </section>
+            <section>
+                <p style="text-align: left">1、postman调试的历史记录，保留了每次测试时的请求参数；</p>
+                <p style="text-align: left">2、在Postman中，Collection类似文件夹，可以把同一个项目的请求放在一个Collection里方便管理和分享，Collection里面也可以再建文件夹；</p>
+                <p style="text-align: left">3、设置environment variables（环境变量）和global variables（全局变量），点击右边的眼睛可以快速查看当前的变量；</p>
+                <p style="text-align: left">4、选择HTTP 请求类型的地方，各种常见的不常见的非常全；</p>
+                <p style="text-align: left">5、请求URL，两层大括号表示这是一个环境变量，可以在3的位置选择当前的environment，环境变量就会被替换成该environment里variable的值；</p>
+            </section>
+            <section>
+                <p style="text-align: left">6、点击可以设置URL参数的key和value；</p>
+                <p style="text-align: left">7、点击发送请求；</p>
+                <p style="text-align: left">8、点击保存请求到Collection，如果要另存为的话，可以点击右边的下箭头；</p>
+                <p style="text-align: left">9、设置鉴权参数，可以用OAuth之类的；</p>
+                <p style="text-align: left">10、自定义HTTP Header；</p>
+                <p style="text-align: left">11、设置Request body；</p>
+                <p style="text-align: left">12、显示发起请求之前执行的脚本；</p>
+                <p style="text-align: left">13、在收到response之后执行的测试；</p>
+                <p style="text-align: left">14、返回数据的格式，Pretty可以看到格式化后的JSON，Raw就是未经处理的数据，Preview可以预览HTML页面。</p>
+            </section>
+        </section>
+        <section>
+            <h3>3.常见问题</h3>
+        </section>
+        <section>
+            <p style="text-align: left">获取数据：</p>
+            <p style="text-align: left">URL：http://music.163.com/api/search/get/web?s=墨须眉&type=1002&offset=0&total=true&limit=100</p>
+            <p style="text-align: left">
+                配置header:
+                Referer:http://music.163.com
+                Cookie:appver=1.5.2</p>
+            <img src="../img/js-05-HowusePostman/2.png">
+        </section>
+        <section>
+            <h3>4.解决方案</h3>
+        </section>
+        <section>
+            <p style="text-align: left">原因：没有让postman发送请求的时候使用这个网站的浏览器cookie</p>
+            <p style="text-align: left">解决方法： 打开Postman Interceptor这个插件，让postman发送请求的时候使用这个网站的浏览器cookie</p>
+            <img src="../img/js-05-HowusePostman/4.png">
+        </section>
+        <section>
+            <h3>5.编码实战</h3>
+        </section>
 
+        <section>
+            <h3>6.扩展思考</h3>
+        </section>
+        <section>
+            <p>postman中的环境变量</p>
+        </section>
+        <section>
+            <h3>7.参考文献</h3>
+        </section>
+        <section>
+            <p style="text-align: left">参考一：<a href="http://bayescafe.com/tools/use-postman-to-test-api-automatically.html" target="_blank">API自动化测试利器-postman</a></p>
+            <p style="text-align: left">参考二：<a href="https://segmentfault.com/a/1190000004883563" target="_blank">Postman安装及使用入门教程</a></p>
+        </section>
+        <section>
+            <h3>8.更多讨论</h3>
+        </section>
+        <section>
+            <p>postman怎么获取cookie？</p>
+            <p>在使用postman的时候还需要安装另外一个插件Postman Interceptor，安装后在chrome浏览器中设置为开启状态，然后启动postman，打开interceptor开关，就可以获取到cookie信息啦 </p>
+            <p>为什么有的时候会出现403的错误？</p>
+            <p>如果你的参数写在URL上这是get方式 不是post，post是需要在Header下面写参数的</p>
+            <p>怎么设置环境变量？</p>
+            <p>在“MANAGE ENVIRONMENTS”对话框中，点击下面的“ADD"按钮 添加一个名字为“dev"的一组环境变量 在"dev"下可以设置需要的特定的变量譬如此处设置的是key是 uri，value是 http://localhost:8080接口的url中通过{{uri}}来引用这个值</p>
+        </section>
+        <section>
+            <h4>感谢观看</h4>
+            <p><small>BY : 余佳贝 |  王相博</small></p>
+        </section>
+    </div>
+</div>
 
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
 
-二.明天计划的事情
+<script>
 
-1.实现怎么上传图片到服务器 然后显示在列表页
-
-
-
-三.遇到的问题
-
-1.测试接口里面的这个图片地址是什么？ 应该是字符串   可是图片的base64格式的字符串自己试了下 特别的长
-
-
-<img src="data:image/gif;base64,R0lGODlhHAAmAKIHAKqqqsvLy0hISObm5vf394uLiwAA>
-
-
-
-
-
-
-
-
-四.收获
-
-1.了解了一下上传图片这方面的知识吧  
-
-图片的 base64 编码就是可以将一副图片数据编码成一串字符串，使用该字符串代替图像地址
-
-知道用原生js写这个功能 只是有一定的局限性  用angular的方式好一点
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: '../plugin/markdown/marked.js'},
+            {src: '../plugin/markdown/markdown.js'},
+            {src: '../plugin/notes/notes.js', async: true},
+            {
+                src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
