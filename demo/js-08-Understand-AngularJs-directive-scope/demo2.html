@@ -29,10 +29,10 @@
     <div class="container" ng-controller="MyController">
         <div class="my-info">
             <h3>父级scope</h3>
-            我的名字是：<span ng-bind="man.name"></span>
+            我的名字是：<span ng-bind="name"></span>
             <!-- 使用"ng-bind"防止网络状态不佳时出现没有被赋值表达式   -->
             <br>我的年龄是：<span ng-bind="age"></span>
-            <br/>在这里修改名字：<input type='text' ng-model='man.name'>
+            <br/>在这里修改名字：<input type='text' ng-model='name'>
         </div>
         <!-- 使用属性声明指令 -->
         <div class="my-directive" my-directive></div>
@@ -47,9 +47,6 @@
                 age:20
             }
             $scope.name = "Bill";
-            $scope.man = {
-                name:'bill'
-            }
             $scope.age = 20;
             console.log($scope);
             $scope.changeAge = function () {
@@ -59,17 +56,17 @@
         .directive("myDirective", function ($timeout) {
             return {
                 restrict: "AE",
-                scope: true,
+                scope:{},
                 replace: true,
                 template: "<div class='my-directive'>" +
                 "<h3>自定义指令scope</h3>" +
                 "我的名字是：<span ng-bind='name'></span><br/>" +
                 "我的年龄是：<span ng-bind='age'></span><br/>" +
-                "在这里修改名字：<input type='text' ng-model='man.name'>"+
+                "在这里修改名字：<input type='text' ng-model='name'>"+
                 " </div>",
-                link:function ($scope) {
+                link:function (scope) {
                     $timeout(function () {
-                        console.log($scope)
+                        console.log(scope)
                     },3000)
                 }
             };
