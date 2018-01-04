@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>HTML文件里开头的DOCTYPE有什么作用</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' :
+            '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+    <img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+    <map name="pttmap">
+        <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank" />
+    </map>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h3>【css-01】HTML文件里开头的DOCTYPE有什么作用?</h3>
+                <h3>小课堂【武汉-289期】</h3>
+                <p>分享人：熊凡</p>
+            </section>
+
+            <section>
+                <p>目录</p>
+                <p>1.背景介绍</p>
+                <p>2.知识剖析</p>
+                <p>3.常见问题</p>
+                <p>4.解决方案</p>
+                <p>5.编码实战</p>
+                <p>6.扩展思考</p>
+                <p>7.参考文献</p>
+                <p>8.更多讨论</p>
+            </section>
+
+            <section>
+                <section>
+                    <h3>1.背景介绍</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <p style="font-size:26px;">DOCTYPE是document type(文档类型)的简写，在web设计中用来声明文档类型。</p>
+                        <p style="font-size:26px;">在所有 HTML 文档中规定 DOCTYPE 是非常重要的，这样浏览器就能了解预期的文档类型， 告诉浏览器要通过哪一种规范（DTD）解析文档（比如HTML或XHTML规范）。</p>
+                        <p style="font-size:26px;">DOCTYPE声明必须在 HTML 文档的第一行，它不属于 HTML 标签； 它是一条指令，告诉浏览器编写页面所用的标记的版本。</p>
+                        <p style="font-size:26px;">doctype会影响代码验证，并决定了浏览器最终如何显示你的Web文档。</p>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>2.知识剖析</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>doctyp与DTD与SGML</h4>
+                        <p style="font-size:26px;">HTML 4.01 中的 doctype 需要对 DTD 进行引用，因为 HTML 4.01 基于 SGML。</p>
+                        <p style="font-size:26px;">DTD:（Document Type Definition）文档类型定义是一种特殊文档，它规定、约束符合标准通用标示语言（SGML）或SGML子集可扩展标示语言（XML）规则的定义和陈述。</p>
+                        <p style="font-size:26px;">SGML:标准通用标记语言，是一种定义电子文档结构和描述其内容的国际标准语言； 通用标言为语法置标提供了异常强大的工具，同时具有极好的扩展性，因此在数据分类和索引中非常有用； 是所有电子文档标记语言的起源，早在万维网发明之前“通用标言”就已存在。
+                        </p>
+                        <p style="font-size:26px;"></p>
+
+
+
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <p style="font-size:26px;">Doctype可声明三种DTD类型，分别表示严格版本、过渡版本以及基于框架的 HTML 文档。</p>
+                        <p style="font-size:26px;">超文本严格文档类型定义HTML Strict DTD 不允许使用表现性、废弃元素（如font）以及frameset。声明：</p>
+
+                        <pre><code style="background-color:#000; font-size: 20px; line-height:1.5"> < !DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+    "http://www.w3.org/TR/html4/strict.dtd"></code></pre>
+
+                        <p style="font-size:26px;">超文本过渡文档类型定义HTML Transitional DTD 允许使用表现性、废弃元素（如font），不允许使用frameset。声明：</p>
+
+                        <pre><code style="background-color:#000; font-size: 20px; line-height:1.5">< !DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd"></code></pre>
+
+                        <p style="font-size:26px;">超文本框架集文档类型定义HTML Strict DTD 允许表现性元素，废气元素以及frameset。声明：</p>
+
+                        <pre><code style="background-color:#000; font-size: 20px; line-height:1.5">< !DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+    "http://www.w3.org/TR/html4/frameset.dtd"></code></pre>
+
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>浏览器的呈现模式</h4>
+                        <p style="font-size:26px;">现代的浏览器需要不同模式， 既要呈现久远的HTML界面， 不至于界面结构混乱不堪，也需要呈现W3C标准的界面：</p>
+                        <p style="font-size:26px;">标准模式(strict)---是指浏览器按照 W3C 标准解析代码，呈现页面</p>
+                        <p style="font-size:26px;">怪异模式---是指浏览器用自己的方式解析代码，即使用一种比较宽松的向后兼容的方式来显示页面</p>
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>DOCTYPE切换</h4>
+                        <p style="font-size:26px;">浏览器根据不同的DOCTYPE选择不同的渲染方法就叫做DOCTYPE切换。 其实DOCTYPE切换就是用来识别和兼容旧网页的。</p>
+                        <h4>以下情况浏览器会采用标准模式渲染：</h4>
+                        <p style="font-size:26px;">给出了完整的DOCTYPE声明</p>
+                        <p style="font-size:26px;">DOCTYPE声明了Strict DTD</p>
+                        <p style="font-size:26px">DOCTYPE声明了Transitional DTD和URI</p>
+                        <h4>以下情况浏览器会采用怪异模式渲染：</h4>
+                        <p style="font-size:26px;">DOCTYPE声明了Transitional DTD但未给出URI</p>
+                        <p style="font-size:26px">DOCTYPE声明不合法</p>
+                        <p style="font-size:26px;">未给出DOCTYPE声明</p>
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>现今情况</h4>
+                        <p style="font-size:26px;">HTML5协议下 统一写
+                            < !DOCTYPE html>。</p>
+                        <p style="font-size:26px;"> HTML 5 不基于 SGML，因此不需要对 DTD 进行引用，也就没有严格模式与怪异模式的区别，但是需要 doctype 来规范浏览器的行为（html 5简化了这种声明，意在告诉浏览器使用统一的标准即可）；HTML5
+                            有相对宽松的语法，实现时，已经尽可能大的实现了向后兼容。（ HTML5 没有严格和混杂之分）</p>
+
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>3.常见问题</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>如果不声明doctype会发生什么？</h4>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>4.解决办法</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <p style="font-size:26px">如果你是使用最新标准编写的页面但未给出DOCTYPE声明，浏览器会采用怪异模式渲染,这时就可能会出现一些怪异的行为。 例如盒模型不正确、窗口的size不正确等问题。所以，尽量为你网站的所有页面都给出合法的DOCTYPE声明。</p>
+
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>5、编码实战</h3>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>6、扩展思考</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <h4>有没有其他进入怪异模式的方法?</h4>
+                    </div>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                        <p style="font-size:26px">除了不写DOCTYPE声明外，最常见的就是在DOCTYPE声明前面出现了这些内容：普通文本、HTML 标签、HTML 注释、XML 声明、IE条件注释。
+                        </p>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>7、参考文献：</h3>
+                </section>
+                <section>
+                    <div style="text-align:left ; padding:0% 12% ;font-size:34px">
+                        <p style="font-size:26px;">参考一：
+                            <a href=" https://www.zhihu.com/question/20249139"> 为何说 HTML5「no longer based on SGML」？</a>
+                        </p>
+                        <p style="font-size:26px;">参考二：
+                            <a href="https://www.jianshu.com/p/2c381cd4fcf9">HTML_严格模式与混杂模式</a>
+                        </p>
+                        <p style="font-size:26px;">参考三：
+                            <a href="http://frontenddev.org/link/do-you-know-what-a-doctype-what-document-model-is.html">你知道什么是doctype，什么是文档模式吗</a>
+                        </p>
+                        <p style="font-size:26px;">参考四：
+                            <a href="http://blog.csdn.net/binglingnew/article/details/17301433">严格模式与混杂模式-如何触发这两种模式，区分它们有何意义</a>
+                        </p>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>8、更多讨论</h3>
+                </section>
+            </section>
+            <section>
+                <p>谢谢大家</p>
+                <p style="font-size:26px">制作人:熊凡</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="../lib/reveal/js/head.min.js"></script>
+    <script src="../lib/reveal/reveal.js"></script>
+
+    <script>
+        // 以下为常见配置属性的默认值
+        // {
+        // 	controls: true, // 是否在右下角展示控制条
+        // 	progress: true, // 是否显示演示的进度条
+        // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+        // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+        // 	keyboard: true, // 是否启用键盘快捷键来导航
+        // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+        // 	center: true, // 是否将幻灯片垂直居中
+        // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+        // 	loop: false, // 是否循环演示
+        // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+        // 	fragments: true, // 全局开启和关闭碎片。
+        // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+        // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+        // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+        // 	mouseWheel: false, //是否启用通过鼠标滚轮来切换幻灯片
+        // }
+
+        // 初始化幻灯片
+        Reveal.initialize({
+            history: true,
+            transition: 'convex',
+
+
+            dependencies: [{
+                    src: '../plugin/markdown/marked.js'
+                },
+                {
+                    src: '../plugin/markdown/markdown.js'
+                },
+                {
+                    src: '../plugin/notes/notes.js',
+                    async: true
+                },
+                {
+                    src: '../plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function () {
+                        hljs.initHighlightingOnLoad();
+                    }
+                }
+            ]
+        });
+    </script>
+</body>
+
+</html>
