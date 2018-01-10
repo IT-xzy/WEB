@@ -57,7 +57,7 @@
             </section>
             <section>
                 <p>
-                    传统的项目开发中，我们只会用到px、%、em这几个单位，它可以适用于大部分的项目开发，并且拥有比较良好的兼容性。但是你知道吗？从css3开始，浏览器对逻辑单位的支持又提升到了另外一个境界，增加了rem、vh、vw、vm等一些新的长度单位，我们可以利用这些新的单位开发出比较良好的响应式页面，随之覆盖多种不同分辨率的终端，包括移动设备等。现在让我们来看下这些长度单位有什么区别。
+                	传统的项目开发中，我们只会用到px、%、em这几个单位，它可以适用于大部分的项目开发，并且拥有比较良好的兼容性。但是你知道吗？从css3开始，浏览器对逻辑单位的支持又提升到了另外一个境界，增加了rem、vh、vw、vm等一些新的长度单位，我们可以利用这些新的单位开发出比较良好的响应式页面，随之覆盖多种不同分辨率的终端，包括移动设备等。现在让我们来看下这些长度单位有什么区别。
                 </p>
             </section>
         </section>
@@ -67,50 +67,50 @@
             </section>
             <section>
                 <p>
-                    1、px <br />
-                    px就是pixel的缩写，意为像素。px就是一张图片最小的一个点，一张位图就是千千万万的这样的点构成的，比如常常听到的电脑像素是1024x768的，表示的是水平方向是1024个像素点，垂直方向是768个像素点。</br>
+                 1、px <br />
+		px就是pixel的缩写，意为像素。px就是一张图片最小的一个点，一张位图就是千千万万的这样的点构成的，比如常常听到的电脑像素是1024x768的，表示的是水平方向是1024个像素点，垂直方向是768个像素点。</br>
                 </p>
             </section>
             <section>
                 <p>
-                    2、em<br />
-                    参考物是父元素的font-size，具有继承的特点。如果自身定义了font-size按自身来计算（浏览器默认字体是16px），整个页面内1em不是一个固定的值。
+                2、em<br />
+				参考物是父元素的font-size，具有继承的特点。如果自身定义了font-size按自身来计算（浏览器默认字体是16px），整个页面内1em不是一个固定的值。
                 </p>
             </section>
             <section>
                 <p>
-                    3、rem<br />
-                    css3新单位，相对于根元素html（网页）的font-size，不会像em那样，依赖于父元素的字体大小，而造成混乱。
+                3、rem<br />
+				css3新单位，相对于根元素html（网页）的font-size，不会像em那样，依赖于父元素的字体大小，而造成混乱。
                 </p>
             </section>
             <section>
                 <p>
-                    4、%<br />
-                    一般宽泛的讲是相对于父元素，但是并不是十分准确。
-                    1、对于普通定位元素就是我们理解的父元素
-                    2、对于position: absolute;的元素是相对于已定位的父元素
-                    3、对于position: fixed;的元素是相对于ViewPort（可视窗口）
+                4、%<br />
+			一般宽泛的讲是相对于父元素，但是并不是十分准确。
+			1、对于普通定位元素就是我们理解的父元素
+			2、对于position: absolute;的元素是相对于已定位的父元素
+			3、对于position: fixed;的元素是相对于ViewPort（可视窗口）
                 </p>
             </section>
-            <section>
+             <section>
                 <p>
-                    5、vw<br />
-                    css3新单位，viewpoint width的缩写，视窗宽度，1vw等于视窗宽度的1%。
-                    举个例子：浏览器宽度1200px, 1 vw = 1200px/100 = 12 px。
+                5、vw<br />
+				css3新单位，viewpoint width的缩写，视窗宽度，1vw等于视窗宽度的1%。
+				举个例子：浏览器宽度1200px, 1 vw = 1200px/100 = 12 px。
                 </p>
             </section>
-            <section>
+             <section>
                 <p>
-                    6、vh<br />
-                    css3新单位，viewpoint height的缩写，视窗高度，1vh等于视窗高度的1%。
-                    举个例子：浏览器高度900px, 1 vh = 900px/100 = 9 px。
+               6、vh<br />
+				css3新单位，viewpoint height的缩写，视窗高度，1vh等于视窗高度的1%。
+				举个例子：浏览器高度900px, 1 vh = 900px/100 = 9 px。
                 </p>
             </section>
-            <section>
+             <section>
                 <p>
-                    7、vm <br />
-                    css3新单位，相对于视口的宽度或高度中较小的那个。其中最小的那个被均分为100单位的vm
-                    举个例子：浏览器高度900px，宽度1200px，取最小的浏览器高度，1 vm = 900px/100 = 9 px。
+               7、vm <br />
+			css3新单位，相对于视口的宽度或高度中较小的那个。其中最小的那个被均分为100单位的vm
+			举个例子：浏览器高度900px，宽度1200px，取最小的浏览器高度，1 vm = 900px/100 = 9 px。
                 </p>
             </section>
         </section>
@@ -128,9 +128,9 @@
                 <h3>4.解决方案</h3>
             </section>
             <section>
-                vh vw是不包含页面滚动条的视窗宽度(innerwidth)，%包含了滚动条的宽度在里面了(outerwidth)。
-                一般的情况下%就可以满足大部分自适应设计的需求，可以用height：100vh做一个高度占满屏幕的自适应，没有滚动条。
-                用vw，vh设定的大小只和视窗大小有关，所以用来开发多种屏幕设备的应用用这个单位还是挺合适的。
+            	vh vw是不包含页面滚动条的视窗宽度(innerwidth)，%包含了滚动条的宽度在里面了(outerwidth)。
+			一般的情况下%就可以满足大部分自适应设计的需求，可以用height：100vh做一个高度占满屏幕的自适应，没有滚动条。
+			用vw，vh设定的大小只和视窗大小有关，所以用来开发多种屏幕设备的应用用这个单位还是挺合适的。
             </section>
         </section>
         <section>
@@ -147,13 +147,13 @@
             </section>
             <section>
                 <p>
-                    css还有哪些长度单位？<br />
-                    in:寸<br />
-                    cm:厘米<br />
-                    mm:毫米<br />
-                    t:point，大约1/72寸<br />
-                    pc:pica，大约6pt，1/6寸<br />
-                    1in = 2.54cm = 25.4 mm = 72pt = 6pc = 96px <br />
+                css还有哪些长度单位？<br />
+				in:寸<br />
+				cm:厘米<br />
+				mm:毫米<br />
+				t:point，大约1/72寸<br />
+				pc:pica，大约6pt，1/6寸<br />
+				1in = 2.54cm = 25.4 mm = 72pt = 6pc = 96px <br />
                 </p>
             </section>
         </section>
@@ -163,7 +163,7 @@
             </section>
             <section>
                 <p>
-                    <a href="https://www.cnblogs.com/alex-415/p/6844243.html">PX、EM、REM、%、VW、VH、VM等单位有什么区别？</a>
+                	<a href="https://www.cnblogs.com/alex-415/p/6844243.html">PX、EM、REM、%、VW、VH、VM等单位有什么区别？</a>
                 </p>
             </section>
         </section>
@@ -173,8 +173,8 @@
             </section>
             <section>
                 <p>
-                    css中font-size的单位有px、em、pt 用哪个哪个最好 ？<br />
-                    <a href="https://zhidao.baidu.com/question/143251109.html">剖析</a>
+                	css中font-size的单位有px、em、pt 用哪个哪个最好 ？<br />
+                	<a href="https://zhidao.baidu.com/question/143251109.html">剖析</a>
                 </p>
             </section>
         </section>
