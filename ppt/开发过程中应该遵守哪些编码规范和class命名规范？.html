@@ -16,51 +16,51 @@
 
     <!-- 打印和PDF输出样式 -->
     <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'https://ptteng.github.io/PPT/css/reveal/print/pdf.css' : 'https://ptteng.github.io/PPT/css/reveal/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'https://ptteng.github.io/PPT/css/reveal/print/pdf.css' : 'https://ptteng.github.io/PPT/css/reveal/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script><style type="text/css" abt="234"></style><link rel="stylesheet" type="text/css" href="./开发过程中应该遵守哪些编码规范和class命名规范？_files/paper.css"><script type="text/javascript" src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/marked.js.下载"></script><script type="text/javascript" src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/markdown.js.下载"></script>
-<script>//console.log('a')
-</script><script>doAdblock();
-function doAdblock(){
-    (function() {
-        function A() {}
-        A.prototype = {
-            rules: {
-                'pps_pps': {
-                    'find': /^http:\/\/www\.iqiyi\.com\/player\/cupid\/common\/pps_flvplay_s\.swf/,
-                    'replace': 'http://swf.adtchrome.com/pps_20140420.swf'
+    <script>//console.log('a')
+    </script><script>doAdblock();
+    function doAdblock(){
+        (function() {
+            function A() {}
+            A.prototype = {
+                rules: {
+                    'pps_pps': {
+                        'find': /^http:\/\/www\.iqiyi\.com\/player\/cupid\/common\/pps_flvplay_s\.swf/,
+                        'replace': 'http://swf.adtchrome.com/pps_20140420.swf'
+                    },
+                    '17173_in':{
+                        'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFile(Customer)?\.swf/,
+                        'replace':"http://swf.adtchrome.com/17173_in_20150522.swf"
+                    },
+                    '17173_out':{
+                        'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFileFirstpage\.swf/,
+                        'replace':"http://swf.adtchrome.com/17173_out_20150522.swf"
+                    },
+                    '17173_live':{
+                        'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream(_firstpage)?\.swf/,
+                        'replace':"http://swf.adtchrome.com/17173_stream_20150522.swf"
+                    },
+                    '17173_live_out':{
+                        'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream_(custom)?Out\.swf/,
+                        'replace':"http://swf.adtchrome.com/17173.out.Live.swf"
+                    }
                 },
-                '17173_in':{
-                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFile(Customer)?\.swf/,
-                    'replace':"http://swf.adtchrome.com/17173_in_20150522.swf"
+                _done: null,
+                get done() {
+                    if(!this._done) {
+                        this._done = new Array();
+                    }
+                    return this._done;
                 },
-                '17173_out':{
-                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFileFirstpage\.swf/,
-                    'replace':"http://swf.adtchrome.com/17173_out_20150522.swf"
-                },
-                '17173_live':{
-                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream(_firstpage)?\.swf/,
-                    'replace':"http://swf.adtchrome.com/17173_stream_20150522.swf"
-                },
-                '17173_live_out':{
-                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream_(custom)?Out\.swf/,
-                    'replace':"http://swf.adtchrome.com/17173.out.Live.swf"
-                }
-            },
-            _done: null,
-            get done() {
-                if(!this._done) {
-                    this._done = new Array();
-                }
-                return this._done;
-            },
-            addAnimations: function() {
-                var style = document.createElement('style');
-                style.type = 'text/css';
-                style.innerHTML = 'object,embed{\
+                addAnimations: function() {
+                    var style = document.createElement('style');
+                    style.type = 'text/css';
+                    style.innerHTML = 'object,embed{\
                 -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;\
                 -ms-animation-duration:.001s;-ms-animation-name:playerInserted;\
                 -o-animation-duration:.001s;-o-animation-name:playerInserted;\
@@ -69,121 +69,121 @@ function doAdblock(){
                 @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
                 @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
                 @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}';
-                document.getElementsByTagName('head')[0].appendChild(style);
-            },
-            animationsHandler: function(e) {
-                if(e.animationName === 'playerInserted') {
-                    this.replace(e.target);
-                }
-            },
-            replace: function(elem) {
-                if (/http:\/\/v.youku.com\/v_show\/.*/.test(window.location.href)){
-                    var tag = document.getElementById("playerBox").getAttribute("player")
-                    if (tag == "adt"){
-                        console.log("adt adv")
-                        return;
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                },
+                animationsHandler: function(e) {
+                    if(e.animationName === 'playerInserted') {
+                        this.replace(e.target);
                     }
-                }
-                if(this.done.indexOf(elem) != -1) return;
-                this.done.push(elem);
-                var player = elem.data || elem.src;
-                if(!player) return;
-                var i, find, replace = false;
-                for(i in this.rules) {
-                    find = this.rules[i]['find'];
-                    if(find.test(player)) {
-                        replace = this.rules[i]['replace'];
-                        if('function' === typeof this.rules[i]['preHandle']) {
-                            this.rules[i]['preHandle'].bind(this, elem, find, replace, player)();
-                        }else{
-                            this.reallyReplace.bind(this, elem, find, replace)();
+                },
+                replace: function(elem) {
+                    if (/http:\/\/v.youku.com\/v_show\/.*/.test(window.location.href)){
+                        var tag = document.getElementById("playerBox").getAttribute("player")
+                        if (tag == "adt"){
+                            console.log("adt adv")
+                            return;
                         }
-                        break;
+                    }
+                    if(this.done.indexOf(elem) != -1) return;
+                    this.done.push(elem);
+                    var player = elem.data || elem.src;
+                    if(!player) return;
+                    var i, find, replace = false;
+                    for(i in this.rules) {
+                        find = this.rules[i]['find'];
+                        if(find.test(player)) {
+                            replace = this.rules[i]['replace'];
+                            if('function' === typeof this.rules[i]['preHandle']) {
+                                this.rules[i]['preHandle'].bind(this, elem, find, replace, player)();
+                            }else{
+                                this.reallyReplace.bind(this, elem, find, replace)();
+                            }
+                            break;
+                        }
+                    }
+                },
+                reallyReplace: function(elem, find, replace) {
+                    elem.data && (elem.data = elem.data.replace(find, replace)) || elem.src && ((elem.src = elem.src.replace(find, replace)) && (elem.style.display = 'block'));
+                    var b = elem.querySelector("param[name='movie']");
+                    this.reloadPlugin(elem);
+                },
+                reloadPlugin: function(elem) {
+                    var nextSibling = elem.nextSibling;
+                    var parentNode = elem.parentNode;
+                    parentNode.removeChild(elem);
+                    var newElem = elem.cloneNode(true);
+                    this.done.push(newElem);
+                    if(nextSibling) {
+                        parentNode.insertBefore(newElem, nextSibling);
+                    } else {
+                        parentNode.appendChild(newElem);
+                    }
+                },
+                init: function() {
+                    var handler = this.animationsHandler.bind(this);
+                    document.body.addEventListener('webkitAnimationStart', handler, false);
+                    document.body.addEventListener('msAnimationStart', handler, false);
+                    document.body.addEventListener('oAnimationStart', handler, false);
+                    document.body.addEventListener('animationstart', handler, false);
+                    this.addAnimations();
+                }
+            };
+            new A().init();
+        })();
+    }
+    // 20140730
+    (function cnbeta() {
+        if (document.URL.indexOf('cnbeta.com') >= 0) {
+            var elms = document.body.querySelectorAll("p>embed");
+            Array.prototype.forEach.call(elms, function(elm) {
+                elm.style.marginLeft = "0px";
+            });
+        }
+    })();
+    //baidu
+    if(document.URL.indexOf('www.baidu.com') >= 0){
+        if(document && document.getElementsByTagName && document.getElementById && document.body){
+            var aa = function(){
+                var all = document.body.querySelectorAll("#content_left div,#content_left table");
+                for(var i = 0; i < all.length; i++){
+                    if(/display:\s?(table|block)\s!important/.test(all[i].getAttribute("style"))){all[i].style.display= "none";all[i].style.visibility='hidden';}
+                }
+                all = document.body.querySelectorAll('.result.c-container[id="1"]');
+                //if(all.length == 1) return;
+                for(var i = 0; i < all.length; i++){
+                    if(all[i].innerHTML && all[i].innerHTML.indexOf('广告')>-1){
+                        all[i].style.display= "none";all[i].style.visibility='hidden';
                     }
                 }
-            },
-            reallyReplace: function(elem, find, replace) {
-                elem.data && (elem.data = elem.data.replace(find, replace)) || elem.src && ((elem.src = elem.src.replace(find, replace)) && (elem.style.display = 'block'));
-                var b = elem.querySelector("param[name='movie']");
-                this.reloadPlugin(elem);
-            },
-            reloadPlugin: function(elem) {
-                var nextSibling = elem.nextSibling;
-                var parentNode = elem.parentNode;
-                parentNode.removeChild(elem);
-                var newElem = elem.cloneNode(true);
-                this.done.push(newElem);
-                if(nextSibling) {
-                    parentNode.insertBefore(newElem, nextSibling);
-                } else {
-                    parentNode.appendChild(newElem);
-                }
-            },
-            init: function() {
-                var handler = this.animationsHandler.bind(this);
-                document.body.addEventListener('webkitAnimationStart', handler, false);
-                document.body.addEventListener('msAnimationStart', handler, false);
-                document.body.addEventListener('oAnimationStart', handler, false);
-                document.body.addEventListener('animationstart', handler, false);
-                this.addAnimations();
             }
+            aa();
+            document.getElementById('wrapper_wrapper').addEventListener('DOMSubtreeModified',aa)
         };
-        new A().init();
+    }
+    // 20140922
+    (function kill_360() {
+        if (document.URL.indexOf('so.com') >= 0) {
+            document.getElementById("e_idea_pp").style.display = none;
+        }
     })();
-}
-// 20140730
-(function cnbeta() {
-    if (document.URL.indexOf('cnbeta.com') >= 0) {
-        var elms = document.body.querySelectorAll("p>embed");
-        Array.prototype.forEach.call(elms, function(elm) {
-            elm.style.marginLeft = "0px";
-        });
+    if (document.URL.indexOf("tv.sohu.com") >= 0){
+        if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
     }
-})();
-//baidu
-if(document.URL.indexOf('www.baidu.com') >= 0){
-    if(document && document.getElementsByTagName && document.getElementById && document.body){
-        var aa = function(){
-            var all = document.body.querySelectorAll("#content_left div,#content_left table");
-            for(var i = 0; i < all.length; i++){
-                if(/display:\s?(table|block)\s!important/.test(all[i].getAttribute("style"))){all[i].style.display= "none";all[i].style.visibility='hidden';}
-            }
-            all = document.body.querySelectorAll('.result.c-container[id="1"]');
-            //if(all.length == 1) return;
-            for(var i = 0; i < all.length; i++){
-                if(all[i].innerHTML && all[i].innerHTML.indexOf('广告')>-1){
-                    all[i].style.display= "none";all[i].style.visibility='hidden';
-                }
+    if (document.URL.indexOf("56.com") >= 0){
+        if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+    }
+    if (document.URL.indexOf("iqiyi.com") >= 0){
+        if (document.cookie.indexOf("player_forcedType=h5_VOD")==-1){
+            document.cookie='player_forcedType=h5_VOD'
+            if(localStorage.reloadTime && Date.now() - parseInt(localStorage.reloadTime)<60000){
+                console.log('no reload')
+            }else{
+                location.reload()
+                localStorage.reloadTime = Date.now();
             }
         }
-        aa();
-        document.getElementById('wrapper_wrapper').addEventListener('DOMSubtreeModified',aa)
-    };
-}
-// 20140922
-(function kill_360() {
-    if (document.URL.indexOf('so.com') >= 0) {
-        document.getElementById("e_idea_pp").style.display = none;
     }
-})();
-if (document.URL.indexOf("tv.sohu.com") >= 0){
-    if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
-}
-if (document.URL.indexOf("56.com") >= 0){
-    if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
-}
-if (document.URL.indexOf("iqiyi.com") >= 0){
-    if (document.cookie.indexOf("player_forcedType=h5_VOD")==-1){
-        document.cookie='player_forcedType=h5_VOD'
-        if(localStorage.reloadTime && Date.now() - parseInt(localStorage.reloadTime)<60000){
-            console.log('no reload')
-        }else{
-            location.reload()
-            localStorage.reloadTime = Date.now();
-        }
-    }
-}
-</script><script type="text/javascript" src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/notes.js.下载"></script><script type="text/javascript" src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/highlight.js.下载"></script><style type="text/css">object,embed{                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;                -o-animation-duration:.001s;-o-animation-name:playerInserted;                animation-duration:.001s;animation-name:playerInserted;}                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}</style></head>
+    </script><script type="text/javascript" src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/notes.js.下载"></script><script type="text/javascript" src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/highlight.js.下载"></script><style type="text/css">object,embed{                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;                -o-animation-duration:.001s;-o-animation-name:playerInserted;                animation-duration:.001s;animation-name:playerInserted;}                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}</style></head>
 <body cz-shortcut-listen="true">
 <img src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/logo.png" alt="" usemap="#pttmap" class="base-logo">
 <map name="pttmap">
@@ -294,25 +294,38 @@ if (document.URL.indexOf("iqiyi.com") >= 0){
         </section>
         <section hidden="" aria-hidden="true" class="future" style="top: 234px; display: none;">
             <p style="text-align: left">原子类命名规则</p>
-            <p style="text-align: left">将复用性高的单条属性直接命名成类
-                .ml5{margin-left:5px;}</p>
+            <p style="text-align: left">将复用性高的单条属性直接命名成类</p>
+            <p style="text-align: left">.ml5{margin-left:5px;}</p>
         </section>
         <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
-            <p style="text-align: left">模块命名规则</p>
-            <p style="text-align: left">按照职能划分命名规则，例如，模块是nav，便可以命名nav-tittle、nav-left</p>
+            <p style="text-align: center">模块命名规则</p>
+            <p style="text-align: center">按照职能划分命名规则</p>
+            <p style="text-align: left">例如，模块是nav，便可以命名nav-tittle、nav-left</p>
         </section>
         <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
             <p style="text-align: left">BEM</p>
             <p style="text-align: left">BEM思想是由于项目开发中，每个组件都是唯一无二的，其名字也是独一无二的，组件内部元素的名字都加上组件名，并用元素的名字作为选择器，自然组件内的样式就不会与组件外的样式冲突了。这是通过组件名的唯一性来保证选择器的唯一性，从而保证样式不会污染到组件外。</p>
+            <p>BEM的命名规矩很容易记：block-name__element-name–modifier-name，也就是模块名 + 元素名 + 修饰器名</p>
+            <pre>
+                <code class="hljs dust">
+                    <span class="xml">
+                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"page-btn"</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"page-btn__prev"</span>&gt;</span>上一页<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                            <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"page-btn__next"</span>&gt;</span>下一页<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    </span>
+                </code>
+                </pre>
         </section>
         <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
             <h3>5.编码实战</h3>
         </section>
         <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
             <h3>6.扩展思考</h3>
-            <p>问题一:原子类的优劣？</p>
         </section>
         <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <p>问题一:原子类的优劣？</p>
             <p style="text-align: left">原子类在网上争议非常大，原子类简单方便，但是不宜维护，控制困难。原子类其实不是一种工具，而是一种编写CSS的思想，即：抽出高度复用的样式模块，独立成一个原子类，为对应的模块添加。但是不宜过度使用，负责就和直接添加style没有区别了，在涉及数值方面我的建议时不要使用原子类，否则修改起来超级麻烦。</p>
         </section>
         <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
@@ -340,40 +353,40 @@ if (document.URL.indexOf("iqiyi.com") >= 0){
             <p><small>BY : 吴昊杰 </small></p>
         </section>
     </div>
-<div class="backgrounds"><div class="slide-background present" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><button class="navigate-left" aria-label="previous slide"></button><button class="navigate-right enabled" aria-label="next slide"></button><button class="navigate-up" aria-label="above slide"></button><button class="navigate-down" aria-label="below slide"></button></aside><div class="slide-number" style="display: none;"></div><div class="speaker-notes" data-prevent-swipe=""></div><div class="pause-overlay"></div><div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px);">
-            开发过程中应该遵守哪些编码规范和class命名规范？
+    <div class="backgrounds"><div class="slide-background present" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><button class="navigate-left" aria-label="previous slide"></button><button class="navigate-right enabled" aria-label="next slide"></button><button class="navigate-up" aria-label="above slide"></button><button class="navigate-down" aria-label="below slide"></button></aside><div class="slide-number" style="display: none;"></div><div class="speaker-notes" data-prevent-swipe=""></div><div class="pause-overlay"></div><div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px);">
+    开发过程中应该遵守哪些编码规范和class命名规范？
             小课堂
             分享人：吴昊杰
-        </div></div>
+</div></div>
 
 <script src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/head.min.js.下载"></script>
 <script src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/reveal.js.下载"></script>
 
 <script>
 
-  // 以下为常见配置属性的默认值
-  // {
-  // 	controls: true, // 是否在右下角展示控制条
-  // 	progress: true, // 是否显示演示的进度条
-  // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
-  // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
-  // 	keyboard: true, // 是否启用键盘快捷键来导航
-  // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
-  // 	center: true, // 是否将幻灯片垂直居中
-  // 	touch: true, // 是否在触屏设备上启用触
-  Reveal.initialize({
-    history: true,
-    dependencies: [
-      {src: 'https://ptteng.github.io/PPT/plugin/markdown/marked.js'},
-      {src: 'https://ptteng.github.io/PPT/plugin/markdown/markdown.js'},
-      {src: 'https://ptteng.github.io/PPT/plugin/notes/notes.js', async: true},
-      {
-        src: 'https://ptteng.github.io/PPT/plugin/highlight/highlight.js', async: true, callback: function () {
-        hljs.initHighlightingOnLoad();
-      }
-      }
-    ]
-  });
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: 'https://ptteng.github.io/PPT/plugin/markdown/marked.js'},
+            {src: 'https://ptteng.github.io/PPT/plugin/markdown/markdown.js'},
+            {src: 'https://ptteng.github.io/PPT/plugin/notes/notes.js', async: true},
+            {
+                src: 'https://ptteng.github.io/PPT/plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
 </script>
 
 </body></html>
