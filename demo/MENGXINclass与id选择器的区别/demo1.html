@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<!--权重-->
+<p id="p" title="p" class="p" style="color: #0d99a5">我是文本</p>
+<style>
+    /*100*/
+
+    #p {
+        color: yellow;
+    }
+
+    /*1*/
+    p {
+        color: red;
+    }
+
+    /*10*/
+    [title=p] {
+        color: blue;
+    }
+
+    /*10*/
+    .p {
+        color: deeppink;
+    }
+</style>
+<p id="p" title="p" class="p">我是文本</p>
+<p id="p" title="p" class="p">我是文本</p>
+<p id="p" title="p" class="p">我是文本</p>
+</body>
+</html>
