@@ -1,0 +1,306 @@
+﻿<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>葡萄藤PPT</title>
+
+	<link rel="stylesheet" href="../css/reveal/reveal.css">
+
+	<!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+	<link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+	<!-- syntax highlighting 代码高亮主题 -->
+	<link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+	<!-- 打印和PDF输出样式 -->
+	<script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+	<style>
+		.reveal pre code {
+			background-color: #120;
+		}
+	</style>
+</head>
+
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+	<area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+	<div class="slides">
+		<section>
+			<h4>小课堂【萌新】</h4>
+			<h4>【CSS】 css有哪些属性可以继承？ </h4>
+			<h4>分享人：计翔于</h4>
+
+		</section>
+		<section>
+			<p>目录</p>
+			<p>1.背景介绍</p>
+			<p>2.知识剖析</p>
+			<p>3.常见问题</p>
+			<p>4.解决方案</p>
+			<p>5.编码实战</p>
+			<p>6.扩展思考</p>
+			<p>7.参考文献</p>
+			<p>8.更多讨论</p>
+		</section>
+		<section>
+			<section>
+				<h3>1.背景介绍</h3>
+			</section>
+			<section>
+				<p>
+					了解css样式表的继承，我们先从文档树（HTML DOM）开始，文档树由HTML元素组成,文档树和家族树类似，也有祖先、后代、父亲、孩子、兄弟
+					css样式表继承指的是，特定的css属性向下传递到后代元素
+				</p>
+			</section>
+		</section>
+		<section>
+			<section>
+				<h3>2.知识剖析</h3>
+			</section>
+			<section>
+				<p>
+					那么有哪些属性可以自动继承呢
+				</p>
+			</section>
+			<section>
+				有继承性的属性：
+
+				1、字体系列属性
+
+				font：组合字体
+
+				font-family：规定元素的字体系列
+
+				font-weight：设置字体的粗细
+
+				font-size：设置字体的尺寸
+
+				font-style：定义字体的风格
+
+				font-variant：设置小型大写字母的字体显示文本，这意味着所有的小写字母均会被转换为
+				大写，但是所有使用小型大写字体的字母与其余文本相比，其字体尺寸更小。
+
+				font-stretch：允许你使文字变宽或变窄。所有主流浏览器都不支持。
+
+				font-size-adjust：为某个元素规定一个 aspect 值，字体的小写字母 "x" 的高度与
+				"font-size" 高度之间的比率被称为一个字体的 aspect 值。这
+				样就可以保持首选字体的 x-height。
+
+
+			</section>
+			<section>
+				有继承性的属性：
+
+				2、文本系列属性
+
+				text-indent：文本缩进
+
+				text-align：文本水平对齐
+
+				line-height：行高
+
+				word-spacing：增加或减少单词间的空白（即字间隔）
+
+				letter-spacing：增加或减少字符间的空白（字符间距）
+
+				text-transform：控制文本大小写
+
+				direction：规定文本的书写方向
+
+				color：文本颜色
+				3、元素可见性：visibility
+
+				4、表格布局属性：caption-side、border-collapse、border-spacing、
+				empty-cells、table-layout
+
+				5、列表属性：list-style-type、list-style-image、list-style-position、list-style
+
+				6、生成内容属性：quotes
+
+				7、光标属性：cursor
+
+				8、页面样式属性：page、page-break-inside、windows、orphans
+
+				9、声音样式属性：speak、speak-punctuation、speak-numeral、speak-header、
+				speech-rate、volume、voice-family、pitch、pitch-range、
+				stress、richness、、azimuth、elevation
+
+			</section>
+			<section>
+				所有元素可以继承的属性：
+
+				1、元素可见性：visibility
+				2、光标属性：cursor
+
+
+				内联元素可以继承的属性:
+
+
+				1、字体系列属性
+				2、除text-indent、text-align之外的文本系列属性
+
+				块级元素可以继承的属性:
+
+
+				1、text-indent、text-align
+			</section>
+
+			<section>
+				无继承的属性
+
+				1、display
+				2、文本属性：vertical-align：
+				text-decoration：
+				text-shadow：
+				white-space：
+				unicode-bidi：
+				3、盒子模型的属性:宽度、高度、内外边距、边框等
+				4、背景属性：背景图片、颜色、位置等
+				5、定位属性：浮动、清除浮动、定位position等
+				6、生成内容属性:content、counter-reset、counter-increment
+				7、轮廓样式属性:outline-style、outline-width、outline-color、outline
+				8、页面样式属性:size、page-break-before、page-break-after
+
+			</section>
+			<section>
+				继承中比较特殊的几点
+
+				1、a 标签的字体颜色不能被继承
+
+				2、h1-h6标签字体的大下也是不能被继承的
+
+				因为它们都有一个默认值
+			</section>
+		</section>
+
+		<section>
+			<section>
+				<h3>3.常见问题</h3>
+			</section>
+			<section>
+				<p>
+					font-size的继承问题 ？
+				</p>
+			</section>
+		</section>
+		<section>
+			<section>
+				<h3>4.解决方案</h3>
+			</section>
+			<section>
+				<p>
+					font-size是设置字体的一个css样式，其值可以为：px或者em;
+					继承方式是根据父元素来定的，如果父元素已经定义了字体大小，子元素没有设置字体大小，那么会默认使用父元素的font-size值，也可以单独给某一个元素设置其值
+
+				</p>
+			</section>
+
+		</section>
+		<section>
+			<section>
+				<h3>5.编码实战</h3>
+			</section>
+
+			<section>demo</section>
+
+		</section>
+		<section>
+			<section>
+				<h3>6.扩展思考</h3>
+			</section>
+			<section>
+				<p>inherit 关键字指定一个属性应从父元素继承它的值。
+					inherit 关键字可用于任何 HTML 元素上的任何 CSS 属性。</p>
+			</section>
+			<section>
+				<p>
+				</p>
+			</section>
+		</section>
+		<section>
+			<section>
+				<h3>7.参考文献</h3>
+			</section>
+			<section>
+				<a href="https://jingyan.baidu.com/article/7f41ececcf637a593d095cfd.html">CSS教程:学习CSS的继承性</a>
+			</section>
+
+		</section>
+		<section>
+			<section>
+				<h3>8.更多讨论</h3>
+			</section>
+			<section>
+				<p>
+				</p>
+			</section>
+		</section>
+		<section>
+			<h4>鸣谢</h4>
+			<p>感谢大家观看</p>
+			<p>
+				By
+				<small style="vertical-align: middle">计翔于</small>
+			</p>
+		</section>
+	</div>
+</div>
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [{
+            src: '../plugin/markdown/marked.js'
+        },
+            {
+                src: '../plugin/markdown/markdown.js'
+            },
+            {
+                src: '../plugin/notes/notes.js',
+                async: true
+            },
+            {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                callback: function() {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+
+</html>
