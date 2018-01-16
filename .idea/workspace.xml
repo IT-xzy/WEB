@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e7687a6-bffb-4ea2-86eb-50b435621c8c" name="默认的" comment="">
+    <list default="true" id="6e7687a6-bffb-4ea2-86eb-50b435621c8c" name="默认的" comment="默认的">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppt/js-8-angular-directive.html" afterPath="$PROJECT_DIR$/ppt/js-8-angular-directive.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,7 +26,7 @@
       <file leaf-file-name="webIndex.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webIndex.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1717">
+            <state relative-caret-position="1768">
               <caret line="143" column="20" lean-forward="true" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="20" />
               <folding />
             </state>
@@ -37,18 +36,8 @@
       <file leaf-file-name="js-8-angular-directive.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ppt/js-8-angular-directive.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
+            <state relative-caret-position="1034">
               <caret line="308" column="0" lean-forward="true" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JS-8-how-to-use-AngularJs-directiveby12807.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ppt/JS-8-how-to-use-AngularJs-directiveby12807.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="313" column="0" lean-forward="true" selection-start-line="269" selection-start-column="0" selection-end-line="313" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -297,18 +286,25 @@
       <workItem from="1515549762552" duration="1388000" />
       <workItem from="1515565493334" duration="184000" />
       <workItem from="1516000468396" duration="681000" />
-      <workItem from="1516100849637" duration="273000" />
+      <workItem from="1516100849637" duration="371000" />
     </task>
+    <task id="LOCAL-00001" summary="默认的">
+      <created>1516101130342</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1516101130342</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5627000" />
+    <option name="totallyTimeSpent" value="5725000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22470239" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22470239" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -334,6 +330,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="默认的" />
+    <option name="LAST_COMMIT_MESSAGE" value="默认的" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -464,14 +464,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webIndex.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
-          <caret line="143" column="20" lean-forward="true" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ppt/JS-8-how-to-use-AngularJs-directiveby12807.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -480,9 +472,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/webIndex.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="143" column="20" lean-forward="true" selection-start-line="143" selection-start-column="20" selection-end-line="143" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ppt/js-8-angular-directive.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
+        <state relative-caret-position="1034">
           <caret line="308" column="0" lean-forward="true" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
           <folding />
         </state>
