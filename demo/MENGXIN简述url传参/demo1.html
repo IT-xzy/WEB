@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<a target="_blank" href="接收页面.html?arr=[1,2,3]&arr1=[1,2,3]">数组会被转换为字符串</a>
+<a target="_blank" href="接收页面.html?obj={name:1,sex:{name:2,sex:2}}&obj2={name:1,sex:{name:2,sex:2}}">对象会被转换为字符串</a>
+<button onclick="carryArr()">js带数组</button>
+<button onclick="carryObj()">js带对象</button>
+</body>
+<script>
+    //href属性传递的都是字符串,因为是手动写的<?obj={name:1,sex:0}>,
+    //一般都是JS动态设置
+    var arr = [1, 2, 3];
+
+    function carryArr() {
+        var url = '接收页面.html';
+        url += '?arr=' + arr + '&arr1=' + arr;
+        console.log(url);
+        window.open(url, '_blank');
+    }
+
+    var obj = {
+        name: 1,
+        sex: {
+            name: 2,
+            sex: 2
+        }
+    };
+
+    function carryObj() {
+        var url = '接收页面.html';
+        url += '?obj=' + JSON.stringify(obj) + '&obj1=' + JSON.stringify(obj);
+        console.log(url);
+        window.open(url, '_blank');
+    }
+</script>
+</html>
