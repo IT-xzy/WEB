@@ -3,34 +3,34 @@
 <html class=" js no-mobile desktop no-ie chrome chrome62 ppt-section ppt-section gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions no-touch no-retina fontface domloaded w-1366 gt-240 gt-320 gt-480 gt-640 gt-768 gt-800 gt-1024 gt-1280 lt-1440 lt-1680 lt-1920 no-portrait landscape" id="js08angular-page">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>angularJs常用指令ng-blur、ng-change、ng-focus、ng-disabled是如何运用到表单验证中的</title>
-    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/reveal.css">
+
     <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
-    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/theme/ptt.css">
+
     <!-- syntax highlighting 代码高亮主题 -->
-    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/lib/reveal/css/zenburn.css">
+
     <!-- 打印和PDF输出样式 -->
     <script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
-    document.getElementsByTagName('head')[0].appendChild(link);
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'https://ptteng.github.io/PPT/css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
-    <!-- <link rel="stylesheet" type="text/css" href="./angularJs常用指令_files/paper.css"> -->
-    <!-- <script type="text/javascript" src="./angularJs常用指令_files/marked.js.下载"></script> -->
-    <!-- <script type="text/javascript" src="./angularJs常用指令_files/markdown.js.下载"></script> -->
-    <!-- <script type="text/javascript" src="./angularJs常用指令_files/notes.js.下载"></script> -->
-    <!-- <script type="text/javascript" src="./angularJs常用指令_files/highlight.js.下载"></script> -->
 </head>
 
 <body>
-    <img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
-    <map name="pttmap">
-        <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com/" alt="" target="_blank">
-    </map>
+<img src="https://ptteng.github.io/PPT/img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
     <div class="reveal slide center" role="application" data-transition-speed="default" data-background-transition="fade">
         <div class="slides" style="width: 960px; height: 700px; left: 50%; top: 50%; bottom: auto; right: auto; transform: translate(-50%, -50%) scale(0.756);">
             <section class="past" style="top: 136.5px; display: none;" hidden="" aria-hidden="true">
@@ -142,9 +142,10 @@
             ng-blur 指令用于告诉 AngularJS HTML 元素在失去焦点时需要执行的表达式。 AngularJS 中的 ng-blur 指令不会覆盖原生的 onblur 事件， 如果触发该事件，ng-blur 表达式与原生的 onblur 事件都会执行。
         </div>
     </div>
-    <script src="../lib/reveal/js/head.min.js"></script>
-    <script src="../lib/reveal/reveal.js"></script>
-    <script>
+    <script src="https://ptteng.github.io/PPT/lib/reveal/js/head.min.js"></script>
+<script src="https://ptteng.github.io/PPT/lib/reveal/reveal.js"></script>
+
+<script>
     // 以下为常见配置属性的默认值
     // {
     //  controls: true, // 是否在右下角展示控制条
@@ -167,13 +168,13 @@
     Reveal.initialize({
         history: true,
         dependencies: [
-            { src: '../plugin/markdown/marked.js' },
-            { src: '../plugin/markdown/markdown.js' },
-            { src: '../plugin/notes/notes.js', async: true },
-            { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/marked.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/markdown.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/notes/notes.js', async: true },
+            { src: 'https://ptteng.github.io/PPT/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
         ]
     });
-    </script>
+</script>
 </body>
 
 </html>
