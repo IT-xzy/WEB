@@ -97,7 +97,7 @@
                 <img style="width: 100%; height: 100%" src="../img/js-4-Synchronization/liuchengtu.png" alt="">
             </section>
             <section>
-                <a href="../demo/js-4-chenshuwei/demo1.html">UI线程和JS线程互斥的实例</a>
+                <a href="../demo/js-04-Asynchronous-and-synchronous/demo2.html">UI线程和JS线程互斥的实例</a>
                 <p>
                     分析：第一个在keydown的时候，弹出来的是input里原来的value，而第2个在keydown的时候，却能弹出更新后的value，就是因为setTimeout，虽然他的delay设置为0，几乎是即时触发，但还是被添加到了执行队列后面，但就是这个过程，渲染已经完成了，当他回调函数执行时，输出来的已经是更新后的value了。</p>
             </section>
