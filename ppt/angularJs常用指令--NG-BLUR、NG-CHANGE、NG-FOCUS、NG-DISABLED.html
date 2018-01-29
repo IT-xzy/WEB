@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://ptteng.github.io/PPT/PPT/js08angular.html#/8 -->
+<html class=" js no-mobile desktop no-ie chrome chrome62 ppt-section ppt-section gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions no-touch no-retina fontface domloaded w-1366 gt-240 gt-320 gt-480 gt-640 gt-768 gt-800 gt-1024 gt-1280 lt-1440 lt-1680 lt-1920 no-portrait landscape" id="js08angular-page">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'https://ptteng.github.io/PPT/css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+</head>
+
+<body>
+<img src="https://ptteng.github.io/PPT/img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+    <div class="reveal slide center" role="application" data-transition-speed="default" data-background-transition="fade">
+        <div class="slides" style="width: 960px; height: 700px; left: 50%; top: 50%; bottom: auto; right: auto; transform: translate(-50%, -50%) scale(0.756);">
+            <section class="past" style="top: 136.5px; display: none;" hidden="" aria-hidden="true">
+                <h3>angular js常用指令 ng-blur、ng-change、ng-focus、ng-disabled是如何运用到表单验证中的？  </h3>
+                <h4>小课堂【成都】</h4>
+                <p>分享人：程仲夏</p>
+            </section>
+            <section class="past" style="top: 3px; display: none;" hidden="" aria-hidden="true">
+                <p>目录</p>
+                <p>1.背景介绍</p>
+                <p>2.知识剖析</p>
+                <p>3.常见问题</p>
+                <p>4.解决方案</p>
+                <p>5.编码实战</p>
+                <p>6.拓展思考</p>
+                <p>7.参考文献</p>
+                <p>8.更多讨论</p>
+            </section>
+            <section class="past" style="top: 155px; display: none;" hidden="" aria-hidden="true">
+                <h3>1.背景介绍</h3>
+                <p>什么是表单验证</p>
+                <p>表单验证是javascript中的高级选项之一。JavaScript 可用来在数据被送往服务器前对 HTML 表单中的这些输入数据进行验证。</p>
+            </section>
+            <section class="past" style="top: 234px; display: none;" hidden="" aria-hidden="true">
+                <h3>2.知识剖析</h3>
+                <p>常见的表单验证有哪些</p>
+            </section>
+            <section class="past" style="top: 188px; display: none;" hidden="" aria-hidden="true">
+                <p>比如登陆页面的账号和密码，我们可以限制账号和密码的长度，可以限制他不可以为空</p>
+                <p>比如我们在某些平台实名认证的时候，姓名，身份证号，手机号必填</p>
+            </section>
+            <section class="past" style="top: 245.5px; display: none;" hidden="" aria-hidden="true">
+                <h4>3.常见问题 </h4>
+                <p>如何实现表单验证呢？</p>
+            </section>
+            <section class="past" style="top: 168px; display: block;" hidden="" aria-hidden="true">
+                <h3>4.解决方案</h3>
+                <p>h5自带表单验证</p>
+                <p>jQuery的表单验证</p>
+                <p>angular表单验证</p>
+            </section>
+            <section class="past" style="top: 244px; display: block;" hidden="" aria-hidden="true">
+                <p>angular表单验证中的ng-blur、ng-change、ng-focus、ng-disabled是如何运用到表单验证中的</p>
+            </section>
+            <section class="present" style="top: 165px; display: block;">
+                <p>ng-blur 指令用于告诉 AngularJS HTML 元素在失去焦点时需要执行的表达式。</p>
+                <p>AngularJS 中的 ng-blur 指令不会覆盖原生的 onblur 事件， 如果触发该事件，ng-blur 表达式与原生的 onblur 事件都会执行。</p>
+            </section>
+            <section class="future" style="top: 188px; display: block;" hidden="" aria-hidden="true">
+                <p>ng-focus 指令用于告诉 AngularJS 在 HTML 元素获取焦点时需要执行的操作。</p>
+                <p>ng-focus 指令不会覆盖元素的原始 onfocus 事件, 事件触发时，ng-focus 表达式与原始的 onfocus 事件将都会执行。</p>
+            </section>
+            <section hidden="" aria-hidden="true" class="future" style="top: 20px; display: block;">
+                <p>ng-change 指令用于告诉 AngularJS 在 HTML 元素值改变时需要执行的操作。</p>
+                <p>ng-change 指令需要搭配 ng-model 指令使用。</p>
+                <p>AngularJS ng-change 指令指令不会覆盖原生的 onchange 事件, 如果触发该事件，ng-change 表达式与原生的 onchange 事件都会执行。</p>
+                <p>ng-change 事件在值的每次改变时触发，它不需要等待一个完成的修改过程，或等待失去焦点的动作</p>
+                <p>ng-change 事件只针对输入框值的真实修改，而不是通过 JavaScript 来修改。</p>
+            </section>
+            <section hidden="" aria-hidden="true" class="future" style="top: 188px; display: none;">
+                <p>ng-disabled 指令设置表单输入字段的 disabled 属性(input, select, 或 textarea)。</p>
+                <p>如果 ng-disabled 中的表达式返回 true 则表单字段将被禁用。</p>
+                <p></p>
+            </section>
+            <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+                <h3>5.参考文献</h3>
+                <p><a href="http://www.runoob.com/angularjs/angularjs-reference.html" target="_blank">菜鸟教程</a></p>
+                <p><a href="https://www.cnblogs.com/Wenwang/archive/2012/04/26/2470403.html" target="_blank">H5自带表单验证</a></p>
+                <p><a href="http://blog.csdn.net/eson_15/article/details/51497533" target="_blank">jQuery-Validate验证插件</a></p>
+            </section>
+            <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+                <h3>6..更多讨论</h3>
+                <p>ng-pattern如何使用？</p>
+            </section>
+            <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+                <h4>鸣谢</h4>
+                <p>感谢大家观看</p>
+                <p><small>BY : 景鑫 ||  李仁  || 程仲夏</small></p>
+            </section>
+        </div>
+        <div class="backgrounds">
+            <div class="slide-background past" data-loaded="true" style="display: none;"></div>
+            <div class="slide-background past" data-loaded="true" style="display: none;"></div>
+            <div class="slide-background past" data-loaded="true" style="display: none;"></div>
+            <div class="slide-background past" data-loaded="true" style="display: none;"></div>
+            <div class="slide-background past" data-loaded="true" style="display: none;"></div>
+            <div class="slide-background past" data-loaded="true" style="display: none;"></div>
+            <div class="slide-background past" data-loaded="true" style="display: block;"></div>
+            <div class="slide-background past" data-loaded="true" style="display: block;"></div>
+            <div class="slide-background present" data-loaded="true" style="display: block;"></div>
+            <div class="slide-background future" data-loaded="true" style="display: block;"></div>
+            <div class="slide-background future" data-loaded="true" style="display: block;"></div>
+            <div class="slide-background future" data-loaded="true" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+        </div>
+        <div class="progress" style="display: block;"><span style="width: 780.571px;"></span></div>
+        <aside class="controls" style="display: block;">
+            <button class="navigate-left enabled" aria-label="previous slide"></button>
+            <button class="navigate-right enabled" aria-label="next slide"></button>
+            <button class="navigate-up" aria-label="above slide"></button>
+            <button class="navigate-down" aria-label="below slide"></button>
+        </aside>
+        <div class="slide-number" style="display: none;"></div>
+        <div class="speaker-notes" data-prevent-swipe=""></div>
+        <div class="pause-overlay"></div>
+        <div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px);">
+            ng-blur 指令用于告诉 AngularJS HTML 元素在失去焦点时需要执行的表达式。 AngularJS 中的 ng-blur 指令不会覆盖原生的 onblur 事件， 如果触发该事件，ng-blur 表达式与原生的 onblur 事件都会执行。
+        </div>
+    </div>
+    <script src="https://ptteng.github.io/PPT/lib/reveal/js/head.min.js"></script>
+<script src="https://ptteng.github.io/PPT/lib/reveal/reveal.js"></script>
+
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    //  controls: true, // 是否在右下角展示控制条
+    //  progress: true, // 是否显示演示的进度条
+    //  slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    //  history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    //  keyboard: true, // 是否启用键盘快捷键来导航
+    //  overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    //  center: true, // 是否将幻灯片垂直居中
+    //  touch: true, // 是否在触屏设备上启用触摸滑动切换
+    //  loop: false, // 是否循环演示
+    //  rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    //  fragments: true, // 全局开启和关闭碎片。
+    //  autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    //  transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    //  transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    //  mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/marked.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/markdown.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/notes/notes.js', async: true },
+            { src: 'https://ptteng.github.io/PPT/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+    });
+</script>
+</body>
+
+</html>
