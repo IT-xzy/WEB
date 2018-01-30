@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var array = [1, 5, 3, 56, 's'];
+    //普通for循环
+    var cloneArr = function (arr) {
+        var i = 0,
+            l = arr.length,
+            newArr = [];
+        for (; i < l; i++) {
+            newArr.push(arr[i]);
+        }
+        return newArr;
+    };
+    var test1 = cloneArr(array);
+    test1[1] = 'change';
+    console.log(test1);
+    console.log(array);
+    console.log('%c', 'padding:30px 20%;line-height:100px;width:100px;background:url("http://www.jnshu.com/images/home-logo.png") no-repeat #29b078;');
+    //map
+    var test2 = array.map(function (v) {
+        return v;
+    });
+    test2[1] = 'change';
+    console.log(test2);
+    console.log(array);
+    console.log('%c', 'padding:30px 20%;line-height:100px;width:100px;background:url("http://www.jnshu.com/images/home-logo.png") no-repeat #29b078;');
+    //filter
+    var test3 = array.filter(function (v) {
+        return v;
+    });
+    test3[1] = 'change';
+    console.log(test3);
+    console.log(array);
+    console.log('%c', 'padding:30px 20%;line-height:100px;width:100px;background:url("http://www.jnshu.com/images/home-logo.png") no-repeat #29b078;');
+    //from
+    var test4 = Array.from(array, function (v) {
+        return v;
+    });
+    test4[1] = 'change';
+    console.log(test4);
+    console.log(array);
+    console.log('%c', 'padding:30px 20%;line-height:100px;width:100px;background:url("http://www.jnshu.com/images/home-logo.png") no-repeat #29b078;');
+    //forEach没有返回值,不行
+    console.log('%c', 'padding:30px 20%;line-height:100px;width:100px;background:url("http://www.jnshu.com/images/home-logo.png") no-repeat #29b078;');
+</script>
+</body>
+</html>
