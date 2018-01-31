@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var array = [1, 5, 3, 56, 's'];
+    //展开操作符
+    var test1 = [...array];
+    test1[1] = 'change';
+    console.log(test1);
+    console.log(array);
+    console.log('%c', 'padding:30px 20%;line-height:100px;width:100px;background:url("http://www.jnshu.com/images/home-logo.png") no-repeat #29b078;');
+    //concat()
+    var test2 = array.concat();
+    test2[2] = 'change';
+    console.log(test2);
+    console.log(array);
+    console.log('%c', 'padding:30px 20%;line-height:100px;width:100px;background:url("http://www.jnshu.com/images/home-logo.png") no-repeat #29b078;');
+    //slice()
+    var test4= array.slice();
+    test4[2] = 'change';
+    console.log(test4);
+    console.log(array);
+    console.log('%c', 'padding:30px 20%;line-height:100px;width:100px;background:url("http://www.jnshu.com/images/home-logo.png") no-repeat #29b078;');
+    //JSON
+    var test3 = JSON.parse(JSON.stringify(array));
+    test3[2] = 'change';
+    console.log(test3);
+    console.log(array);
+</script>
+</body>
+</html>

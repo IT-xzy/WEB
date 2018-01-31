@@ -1,0 +1,451 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>angular之中，$scope $rootScope $watch $state 是什么？</title>
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h4>小课堂</h4>
+            <p>es6的新特性</p>
+            <h4>分享人：秦栩章</h4>
+        </section>
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section>
+            <section>
+                <h3>1.背景介绍</h3>
+            </section>
+            <section>
+                <p style="text-align: left">
+                    1.变量声明const和let <br>
+                    我们都是知道在ES6以前，var关键字声明变量。无论声明在何处，都会被视为声明在函数的最顶部(不在函数内即在全局作用域的最顶部)。这就是函数变量提升例如:
+                </p>
+                <pre>
+                     <code>
+                      function aa() {
+                        if(bool) {
+                            var test = 'hello man'
+                        } else {
+                            console.log(test)
+                        }
+                      }
+                    </code>
+                </pre>
+               
+            </section>
+        </section>
+        <section>
+            <p>以上的代码实际上是：</p>
+            <pre>
+                <code>
+                function aa() {
+                    var test // 变量提升
+                    if(bool) {
+                        test = 'hello man'
+                    } else {
+                        //此处访问test 值为undefined
+                        console.log(test)
+                    }
+                    //此处访问test 值为undefined
+                }
+                </code>
+            </pre>
+            
+        </section>
+        <section>
+            <section>
+                <h3>2.知识剖析</h3>
+            </section>
+            <section style="text-align: left;font-size: 28px;">
+                <p>
+                    let，const
+                </p>
+                <p>
+                   接下来ES6主角登场：我们通常用let和const来声明，let表示变量、const表示常量。let和const都是块级作用域。怎么理解这个块级作用域？
+                </p>
+                <p>在一个函数内部在一个代码块内部</p>
+                <p>说白了 {}大括号内的代码块即为let 和 const的作用域。</p>
+                <pre>
+                     <code>
+                    function aa() {
+                        if(bool) {
+                           let test = 'hello man'
+                        } else {
+                            //test 在此处访问不到
+                            console.log(test)
+                        }
+                    }
+                    </code>
+                </pre>
+               
+                <span>let的作用域是在它所在当前代码块，但不会被提升到当前函数的最顶部。</span>
+                
+            </section>
+            <section>
+                    <p>再来说说const</p>
+                    <code>
+                        const name = 'lux'
+                        name = 'joe' //再次赋值此时会报错
+                    </code>
+                </section>
+                <section>
+                    <p>来对比一下let和var</p>
+                    <span>经典的面试题：输出1~10</span>
+                    <pre>
+                        <code>
+                            var funcs = []
+                            for (var i = 0; i < 10; i++) {
+                                funcs.push(function() { console.log(i) })
+                            }
+                            funcs.forEach(function(func) {
+                                func()
+                            })
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <pre>
+                        <code>
+                            // ES5告诉我们可以利用闭包解决这个问题
+                            var funcs = []
+                                for (var i = 0; i < 10; i++) {
+                                    func.push(
+                                    (function(value) {
+                                        return function() {
+                                            console.log(value)
+                                        }
+                                    }(i))
+                                    )
+                                }
+                            // es6
+                            for (let i = 0; i < 10; i++) {
+                                func.push(function() {
+                                    console.log(i)
+                                })
+                            }
+                        </code>
+                    </pre>
+                </section>
+            <section style="text-align: left;font-size: 28px;">
+                <p>
+                  2.模板字符串：解决了ES5在字符串功能上的痛点。
+                </p>
+                <span>基本的字符串格式化。将表达式嵌入字符串中进行拼接。用${}来界定。</span>
+                <pre>
+                    <code>
+                        //es5 
+                        var name = 'lux'
+                        console.log('hello' + name)
+                        //es6
+                        const name = 'lux'
+                        console.log(`hello ${name}`) //hello lux
+                    </code>
+                </pre>
+                <p>
+                    多行字符串或者字符串一行行拼接
+                </p>
+                <pre>
+                    <code>
+                         // es5
+                        var msg = "Hi \
+                        man!
+                        "
+                        // es6
+                        const template = `<div>
+                            <span>hello world</span>
+                        </div>`
+                    </code>
+                </pre>
+            </section>
+            <section style="text-align:left;font-size: 28px">
+               <p>函数默认参数</p>
+               <span>
+                   在ES5我们给函数定义参数默认值是怎么样？
+               </span>
+               <pre>
+                   <code>
+                         function action(num) {
+                            num = num || 200
+                           <!--  //当传入num时，num为传入的值
+                            //当没传入参数时，num即有了默认值200 -->
+                            return num
+                        }
+                   </code>
+               </pre>
+               <span>
+                   ES6给函数定义参数默认值.
+               </span>
+               <pre>
+                   <code>
+                       function action(num = 200) {
+                            console.log(num)
+                        }
+                        action() //200
+                        action(300) //300
+                   </code>
+               </pre>
+            </section>
+            <section>
+                <p>箭头函数</p>
+                <span>
+                    箭头函数最直观的三个特点。
+                    不需要function关键字来创建函数
+                    省略return关键字
+                    继承当前上下文的 this 关键字
+                </span>
+                <pre>
+                     <code>
+                        var f = v => v;
+                        //上面的箭头函数等同于：
+                        var f = function(v) {
+                          return v;
+                        };
+                    </code>
+                </pre>
+                
+            </section>
+            <section>
+                    如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分。
+                    <pre>
+                        <code>
+                            var f = () => 5;
+                            // 等同于
+                            var f = function () { return 5 };
+
+                            var sum = (num1, num2) => num1 + num2;
+                            // 等同于
+                            var sum = function(num1, num2) {
+                              return num1 + num2;
+                            };
+                        </code>
+                    </pre>
+                </section>
+            <section>
+                <p>注意的点</p>
+                <span>
+                函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。</br>
+                不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。</br>
+                不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。</br>
+                不可以使用yield命令，因此箭头函数不能用作 Generator 函数。</br>
+                </span>
+                <pre>
+                    <code>
+                        function foo() {
+                          setTimeout(() => {
+                            console.log('id:', this.id);
+                          }, 100);
+                        }
+                        var id = 21;
+                        foo.call({ id: 42 });
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <pre>
+                    <code>
+                         function foo() {
+                          setTimeout(function() {
+                            console.log('id:', this.id);
+                          }, 100);
+                        }
+                        var id = 21;
+                        foo.call({ id: 42 });
+                    </code>
+                </pre>
+            </section>
+            <section style="text-align:left">
+                <p>数据访问--解构</p>
+                <pre>
+                    <code>
+                        var people = {
+                            name: 'lux',
+                            age: 20
+                        }
+                        var name = people.name
+                        var age = people.age
+                        console.log(name + ' --- ' + age)
+                    </code>
+                </pre>
+                
+            </section>
+            <section>
+                <pre>
+                    <code>
+                        //对象
+                        const people = {
+                            name: 'lux',
+                            age: 20
+                        }
+                        const { name, age } = people
+                        console.log(`${name} --- ${age}`)
+                        //数组
+                        const color = ['red', 'blue']
+                        const [first, second] = color
+                        console.log(first) //'red'
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+                <p>解构赋值的用途</p>
+                
+                <section>
+                    <p>交换变量的值</p>
+                    <pre>
+                        <code>
+                            let x = 1;
+                            let y = 2;
+                            [x, y] = [y, x];
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <p>从函数返回多个值</p>
+                    <pre>
+                        <code>
+                            // 返回一个数组
+
+                            function example() {
+                              return [1, 2, 3];
+                            }
+                            let [a, b, c] = example();
+
+                            // 返回一个对象
+
+                            function example() {
+                              return {
+                                foo: 1,
+                                bar: 2
+                              };
+                            }
+                            let { foo, bar } = example();
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <p>函数参数的定义</p>
+                    <pre>
+                        <code>
+                            function f([x, y, z]) { ... }
+                            f([1, 2, 3]);
+
+                            // 参数是一组无次序的值
+                            function f({x, y, z}) { ... }
+                            f({z: 3, y: 2, x: 1});
+                        </code>
+                    </pre>
+                </section>
+        </section>
+        <section>
+            <section>
+                <h3>3.常见问题</h3>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>4.解决方案</h3>
+            </section>
+        </section>
+        <section>
+            <h3>5.编码实战</h3>
+        </section>
+
+        <section>
+            <h3>6.扩展思考</h3>
+        </section>
+        <section>
+            <h3>7.参考文献</h3>
+            <p>参考一：<a href="https://www.jianshu.com/p/287e0bb867ae"
+                      target="_blank">ES6这些就够了</a></p>
+            <p>参考二：<a href="http://es6.ruanyifeng.com/#docs/function"
+                      target="_blank">$ECMAScript 6 入门</a></p>
+        </section>
+        <section>
+            <h3>8.更多讨论</h3>
+        </section>
+        <section>
+            <h4>鸣谢</h4>
+            <p>感谢大家观看</p>
+            <p>
+                By
+                <small style="vertical-align: middle">秦栩章/small>
+            </p>
+        </section>
+    </div>
+</div>
+
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: '../plugin/markdown/marked.js'},
+            {src: '../plugin/markdown/markdown.js'},
+            {src: '../plugin/notes/notes.js', async: true},
+            {
+                src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
+Contact GitHub API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Status He
