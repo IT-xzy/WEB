@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="" >
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular.min.js"></script>
+    <style>
+        .bkcolor
+        {
+            background-color:green;
+        }
+        .ftcolor
+        {
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<div ng-init="arr=[3,6,10,88];
+obj={name:'chuizi',age:30};
+arrobj=[{name:'ipone',price:7999},{name:'huawei',price:'4999'}]">
+    <ul>
+        <li ng-repeat="x in arr">{{x}}</li>
+    </ul>
+    <h2 ng-repeat="(key,val) in obj">{{key+'--'+val}}</h2>
+    <h1 ng-repeat="item in arrobj">{{item.name+'--'+item.price}}</h1>
+</div>
+<div ng-init="array=[3,6,5,4,3]">
+    <ul>
+        <li ng-repeat="x in array track by $index">{{x}}</li>
+    </ul>
+</div>
+</body>
+</html>
+<!--下面是ng-class的demo-->
+
+<!--<!DOCTYPE html>-->
+
+<!--<html ng-app="App">-->
+<!--<head>-->
+    <!--<meta charset="utf-8">-->
+<!--<script src="https://cdn.bootcss.com/angular.js/1.6.1/angular.min.js"></script>-->
+    <!--<script type="text/javascript">-->
+        <!--var App = angular.module("App", []);-->
+        <!--App.controller("ctrl", function ($scope) {-->
+            <!--$scope.isbk=true;-->
+            <!--$scope.isft=true;-->
+        <!--});-->
+    <!--</script>-->
+    <!--<style type='text/css'>-->
+        <!--.bkcolor-->
+        <!--{-->
+            <!--background-color:green;-->
+        <!--}-->
+        <!--.ftcolor-->
+        <!--{-->
+            <!--color:red;-->
+        <!--}-->
+    <!--</style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div ng-controller ="ctrl">-->
+    <!--<input type='checkbox' ng-model='isbk' />使用background-->
+    <!--<input type='checkbox' ng-model='isft'/>使用frontcolor-->
+    <!--<div ng-class='{bkcolor:isbk, ftcolor:isft}'>-->
+        <!--测试-->
+    <!--</div>-->
+    <!--<div ng-class="'bkcolor'">nihaoma</div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

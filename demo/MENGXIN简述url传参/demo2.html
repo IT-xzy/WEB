@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng:app="app">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ui-view=""></div>
+<script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.min.js"></script>
+<script src="https://cdn.bootcss.com/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+<script>
+    var $ng = window.angular;
+    $ng.module('app', ['ui.router'])
+        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($router, $urlRouter, $locationProvider) {
+            $locationProvider.hashPrefix('');
+            $urlRouter.otherwise('A');
+            $router
+                .state('A', {
+                    url: '/A',
+                    template: '<a ui-sref="B({name:1,name2:2,sex:0,fav:123,hide:456789})">Go B</a>',
+                    controller: 'A'
+                })
+                .state('B', {
+                    url: '/B/:name/{name2}?sex&fav',
+                    template: '<a ui-sref="A">Go A</a>',
+                    params: {
+                        hide: null
+                    },
+                    controller: 'B'
+                })
+
+        }])
+        .controller('A', ['$state', function ($state) {
+            console.log($state.params);
+        }])
+        .controller('B', ['$state', function ($state) {
+            console.log($state.params);
+        }]);
+</script>
+</body>
+</html>

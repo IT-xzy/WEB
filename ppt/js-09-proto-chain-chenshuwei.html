@@ -1,0 +1,419 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>简述原型链是什么？</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' :
+                '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>【JS-task05】JS中的原型链是什么？</h3>
+            <h3>小课堂【深圳】</h3>
+            <p>分享人：陈树威</p>
+        </section>
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多提问</p>
+        </section>
+        <section>
+            <section>
+                <h3>1.背景介绍</h3>
+            </section>
+            <section>
+                <h4> 1.构造函数</h4>
+                <p style="text-align: left">
+                    构造函数 ，是一种特殊的方法。主要用来在创建对象时初始化对象。每个构造函数都有prototype(原型)属性
+                </p>
+            </section>
+            <section>
+                <img src="../img/js-9-prototype-chenshuwei/function.png">
+            </section>
+            <section>
+                <h4> 2.原型模式</h4>
+                <p style="text-align: left">
+                    每个函数都有prototype(原型)属性，这个属性是一个指针，指向一个对象，这个对象的用途是包含特定类型的所有实例共享的属性和方法，即这个原型对象是用来给实例共享属性和方法的。
+                    而每个实例内部都有一个指向原型对象的指针。
+                </p>
+            </section>
+            <section>
+                <img src="../img/js-9-prototype-chenshuwei/object.png">
+            </section>
+            <section>
+                <h4>原型链</h4>
+                <p style="text-align: left">
+                    每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含指向原型对象内部的指针。我们让原型对象的实例（1）等于另一个原型对象（2）,</br>
+                    此时原型对象（2）将包含一个指向原型对象（1）的指针，</br>
+                    再让原型对象（2）的实例等于原型对象（3），如此层层递进就构成了实例和原型的链条，这就是原型链的概念</p>
+            </section>
+            <section>
+                <img src="../img/js-9-prototype-chenshuwei/prototype-chain.png">
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>2.知识剖析</h3>
+            </section>
+            <section>
+                <h4>构造函数</h4>
+                <p style="text-align: left">构造函数 ，是一种特殊的方法。主要用来在创建对象时初始化对象。 即为对象变量赋初始值。每个构造函数的实例都将共享构造函数的初始值。
+                    构造函数的出现是为了解决使用Object构造函数和字面量表示法不方便创建大量重复对象的问题。</p>
+            </section>
+            <section>
+                <h4>传统创建对象实例的方法</h4>
+                <pre><code>
+                 var person={
+                            name:'张女士',
+                            age:'80',
+                            gender:'女'
+                            };
+                        console.log(person)
+                </code></pre>
+                <p>这个方法如果用于创建大量相同属性和方法的对象时，会产生大量重复代码</p>
+            </section>
+            <section>
+                <h4>构造函数的方法</h4>
+                <pre><code>
+                    //构造函数方法创建对象实例
+                    function Person(name,age,gender) {
+                       this.name=name;
+                       this.age=age;
+                       this.gender=gender;
+                       this.say=function () {
+                       alert(this.name)
+                        }
+                    }
+                    var person1=new Person('钟女士',80,'女');
+                    var person2=new Person('张女士',80,'女');
+                    console.log(person2)
+                    console.log(person1)
+                </code></pre>
+            </section>
+            <section>
+                <h4>原型模式</h4>
+                <p style="text-align: left">使用构造函数的问题是，每个方法都要在每个实例上重新创建一遍，即在构造函数的不同实例上的同名函数是不相等的。而我们创建每个构造函数都有一个prototype(原型)属性，这个属性是个指针，指向一个对象，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法，我们使用这个原型对象来共享实例的属性和方法的模式就叫原型模式</p>
+            </section>
+            <section>
+                <div>
+                    <pre><code>
+                        //原型模式创建对象
+                        function Person(){
+                        }
+                        Person.prototype.name='钟女士';
+                        Person.prototype.age=80;
+                        Person.prototype.gender='女';
+                        var person1= new Person();
+                        console.log(person1)
+                        //简写原型模式
+                        Person.prototype={
+                        constructor:Person
+                        name:'钟女士'，
+                        age:80,
+                        gender:'女'
+                        }
+                    </code></pre>
+                    <p style="text-align: left">注：每个原型对象都有constructor属性，由于简写模式重写了默认的prototype对象，所以constructor也会被重新定义，不再指向他的构造函数，所以可以自己写一个constructor属性指向他的构造函数</p>
+                </div>
+            </section>
+            <section>
+                <h4>原型链</h4>
+                <p style="text-align: left">每个构造函数都有原型对象，每个构造函数实例都包含一个指向原型对象的内部指针（__proto__），如果我们让第一个构造函数的原型对象等于第二个构造函数的实例，结果第一个构造函数的原型对象将包含一个指向第二个原型对象的指针，再然第三个原型对象等于第一个构造函数的实例，这样第三个原型对象也将包含指向第一个原型对象的指针，以此类推，就够成了实例于原型的链条，这就是原型链的基本概念</p>
+            </section>
+            <section>
+                 <pre><code>
+function One(){
+ }
+ function Two(){
+ }
+ function Three(){
+ }
+ Two.prototype=new One();
+ Three.prototype=new Two();
+ var three=new Three();
+ console.log(three);
+ console.log(three.__proto__===Three.prototype) //true
+ console.log(three.__proto__.__proto__===Two.prototype) //true
+ console.log(three.__proto__.__proto__.__proto__===One.prototype)  //true
+ console.log(three.__proto__.__proto__.__proto__.__proto__===Object.prototype)  //true
+                 </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>3.常见问题</h3>
+            </section>
+            <section>
+                <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                    <p>若想访问一个对象的原型，应该使用什么方法？</p>
+                </div>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>4.解决办法</h3>
+            </section>
+            <section>
+                <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                    <h4>在对象实例中，访问对象原型的方法</h4>
+                    <p>1、使用_proto_属性</p>
+                    <p>此属性是浏览器支持的一个属性，并不是ECMAScript里的属性</p>
+                    <p>2.Object.getPrototypeOf</p>
+                    <p>3.使用constructor.prototype的方法</p>
+                    <p>对于不支持_proto_的浏览器，可以使用constructor，访问到对象的构造函数，在用prototype访问到原型</p>
+                    <h4>在构造函数中，访问对象原型的方法</h4>
+                    <p>1.使用prototype属性</p>
+                </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>6、扩展思考</h3>
+            </section>
+            <section>
+                <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                    <h4>使用原型链解释anuglar作用域</h4>
+                </div>
+            </section>
+            <section>
+                <p>在开发过程中，我们可能会出现控制器的嵌套，看下面这段代码：</p>
+                <pre><code>
+                <div ng-controller="OuterCtrl">
+                    <span>{{a}}</span>
+                    <div ng-controller="InnerCtrl">
+                      <span>{{a}}</span>
+                    </div>
+                </div>
+                <script>
+                function OuterCtrl($scope) {
+                $scope.a = 1;
+                }
+                function InnerCtrl($scope) {
+                }
+                </script>
+                </code></pre>
+                <p style="text-align: left">我们可以看到界面显示了两个1，而我们只在OuterCtrl的作用域里定义了a变量，但界面给我们的结果是，两个a都有值,现在自控制器里的a是从父控制器里继承过来的</p>
+
+            </section>
+            <section>
+                <p>我们可以父子级的作用域看成两个原型对象，其中一个原型对象继承另一个原型对象的实例</p>
+                <pre><code>
+                    function Outer() {
+                    this.a = 1;
+                    }
+
+                   function Inner() {
+                   }
+
+                   var outer = new Outer();
+                    Inner.prototype=new Outer();
+                   var inner = new Inner();
+                   console.log(outer.a)
+                   console.log(inner.a)
+                </code></pre>
+                <p>Angular的实现机制其实也就是把这两个控制器中的$scope作了关联，外层的作用域实例成为了内层作用域的原型。</p>
+            </section>
+            <section>
+                <p>既然作用域是通过原型来继承的，自然也就可以推论出一些特征来。比如说这段代码，点击按钮的结果是什么？</p>
+                <pre><code>
+                    <div ng-controller="OuterCtrl">
+                       <span>{{a}}</span>
+                       <div ng-controller="InnerCtrl">
+                          <span>{{a}}</span>
+                        <button ng-click="a=a+1">a++</button>
+                    </div>
+                </div>
+                    <script>
+                        function OuterCtrl($scope) {
+                            $scope.a = 1;
+                        }
+
+                        function InnerCtrl($scope) {
+                        }
+                    </script>
+                </code></pre>
+                <p>点了按钮之后，两个a不一致了，里面的变了，外面的没变，这是为什么？</p>
+            </section>
+            <section>
+                   <pre><code>
+                    function Outer() {
+                    this.a = 1;
+                    }
+
+                   function Inner() {
+                   }
+
+                   var outer = new Outer();
+                    Inner.prototype=new Outer();
+                   var inner = new Inner();
+                       inner.a = inner.a + 1;
+                       console.log(outer.a)
+                       console.log(inner.a)
+                </code></pre>
+                <p>因为在原型链中，访问一个实例属性时，会在实例本身查找，如果找不到，则搜索实例的原型，如果再搜索不到，则继续沿着原型链往上查找。找到之后则会赋给该实例，所以inner上面就被赋值了一个新的a，outer里面的仍然保持原样，这也就导致了刚才看到的结果。</p>
+            </section>
+            <section>
+                <h4>上下级共享变量</h4>
+                <p>比如说，我们就是想上下级共享变量，不创建新的，该怎么办呢？</p>
+                <pre><code>
+                function Outer() {
+                 this.data = {
+                     a: 1
+                  };
+                }
+
+                function Inner() {
+                }
+
+                var outer = new Outer();
+                Inner.prototype = outer;
+
+                var inner = new Inner();
+
+                console.log(outer.data.a);
+                console.log(inner.data.a);
+                inner.data.a += 1;
+
+                console.log(outer.data.a);
+                console.log(inner.data.a);
+                </code></pre>
+            </section>
+            <section>
+                <p>我们可以把a写在一个对象里，当inner找到对象data并赋值到自己身上时，其实是复制了对象的指针（参考高程第4章复制引用类型和基本类型的区别），我们对对象里的属性的改动都会反映到所有引用该对象的元素上。</p>
+            </section>
+            <section>
+                <p>反映到AngularJs,我们可以这么写</p>
+                <pre><code>
+    <div ng-controller="OuterCtrl">
+        <span>{{data.a}}</span>
+        <div ng-controller="InnerCtrl">
+            <span>{{data.a}}</span>
+            <button ng-click="data.a=data.a+1">increase a</button>
+        </div>
+    </div>
+    <script>
+        function OuterCtrl($scope) {
+            $scope.data = {
+                a: 1
+            };
+        }
+
+        function InnerCtrl($scope) {
+        }
+    </script>
+                </code></pre>
+                <p>这样点击按钮两个控制器的a都会+1</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>7、参考文献：</h3>
+                <div style="text-align:left ; padding:0% 12% ;font-size:34px">
+                    <p>参考一：
+                        <a target="_blank">JavaScript高级程序设计</a>
+                    </p>
+                    <p>参考二：
+                        <a href="https://github.com/xufei/blog/issues/18" target="_blank">作用域与事件</a>
+                    </p>
+                </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>8、更多提问</h3>
+            </section>
+        </section>
+        <section>
+            <p>谢谢大家</p>
+            <p>制作人：陈树威</p>
+        </section>
+
+    </div>
+</div>
+
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: false, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        transition: 'convex',
+
+
+        dependencies: [{
+            src: '../plugin/markdown/marked.js'
+        },
+            {
+                src: '../plugin/markdown/markdown.js'
+            },
+            {
+                src: '../plugin/notes/notes.js',
+                async: true
+            },
+            {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+
+</html>

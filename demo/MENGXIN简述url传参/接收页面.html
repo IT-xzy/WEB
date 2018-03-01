@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+<script>
+    //规定
+    //JS传的对象  就是JSON对象,格式<?obj={"name":1,"sex":0}&obj1={"name":1,"sex":0}>
+    //a标签传递的对象 格式<?obj={name:222,sex:{name:2,sex2:{name:111,sex:22}}}> || <?obj={name:"2ss22",sex:{name:"2",sex2:{name:"111",sex:"22"}}}>
+    //JS传的数组 格式<?obj=1,2,3>
+    //a标签传递的数组 格式<?obj=[1,2,3]>
+    (function () {
+        var urlParams = decodeURIComponent(location.search).split('?')[1].split('&'),
+            result = {};
+        urlParams.map(function (v, i, arr) {
+            result[v.split('=')[0]] = function () {
+                switch (true) {
+                    //JS传的对象
+                    case v.indexOf('{"') > -1 && v.indexOf('[') < 0:
+                        console.log('JS传的对象');
+                        return JSON.parse(v.split('=')[1]);
+                    //a标签传递的对象
+                    case v.indexOf('{') > -1 && v.indexOf('[') < 0:
+                        console.log('a标签传递的对象,,处理有点麻烦呀@@@');
+                        //...
+                        return JSON.parse((function () {
+                            return v.split('=')[1].replace(/[{]|[,]|[:{]|[:]/g, function ($) {
+                                if ($ == ',') {
+                                    return $ + '"';
+                                }
+                                if ($ == ':') {
+                                    return '"' + $;
+                                }
+                                if ($ == '{') {
+                                    return $ + '"';
+                                }
+                                if ($ == ':{') {
+                                    return '"' + $;
+                                }
+                                return $;
+                            });
+                        })());
+                    //JS传的数组
+                    case v.indexOf('{') < 0 && v.indexOf('[') < 0 && v.indexOf(',') > -1:
+                        console.log('JS传的数组');
+                        return JSON.parse('[' + v.split('=')[1] + ']');
+                    //a标签传递的数组
+                    case v.indexOf('{') < 0 && v.indexOf('[') > -1 && v.indexOf(',') > -1:
+                        console.log('a标签传递的数组');
+                        return JSON.parse(v.split('=')[1]);
+                }
+            }();
+        });
+        console.log(result);
+    })();
+</script>
+</html>
