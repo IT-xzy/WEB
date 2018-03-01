@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' :
+            '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <style>
+        .reveal pre code {
+            background-color: #120;
+        }
+    </style>
+</head>
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h4>小课堂【萌新】</h4>
+            <h4>【CSS】常见的表单元素有哪些？各有什么属性？</h4>
+            <h4>分享人：汪胜</h4>
+        </section>
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section>
+            <section>
+                <h3>1.背景介绍</h3>
+            </section>
+            <section><p>表单元素是允许用户在表单中输入信息的元素。随着时代的改变和互联网的发展，表单的使用越来越广泛。</p></section>
+        </section>
+        <section>
+            <section>
+                <h3>2.知识剖析</h3>
+            </section>
+            <section><p>什么是表单</p></section>
+            <section><p>表单在网页中主要负责数据采集功能。一个表单有三个基本组成部分： 表单标签：这里面包含了处理表单数据所用CGI程序的URL以及数据提交到服务器的方法。 表单域：包含了文本框、密码框、隐藏域、多行文本框、复选框、单选框、下拉选择框和文件上传框等。 表单按钮：包括提交按钮、复位按钮和一般按钮；用于将数据传送到服务器上的CGI脚本或者取消输入，还可以用表单按钮来控制其他定义了处理脚本的处理工作。
+            </p></section>
+            <section><p>常用表单元素</p></section>
+            <section><p>
+                form:定义供用户输入的表单。
+                fieldset:定义域。即输入区加有文字的边框。
+                legend：定义域的标题，即边框上的文字。
+                label：定义一个控制的标签。如输入框前的文字，用以关联用户的选择。
+                input:定义输入域，常用。可设置type属性，从而具有不同功能。
+                textarea:定义文本域(一个多行的输入控件)，默认可通过鼠标拖动调整大小。
+                button:定义一个按钮。
+                select:定义一个选择列表，即下拉列表。
+                option:定义下拉列表中的选项。
+            </p></section>
+            <section><p>表单的种类</p></section>
+            <section><p>文本框: 文本框是一种让访问者自己输入内容的表单对象，通常被用来填写信息或者简短的回答，如姓名、地址等。</p>
+                <p>
+                属性解释：
+                type="text"定义单行文本输入框；
+                name属性定义文本框的名称，要保证数据的准确采集，必须定义一个独一无二的名称；
+                size属性定义文本框的宽度，单位是单个字符宽度；
+                maxlength属性定义最多输入的字符数。
+                value属性定义文本框的初始值</p></section>
+            <section><p>多行文本框: 也是一种让访问者自己输入内容的表单对象，只不过能让访问者填写较长的内容。</p>
+                <p>
+                属性解释：
+                name属性定义多行文本框的名称，要保证数据的准确采集，必须定义一个独一无二的名称；
+                cols属性定义多行文本框的宽度，单位是单个字符宽度；
+                rows属性定义多行文本框的高度，单位是单个字符宽度；
+                wrap属性定义输入内容大于文本域时显示的方式
+            </p></section>
+            <section><p>密码框: 是一种特殊的文本域，用于输入密码。当访问者输入文字时，文字会被星号或其它符号代替，而输入的文字会被隐藏。</p>
+                <p>
+                属性解释：
+                type="password"定义密码框；
+                name属性定义密码框的名称，要保证数据的准确采集，必须定义一个独一无二的名称；
+                size属性定义密码框的宽度，单位是单个字符宽度；
+                maxlength属性定义最多输入的字符数。
+            </p></section>
+            <section><p>隐藏域: 隐藏域是用来收集或发送信息的不可见元素，对于网页的访问者来说，隐藏域是看不见的。当表单被提交时，隐藏域就会将信息用你设置时定义的名称和值发送到服务器上。</p>
+                <p>
+                属性解释：
+                type="hidden"定义隐藏域；
+                name属性定义隐藏域的名称，要保证数据的准确采集，必须定义一个独一无二的名称；
+                value属性定义隐藏域的值
+            </p></section>
+            <section><p>单选框: 当需要访问者在单选项中选择唯一的答案时，就需要用到单选框了。</p>
+                <p>
+                属性解释：
+                type="radio"定义单选框；
+                name属性定义单选框的名称，要保证数据的准确采集，单选框都是以组为单位使用的，在同一组中的单选项都必须用同一个名称；
+                value属性定义单选框的值，在同一组中，它们的域值必须是不同的。</p></section>
+            <section><p>复选框: 复选框允许在待选项中选中一项以上的选项。每个复选框都是一个独立的元素，都必须有一个唯一的名称。</p>
+                <p>
+                属性解释：
+                type="checkbox"定义复选框；
+                name属性定义复选框的名称，要保证数据的准确采集，必须定义一个独一无二的名称；
+                value属性定义复选框的值
+            </p></section>
+            <section><p>提交按钮: 提交按钮用来将输入的信息提交到服务器。</p>
+                <p>
+                属性解释：
+                type="submit"定义提交按钮；
+                name属性定义提交按钮的名称；
+                value属性定义按钮的显示文字；
+                 </p></section>
+                 <section><p>复位按钮: 复位按钮用来重置表单。
+                <p>属性解释：
+                type="reset"定义复位按钮；
+                name属性定义复位按钮的名称；
+                value属性定义按钮的显示文字；
+               </p></section>
+            <section>常用type属性：button、checkbox、hidden、image、password、checkbox、radio、reset、submit、text。</section>
+        </section>
+        <section>
+            <section>
+                <h3>3.常见问题</h3>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>4.解决方案</h3>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>5.编码实战</h3>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>6.扩展思考</h3>
+            </section>
+            <section><p>html5新增type属性：</p>
+              <p>（1）search：input会呈现为搜索框（与text类型的唯一区别在于当鼠标覆盖时尾部出现叉号可快速清除输入的内容）。</p>
+              <p>（2）tel：编辑电话号码的控件，提交时换行符会自动从输入框中去掉（普通的text并不会，故text类型验证输入值时一般需要trim()函数处理）。
+              </p>
+             <p>（3）url：编辑url的控件，提交时换行符与首位的空格都将自动去除。</p>
+             <p>（4）email：可输入一个邮件地址。</p> </section>
+        </section>
+        <section>
+            <section>
+                <h3>7.参考文献</h3>
+            </section>
+            <section>
+                <p>html元素 —— 表单元素及实用属性</p>
+                <p>HTML5-input元素新特性</p>
+                <p>W3School HTML 表单</p>
+                <p>菜鸟教程</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>8.更多讨论</h3>
+            </section>
+        </section>
+        <section>
+            <h4>鸣谢</h4>
+            <p>感谢大家观看</p>
+            <p>
+                By
+                <small style="vertical-align: middle">汪胜</small>
+            </p>
+        </section>
+    </div>
+</div>
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: '../plugin/markdown/marked.js'},
+            {src: '../plugin/markdown/markdown.js'},
+            {src: '../plugin/notes/notes.js', async: true},
+            {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+html {
+	font-size: 62.5%;
+	font-family: "Microsoft YaHei UI";
+}
+
+body {
+	margin: 0;
+	background-color: #f9f9f9;
+}
+
+
+/*header导航部分*/
+
+header {
+	background-color: #1d7ad9;
+}
+
+.navbar-default {
+	background-color: #1d7ad9;
+	border: 0;
+}
+
+.navbar-default a {
+	color: #ffffff !important;
+	/*提高优先权！*/
+	font-size: .8rem;
+}
+
+.navbar-nav {
+	float: right;
+}
+
+@media only screen and (min-width:768px) {
+	.navbar-nav a {
+		border-right: 1px solid #ffffff;
+		border-left: 1px solid #ffffff;
+	}
+	.navbar-nav a:hover {
+		background-color: #ffffff !important;
+		color: #000000 !important;
+		transition-property: background-color;
+		/*选择一个属性变换*/
+		transition-duration: 500ms;
+		/*渐变开始过程*/
+	}
+}
+
+@media only screen and (max-width:767px) {
+	.navbar-nav {
+		/*定义展开居中样式*/
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		text-align: center;
+		border: 0;
+	}
+	.navbar-nav a:hover {
+		text-decoration: none;
+		border-bottom: 2px solid #ffffff;
+	}
+}
+
+
+/* 按钮部分*/
+
+.butt {
+	margin-top: 4rem;
+}
+
+.line-circle {
+	margin-top: 3rem;
+}
+
+.butt button {
+	margin: 0 1%;
+	border: 0;
+}
+
+.butt button:hover {
+	background-color: #1d7ad9!important;
+	color: #ffffff!important;
+	transition-property: background-color;
+	/*选择一个属性变换*/
+	transition-duration: 500ms;
+	/*渐变开始过程*/
+	/*transition-timing-function: linear;*/
+	/*规定以相同速度开始至结束的过渡效果，在hover里面没用*/
+}
+
+
+/*正文部分*/
+
+.content {
+	background-color: #ffffff;
+	margin-top: 4rem;
+}
+
+
+/*顺序部分*/
+
+.box-process {
+	position: relative;
+	float: right;
+	counter-reset: step;
+	/*创建一个计数器*/
+	max-width: 640px;
+	width: 100%;
+	list-style: none;
+}
+
+.box-step {
+	position: relative;
+	float: left;
+	width: 25%;
+	text-align: center;
+	color: #ff7f02;
+}
+
+
+/*序号效果*/
+
+.box-step:before {
+	position: relative;
+	display: block;
+	width: 20px;
+	height: 20px;
+	counter-increment: step;
+	/*增加的部分*/
+	content: counter(step);
+	/*设置内容*/
+	background-color: #ff7f02;
+	color: #ffffff;
+	text-align: center;
+	border-radius: 50%;
+	margin: 3px auto 20px auto;
+	z-index: 10;
+}
+
+
+/*横线效果*/
+
+.box-step:after {
+	z-index: 1;
+	/*序号在横线的上一层*/
+	left: 0;
+	top: 12px;
+	position: absolute;
+	width: 100%;
+	content: '';
+	/*实现横线效果*/
+	height: 3px;
+	background-color: #ff7f02;
+	/*横线部分颜色*/
+	border-radius: 10px;
+}
+
+
+/*设置三个颜色部分*/
+
+.box-step-0~li:before,
+.box-step-0~li:after {
+	background-color: #ccc;
+}
+
+
+/*所有前面有个class="box-step-0"的li:before,li:after的background-color的颜色设置为灰色*/
+
+.box-step-0~li {
+	color: #ccc;
+	/*与上面同理*/
+}
+
+.box-step:hover:before,
+.box-step:hover:after {
+	background-color: #ff7f02;
+}
+
+.box-step:hover {
+	color: #ff7f02;
+	/*注意：hover在before，after的前面*/
+}
+
+
+/*提示部分*/
+
+.tips p {
+	font-size: 1.5rem;
+	margin-top: 2rem;
+	padding: 0rem 1rem;
+	font-weight: bold;
+	border-left: 4px solid #1d7ad9;
+}
+
+
+/*选择部分第一部分*/
+
+.titles {
+	color: #1d7ad9;
+	background-color: #f3f3f3;
+	width: 100%;
+	padding: .5rem .5rem;
+}
+
+.titles span {
+	margin-left: .5rem;
+}
+
+.sold,
+.steal,
+.cry {
+	background-color: #fbfcff;
+	padding: 2rem 0 2rem 5%;
+	/*离左边5%的距离*/
+}
+
+.sold span {
+	margin: 0 .5rem;
+	font-weight: normal;
+}
+
+.sold label {
+	margin-right: 2%;
+}
+
+
+/*变化radio样式部分，用<i>标签*/
+
+input[type='radio'] {
+	opacity: 0;
+	width: 30px;
+	height: 30px;
+	margin-right: -2rem;
+}
+
+i {
+	display: inline-block;
+	padding: 6px;
+	/*半径为6px的圆*/
+	border: 1px solid #999999;
+	/*6+1等于7*/
+	border-radius: 50%;
+	width: 5px;
+	height: 5px;
+}
+
+input[type='radio']:checked+i {
+	border: 5px solid #1d7ad9;
+	/*2+5等于7所以圆的大小没变*/
+	padding: 2px;
+	/*半径为2px了*/
+}
+
+@media only screen and (min-width: 767px) {
+	.detail {
+		margin: 0 2%;
+		float: right;
+	}
+	.pick {
+		position: relative;
+		top: -3rem;
+	}
+	.picking {
+		position: relative;
+		top: -6rem;
+	}
+	.part {
+		display: inline;
+		margin-right: 1.5%;
+	}
+	.out,
+	.in {
+		margin-bottom: 1rem;
+	}
+}
+
+
+/*响应式布局*/
+
+@media only screen and (max-width: 767px) {
+	.volume {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.detail {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 2rem;
+	}
+	.part {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+label span {
+	font-weight: normal;
+}
+
+select {
+	position: relative;
+	width: 10rem;
+	height: 3rem;
+	font-size: 1.5rem;
+	border: 1px solid darkgray;
+	border-radius: .5rem;
+	appearance: none;
+	/*去掉默认样式*/
+	-moz-appearance: none;
+	/*三大内核都要去掉默认样式*/
+	-webkit-appearance: none;
+	-webkit-appearance: none;
+	background: url("../img/down.png") no-repeat 90% center;
+	color: darkgray;
+	padding-right: 2rem;
+}
+
+.steal input {
+	max-width: 80px;
+}
+
+.bd {
+	background-color: #ffffff;
+}
+
+
+/*下一步部分*/
+
+.next {
+	margin: 4rem 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.next button {
+	border: 0;
+	color: #ffffff;
+	background-color: #e15053;
+	border-radius: 10rem;
+	font-size: 1.5rem;
+	width: 16rem;
+	height: 3rem;
+}
+
+.next button:hover {
+	background-color: #1d7ad9;
+	transition-property: background-color;
+	/*选择一个属性变换*/
+	transition-duration: 500ms;
+	/*渐变开始过程*/
+}
+
+
+/*footer部分*/
+
+.footer {}
+
+.patform p {
+	color: #999999;
+	margin-top: 4rem;
+	font-size: 1.3rem;
+}
+
+.about {
+	margin-top: 3rem;
+}
+
+.about a {
+	color: #999999;
+	text-decoration: none;
+	margin-right: 1rem;
+	line-height: 4rem;
+}
+
+.enterprise {
+	margin-top: 4rem;
+}
+
+.enterprise img {
+	float: right;
+}
+
+.footer-3-p {
+	float: right;
+	color: #999999;
+}
+
+@media only screen and (max-width: 767px) {
+	/*注意：and和括号之间有空格*/
+	.enterprise img {
+		/*float: left;*/
+	}
+	.footer-3-p {
+		/*float: left;*/
+		color: #999999;
+	}
+}
+
+.punish {
+	background-color: #1d7ad9;
+	color: #ffffff;
+	width: 100%;
+	margin-top: 4rem;
+	padding: .2rem 0;
+}
