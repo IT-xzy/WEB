@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <style type="text/css">
+        h3 {
+            font-family: 'Microsoft Yahei';
+        }
+
+        p {
+            font-size: 30px !important;
+            letter-spacing: 2px;
+            line-height: 50px !important;
+            text-align: left;
+        }
+
+        B {
+            color: rgb(195, 255, 219);
+            font-size: 40px !important;
+            font-weight: 500 !important;
+        }
+
+        a {
+            color: #fff !important;
+        }
+    </style>
+</head>
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>【JS-task04】</h3>
+
+            <h3>如何理解JS作用域与作用域链？
+            </h3>
+
+            <h3>小课堂</h3>
+
+            分享人：钟楚炯
+        </section>
+        <section>
+            <p style="text-align: center;">目录</p>
+            <p style="text-align: center;">1.背景介绍</p>
+            <p style="text-align: center;">2.知识剖析</p>
+            <p style="text-align: center;">3.常见问题</p>
+            <p style="text-align: center;">4.解决方案</p>
+            <p style="text-align: center;">5.编码实战</p>
+            <p style="text-align: center;">6.扩展思考</p>
+            <p style="text-align: center;">7.参考文献</p>
+            <p style="text-align: center;">8.更多讨论</p>
+        </section>
+        <!--1.背景介绍-->
+        <section>
+            <section>
+                <h3>1.背景介绍</h3>
+            </section>
+            <section>
+                <p>JS中声明的变量跟函数有它自己的可访问范围，超出这个范围就访问不到这个变量\函数。这个可访问范围就是今天要说的作用域。</p>
+                <p>作用域控制着变量跟函数的可见性和生命周期。</p>
+            </section>
+        </section>
+        <!--2.知识剖析-->
+        <section>
+            <h3>2.知识剖析</h3>
+        </section>
+        <!--2.1 JS有哪些数据类型？-->
+        <section>
+            <section>
+                <b>1.全局作用域(Global Scope)</b>
+                <p>在代码中任何地方都能访问到的对象拥有全局作用域，一般来说一下几种情形拥有全局作用域：</p>
+            </section>
+            <section>
+                <p>(1)所有末定义直接赋值的变量自动声明为拥有全局作用域，例如：</p>
+                <pre>
+                     <code>
+                    function person(){
+                        var Name="老威";
+                        nickName="掏粪男孩";
+                    }
+                    person();
+                    console.log(nickName);
+                    console.log(Name);
+                     </code>
+            </pre>
+                <p>变量nickName拥有全局作用域，而Name在函数外部无法访问到。</p>
+            </section>
+            <section>
+                <p>(2)所有window对象的属性拥有全局作用域</p>
+                <p>一般情况下，window对象的内置属性都都拥有全局作用域，例如window.name、window.top等等。</p>
+                <pre>
+                     <code>
+                    var site = 'baidu.com';
+                    function getSite() {
+                      alert(this.site);
+                    }
+                    alert(window.site);  // 'baidu.com'
+                    getSite();	// 'baidu.com'
+                    window.getSite();	// 'baidu.com'
+                     </code>
+            </pre>
+                <p>在上面示例中，site变量和getSite()方法没有指定上级对象，所在二者会被添加到window全局对象，所以直接访问二者与通过window访问本质相同（如，直接访问getSite()与使用window.getSite()访问一样）。</p>
+            </section>
+            <section>
+                <b>2. 局部作用域(Local Scope)</b>
+                <p>和全局作用域相反，局部作用域一般只在固定的代码片段内可访问到，最常见的例如函数内部，所有在一些地方也会看到有人把这种作用域成为函数作用域</p>
+            </section>
+            <section>
+                <p>例如下列代码中的nickName和函数inner都只拥有局部作用域：</p>
+                <pre>
+                    <code>
+                        function person(){
+                            var nickName="掏粪男孩";
+                            function inner(){
+                                alert(nickName);
+                            }
+                            inner();
+                        }
+                        alert(nickName);
+                        inner();
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <b>作用域链(Scope Chain)</b>
+                <p>说完了作用域我们就可以接着来聊聊作用域链(Scope Chain)这个概念了.作用域链就是由多个作用域组成的 在JS中，函数的可以允许嵌套的。即，在一个函数的内部声明另一个函数.类似这样：</p>
+                <pre>
+        <code>
+            function A(){
+            var  a=1;
+               function B(){  //在A函数内部，声明了函数B，这就是所谓的函数嵌套。
+                    var b=2;
+               }
+            }
+        </code>
+                </pre>
+            </section>
+            <section>
+                <p>对于A来说，A函数在执行的时候，会创建其A函数的作用域， 那么函数B在创建的时候，会引用A的作用域，类似下面这样</p>
+                <img src="../pic-one.png" alt="">
+            </section>
+            <section>
+                <p>函数B在执行的时候，其作用域类似于下面这样：</p>
+                <img src="../pic-two.png" alt="">
+            </section>
+            <section>
+                <p>从上面的两幅图中可以看出，函数B在执行的时候，是会引用函数A的作用域的。所以，像这种函数作用域的嵌套就组成了所谓的函数作用域链。当在自身作用域内找不到该变量的时候，会沿着作用域链逐步向上查找，若在全局作用域内部仍找不到该变量，则会抛出异常。 </p>
+            </section>
+        </section>
+        <!--3.常见问题-->
+        <section>
+            <h3>3.常见问题</h3>
+        </section>
+        <section>
+            <B>如何运用作用域链的知识进行性能优化?</B>
+        </section>
+        <!--4.解决方案-->
+        <section>
+            <section>
+                <h3>4.解决方案</h3>
+            </section>
+                <section>
+                    <p>其实作用域链就是JS引擎查询数据的一个链表，后定义的覆盖先定义的，查询不到定义的数据就往深一层查询，一直到全局作用域为止 但是越往内层延伸，读写速度就会越慢，查找全局变量是最慢的。所以，在编写代码的时候应尽量少使用全局变量，尽可能使用局部变量。 如果一个跨作用域的对象被引用了一次以上，则先把它存储到局部变量里再使用。例如下面的代码： </p>
+                    <pre>
+                     <code>
+            function changeColor(){
+                        document.getElementById("a").onclick=function(){
+                        document.getElementById("b").style.backgroundColor="red";
+                        document.getElementById("a").style.backgroundColor="red"; };
+                        }
+                     </code>
+                    </pre>
+                </section>
+                <section>
+                    <p>这个函数引用了两次全局变量document，查找该变量必须遍历整个作用域链，直到最后在全局对象中才能找到。这段代码可以重写如下：</p>
+                    <pre>
+                     <code>
+                    function changeColor(){
+                            var a=document.getElementById("a");
+                            var b=document.getElementById("b")
+                            a.onclick=function(){
+                            a.style.backgroundColor="red";
+                            b.style.backgroundColor="red";
+                            }; }
+                     </code>
+                    </pre>
+                    <p>这段代码比较简单，但是如果程序中有大量的全局变量被从新反复访问，那么重写后的代码性能会有显著改善。</p>
+                </section>
+        </section>
+
+        <!--5.编码实战-->
+        <section>
+            <h3>5.编码实战</h3>
+        </section>
+        <!--6.拓展思考-->
+        <section>
+            <section>
+                <h3>6.拓展思考</h3>
+            </section>
+            <section>
+                <b>执行上下文创建过程是怎样的？</b>
+            </section>
+            <section>
+                <p>当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。</p>
+                <p>虽然在定义上跟作用域还是有些差别的，执行上下文其实可以理解为作用域。</p>
+            </section>
+            <section>
+                <p>在JavaScript解释器内部，每次调用执行上下文，分为两个阶段：</p>
+                <ol>
+                    <li>创建阶段</li>
+                    <li>代码执行阶段</li>
+                </ol>
+            </section>
+            <section>
+                <b>创建阶段</b>
+                <p>当进入执行上下文时，会创建一个变量对象，所有在执行上下文里创建的变量、函数和形参等都会挂在这个变量对象上面(变量\函数提升)。</p>
+            </section>
+            <section>
+                <p>举个例子</p>
+                <pre>
+                    <code>
+                        function foo(a) {
+                          var b = 2;
+                          function c() {}
+                          var d = function() {};
+                          b = 3;
+                        }
+                        foo(1);
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <p>在进入执行上下文后，这时候的 AO 是：</p>
+                <pre>
+                    <code>
+                        AO = {
+                            arguments: {
+                                0: 1,
+                                length: 1
+                            },
+                            a: 1,
+                            b: undefined,
+                            c: reference to function c(){},
+                            d: undefined
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <p>在代码执行阶段，会顺序执行代码，根据代码，修改变量对象的值</p>
+                <p>还是上面的例子，当代码执行完后，这时候的 AO 是：</p>
+                <pre>
+                    <code>
+                        AO = {
+                            arguments: {
+                                0: 1,
+                                length: 1
+                            },
+                            a: 1,
+                            b: 3,
+                            c: reference to function c(){},
+                            d: reference to FunctionExpression "d"
+                        }
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+
+        <section>
+            <h3>7.参考文献</h3>
+            <section>
+                <p style="text-align: center">参考：<a href="https://www.cnblogs.com/lhb25/archive/2011/09/06/javascript-scope-chain.html"
+                                                     target="_blank">理解 JavaScript 作用域和作用域链</a><br>
+                    <a href="https://github.com/mqyqingfeng/Blog/issues/6">JavaScript深入之作用域链</a><br>
+                    <a href="http://yanhaijing.com/javascript/2014/04/29/what-is-the-execution-context-in-javascript/">了解JavaScript的执行上下文</a>
+            </section>
+        </section>
+        <section>
+            <h3>8.更多讨论</h3>
+        </section>
+        <section>
+            <p style="text-align: center">感谢大家观看
+            <p style="text-align: center">
+                <small>BY : 钟楚炯</small>
+        </section>
+        <script src="../lib/reveal/js/head.min.js"></script>
+        <script src="../lib/reveal/reveal.js"></script>
+    </div>
+</div>
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: '../plugin/markdown/marked.js'},
+            {src: '../plugin/markdown/markdown.js'},
+            {src: '../plugin/notes/notes.js', async: true},
+            {src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
