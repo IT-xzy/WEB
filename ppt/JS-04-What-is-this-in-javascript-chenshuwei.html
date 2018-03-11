@@ -182,17 +182,30 @@
                 <p style="text-align: left">foo.bar()在示例 1 中，MemberExpression 计算的结果是 foo.bar，那么 foo.bar 是不是一个 Reference
                     呢？
                     查看规范 11.2.1 Property Accessors，这里展示了一个计算的过程，什么都不管了，就看最后一步：</p>
-                <p style="text-align: left">Return a value of type Reference whose base value is baseValue and whose
-                    referenced name is propertyNameString, and whose strict mode flag is strict.</p>
+                <p style="text-align: left"><em>Return a value of type Reference whose base value is baseValue and whose
+                    referenced name is propertyNameString, and whose strict mode flag is strict.</em></p>
                 <p style="text-align: left">我们得知该表达式返回了一个 Reference 类型！根据之前的内容，我们知道该值为：
                 </p>
+            </section>
+            <section>
+                <pre>
+                    <code>
+                        var Reference = {
+                          base: foo,
+                          name: 'bar',
+                          strict: false
+                        };
+                    </code>
+                </pre>
+                <p style="text-align: left">接下来按照 2.1 的判断流程走：该值是 Reference 类型，然后执行IsPropertyReference(ref)，如果ref的base value是一个对象则返回true,那么 this
+                    的值为 base value 即这个foo</p>
             </section>
             <section>
                 <p style="text-align: left">
                     实例3,4,5中，MemberExpression计算结果分别为（foo.bar=foo.bar）,(false||foo.var),(f00,bar,foo,bar)</p>
                 <p style="text-align: left">根据规范，逗号操作符，逻辑或操作符和赋值操作符都会执行：</p>
-                <p style="text-align: left"> 3.Let rval be GetValue(ref).</p>
-                <p style="text-align: left">因为使用了 GetValue，所以返回的不是 Reference 类型，this 为 undefined</p>
+                <p style="text-align: left"> <em>3.Let rval be GetValue(ref).</em></p>
+                <p style="text-align: left">因为使用了 <strong>GetValue</strong>，所以返回的不是 Reference 类型，this 为 undefined</p>
                 <p style="text-align: left">this 为 undefined，非严格模式下，this 的值为 undefined 的时候，其值会被隐式转换为全局对象。</p>
                 <p style="text-align: left">因此这些this都指向了全局对象</p>
             </section>
@@ -221,19 +234,6 @@
                         console.log((foo.bar, foo.bar)()); // 1
                       </code>
                 </pre>
-            </section>
-            <section>
-                <pre>
-                    <code>
-                        var Reference = {
-                          base: foo,
-                          name: 'bar',
-                          strict: false
-                        };
-                    </code>
-                </pre>
-                <p>接下来按照 2.1 的判断流程走：该值是 Reference 类型，然后执行IsPropertyReference(ref)，如果ref的base value是一个对象则返回true,那么 this
-                    的值为 base value 即这个foo</p>
             </section>
             <section>
 
