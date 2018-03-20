@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+
+<body>
+<!--2-->
+<div ng-app="myApp" ng-controller="myCtrl">
+    <input type="text" ng-model="greeting.text"><br>
+    <br>
+     {{greeting.text}}
+</div>
+<!--5-->
+<div></div>
+<script>
+    //2
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.greeting = {
+            text:'hello'
+        };
+    });
+</script>
+
+</body>
+</html>

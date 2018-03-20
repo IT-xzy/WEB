@@ -1,0 +1,165 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <style>
+        .reveal pre code {
+            background-color: #120;
+        }
+    </style>
+</head>
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h4>小课堂【萌新】</h4>
+            <h4>【CSS-TASK1】常见的<span style="text-transform: none">inline</span>元素、<span style="text-transform: none">block</span>元素、<span
+                    style="text-transform: none">inline-block</span>元素有哪些？它们之间有什么区别？</h4>
+            <h4>分享人：汪胜</h4>
+        </section>
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section>
+            <section>
+                <h3>1.背景介绍</h3>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>2.知识剖析</h3>
+            </section>
+            <section><p>在這里，inline表示的是行内元素，block表示的是块級元素，inline-block表示的是内联块狀元素</p></section>
+            <section><p>常見的inline元素：span,a,strong,em等。</p></section>
+            <section><p>具体行内元素的具体用法</p></section>
+            <section><p>span,常用内联元素。a,定义超链接，用于从一张页面链接到另一张页面,最重要的属性是 href 属性，它指示链接的目标,在所有浏览器中，链接的默认外观是： 未被访问的链接带有下划线而且是蓝色的， 已被访问的链接带有下划线而且是紫色的， 活动链接带有下划线而且是红色的。strong,粗体强调。em,斜体强调。</p></section>
+            <section><p>常見的block元素：div,p,h1到h6,form,ul,ol等。</p></section>
+            <section><p>具体块级元素的具体用法</p></section>
+            <section><p>div,常用块级元素。p,定义段落。h1到h6，定义大小不同的标题。form，为用户输入创建 HTML 表单。ul,无序列表。ol,有序列表。</p></section>
+            <section><p>常見的inline-block元素：img,input等。</p></section>
+             <section><p>具体内联块状元素的具体用法</p></section>
+            <section><p>img,用于向网页中嵌入一幅图像.input,用于搜集用户信息。根据不同的type属性值，输入字段拥有很多种形式。输入字段可以是文本字段、复选框、单选按钮,下拉列表等。</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>3.常见问题</h3>
+            </section>
+            <section><p>在使用inline-block时，浏览器会自动产生空隙</p></section>
+            <section><p>说明：你如果需要这些空隙，可以留着。你如果不需要这些空隙，可以去掉。</p></section>
+        </section>
+        <section>
+            <section>
+                <h3>4.解决方案</h3>
+            </section>
+            <section><p>1.使用margin负值。2.设置父元素的字体为“0”，然后在“inline-block”元素上重置字体需要的大小。</p></section>
+        </section>
+        <section>
+            <section>
+                <h3>5.编码实战</h3>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>6.扩展思考</h3>
+            </section>
+            <section><p>元素的分類</p><p>共三类</p></section>
+            <section><p>行内元素：一个挨着一个，都在同一行按从左至右的顺序显示。行内元素用英语单词inline表示，它还有其它叫法，如：内联元素、内嵌元素、直进式元素等。基本上没有统一的翻译。 </p></section>
+            <section><p>特点：1.和其他元素都在一行上； 2.高度、行高和顶以及底边距都不可改变； 3.宽度就是它的文字或图片的宽度，不可改变。 4.内联元素只能容纳文本或者其他内联元素</p></section>
+            <section><p>块元素：又名块级元素，用英语单词block表示，和其对应的是内联元素 。大多数HTML 元素被定义为块级元素或内联元素。块级元素在浏览器显示时会独占一行，多个block元素会各自新起一行。</p></section>
+            <section><p>特点：1.总是在新行上开始； 2.高度宽度都可设置； 3.若没有设置宽度，块元素的宽度是父容器的100%。 4.它可以容纳内联元素和其他块元素</p></section>
+            <section><p>行内块元素：行内块元素既具有宽度高度特性，又具有同行特性，用inline-block表示。</p></section>
+            <section><p>display属性</p><p>display属性设置元素的显示方式，常用值有block、inline、inline-block。</p></section>
+            <section><p>用法</p><p>display：block；块方式显示元素。display：inline； 元素以行内元素方式显示。display:inline-block;元素以内联块状元素方式显示，既具有block的宽度高度特性又具有inline的同行特性。</p></section>
+        </section>
+        <section>
+            <section>
+                <h3>7.参考文献</h3>
+            </section>
+            <section><p>《css inline元素与inline-block,block元素 - 竹叶海 - 博客园》</p><p>《block,inline和inline-block概念和区别 - 黄小洁 - 博客园》</p></section>
+        </section>
+        <section>
+            <section>
+                <h3>8.更多讨论</h3>
+            </section>
+        </section>
+        <section>
+            <h4>鸣谢</h4>
+            <p>感谢大家观看</p>
+            <p>
+                By
+                <small style="vertical-align: middle">汪胜</small>
+            </p>
+        </section>
+    </div>
+</div>
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: '../plugin/markdown/marked.js'},
+            {src: '../plugin/markdown/markdown.js'},
+            {src: '../plugin/notes/notes.js', async: true},
+            {
+                src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>

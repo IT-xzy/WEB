@@ -1,0 +1,362 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>简述Js中this的指向</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>简述Js中this的指向</h2>
+            <h2>小课堂【深圳】</h2>
+            <p>分享人：陈树威</p>
+        </section>
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section>
+            <h3>1.背景介绍</h3>
+        </section>
+        <section>
+            <p></p>
+            <section>
+                <p style="text-align: left">当JavaScript代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution
+                    context)。<br/>
+
+                    对于每个执行上下文，都有三个重要属性</p>
+                <ul style="text-align: left;display: block">
+                    <li style="text-align: left">变量对象(Variable object，VO)</li>
+                    <li style="text-align: left">作用域链(Scope chain)</li>
+                    <li style="text-align: left">this</li>
+                </ul>
+
+
+            </section>
+        </section>
+        <section>
+            <h3>2.知识剖析</h3>
+        </section>
+        <section>
+            <section>
+                <h3>ECMAScript 的类型分为语言类型和规范类型。</h3>
+                <ul style="text-align: left;display: block">
+                    <li>ECMAScript 语言类型是开发者直接使用 ECMAScript 可以操作的。其实就是我们常说的Undefined, Null, Boolean, String, Number, 和
+                        Object。
+                    </li>
+                    <li>ECMAScript 规范中还有一种只存在于规范中的类型，它们的作用是用来描述语言底层行为逻辑。</li>
+                    <li>其中重点是便是规范类型中的 Reference 类型。它与 this 的指向有着密切的关联。</li>
+                </ul>
+            </section>
+            <section>
+                <p>这里的 Reference 是一个 Specification Type，也就是 “只存在于规范里的抽象类型”。它们是为了更好地描述语言的底层行为逻辑才存在的，但并不存在于实际的 js 代码中。</p>
+
+            </section>
+            <section>
+                <h4 style="text-align: left">Reference 的构成，由三个组成部分，分别是：</h4>
+                <ul style="text-align: left;display: block">
+                    <li>base value</li>
+                    <li>referenced name</li>
+                    <li>strict reference</li>
+                </ul>
+                <p style="text-align: left">base value 就是属性所在的对象或者就是 EnvironmentRecord，它的值只可能是 undefined, an Object, a
+                    Boolean, a String, a Number, or an environment record 其中的一种。</p>
+                    <p style="text-align: left">referenced name 就是属性的名称。</p>
+            </section>
+            <section>
+                <h4>举个例子</h4>
+                <pre>
+                    <code>
+                        var foo = 1;
+                        // 对应的Reference是：
+                        var fooReference = {
+                        base: EnvironmentRecord,
+                        name: 'foo',
+                        strict: false
+                        };
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h4 style="text-align: left">而且规范中还提供了获取 Reference 组成部分的方法，比如 GetBase 和 IsPropertyReference。</h4>
+                <ul>
+                    <li>GetBase(reference),返回的是reference的值</li>
+                    <li>IsPropertyReference(reference)，如果 base value 是一个对象，就返回true。</li>
+                    <li>GetValue,GetValue 返回对象属性真正的值，但是要注意：调用 GetValue，返回的将是具体的值，而不再是一个 Reference</li>
+                </ul>
+            </section>
+            <section>
+                <h3>当函数调用时，如何确定this的值？</h3>
+                <ul>
+                    <li>1.计算MemberExpression的结果赋给ref</li>
+                    <li>2.判断ref是不是一个Reference类型</li>
+                    <li>a.如果ref是Reference,并且ref的base value是一个对象,那么 this 的值为 base value</li>
+                    <li>如果 ref 是 Reference，并且 base value 值是 Environment Record, 那么this的值为
+                        ImplicitThisValue(ref)即为undefind
+                    </li>
+                    <li>b.如果 ref 不是 Reference，那么 this 的值为 undefined</li>
+                </ul>
+            </section>
+            <section>
+                <p>举个例子</p>
+                <pre>
+                    <code>
+                        function foo() {
+                           console.log(this)
+                        }
+                        foo(); // MemberExpression 是 foo
+                        function foo() {
+                           return function() {
+                           console.log(this)
+                          }
+                        }
+                        foo()(); // MemberExpression 是 foo()
+                        var foo = {
+                           bar: function () {
+                           return this;
+                           }
+                        }
+                        foo.bar(); // MemberExpression 是 foo.bar
+                    </code>
+                </pre>
+                <p>所以简单理解 MemberExpression 其实就是()左边的部分。</p>
+            </section>
+            <section>
+                <p>2.判断 ref 是不是一个 Reference 类型。
+                    关键就在于看规范是如何处理各种 MemberExpression，返回的结果是不是一个Reference类型。
+                    举最后一个例子：</p>
+                <pre>
+                    <code>
+                        var value = 1;
+                        var foo = {
+                          value: 2,
+                          bar: function () {
+                            return this.value;
+                          }
+                        }
+                        //示例1
+                        console.log(foo.bar());
+                        //示例2
+                        console.log((foo.bar)());
+                        //示例3
+                        console.log((foo.bar = foo.bar)());
+                        //示例4
+                        console.log((false || foo.bar)());
+                        //示例5
+                        console.log((foo.bar, foo.bar)());
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <p style="text-align: left">foo.bar()在示例 1 中，MemberExpression 计算的结果是 foo.bar，那么 foo.bar 是不是一个 Reference
+                    呢？
+                    查看规范 11.2.1 Property Accessors，这里展示了一个计算的过程，什么都不管了，就看最后一步：</p>
+                <p style="text-align: left"><em>Return a value of type Reference whose base value is baseValue and whose
+                    referenced name is propertyNameString, and whose strict mode flag is strict.</em></p>
+                <p style="text-align: left">我们得知该表达式返回了一个 Reference 类型！根据之前的内容，我们知道该值为：
+                </p>
+            </section>
+            <section>
+                <pre>
+                    <code>
+                        var Reference = {
+                          base: foo,
+                          name: 'bar',
+                          strict: false
+                        };
+                    </code>
+                </pre>
+                <p style="text-align: left">接下来按照 2.1 的判断流程走：该值是 Reference 类型，然后执行IsPropertyReference(ref)，如果ref的base value是一个对象则返回true,那么 this
+                    的值为 base value 即这个foo</p>
+            </section>
+            <section>
+                <p style="text-align: left">
+                    实例3,4,5中，MemberExpression计算结果分别为（foo.bar=foo.bar）,(false||foo.var),(f00,bar,foo,bar)</p>
+                <p style="text-align: left">根据规范，逗号操作符，逻辑或操作符和赋值操作符都会执行：</p>
+                <p style="text-align: left"> <em>3.Let rval be GetValue(ref).</em></p>
+                <p style="text-align: left">因为使用了 <strong>GetValue</strong>，所以返回的不是 Reference 类型，this 为 undefined</p>
+                <p style="text-align: left">this 为 undefined，非严格模式下，this 的值为 undefined 的时候，其值会被隐式转换为全局对象。</p>
+                <p style="text-align: left">因此这些this都指向了全局对象</p>
+            </section>
+            <section>
+                <h3>结果</h3>
+                <pre>
+                    <code>
+                        var value = 1;
+
+                        var foo = {
+                          value: 2,
+                          bar: function () {
+                            return this.value;
+                          }
+                        }
+
+                        //示例1
+                        console.log(foo.bar()); // 2
+                        //示例2
+                        console.log((foo.bar)()); // 2
+                        //示例3
+                        console.log((foo.bar = foo.bar)()); // 1
+                        //示例4
+                        console.log((false || foo.bar)()); // 1
+                        //示例5
+                        console.log((foo.bar, foo.bar)()); // 1
+                      </code>
+                </pre>
+            </section>
+            <section>
+
+            </section>
+        </section>
+        <section>
+            <h3>3.常见问题</h3>
+        </section>
+        <section>
+            <section>
+                <p>1.如何改变this的指向？</p>
+            </section>
+        </section>
+        <section>
+            <h3>4.解决方案</h3>
+        </section>
+        <section>
+            <p>可以使用call或者apply的方法</p>
+            <pre>
+                <code>
+                    // 一个对象可以作为call和apply的第一个参数，并且this会被绑定到这个对象。
+                    var obj = {a: 'Custom'};
+
+                    // 这个属性是在global对象定义的。
+                    var a = 'Global';
+
+                    function whatsThis(arg) {
+                      console.log(this.a) // this的值取决于函数的调用方式
+                    }
+
+                    whatsThis();          // 'Global'
+                    whatsThis.call(obj);  // 'Custom'
+                    whatsThis.apply(obj); // 'Custom'
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>5.编码实战</h3>
+        </section>
+        </section>
+        <section>
+            <section>
+                <h3>6.扩展思考</h3>
+            </section>
+            <section>
+                <p>以下代码的this的指向？</p>
+                <pre>
+                    <code>
+                        function Foo(){
+                            getName = function(){
+                                console.log(1);
+                                };
+                            return this
+                        }
+
+                        function getName(){
+                            console.log(5);
+                        }
+
+                        Foo().getName();
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <h3>7.参考文献</h3>
+        </section>
+        <section>
+            <p style="text-align: left">参考一：<a href="https://github.com/mqyqingfeng/Blog/issues/7" target="_blank">JavaScript深入之从ECMAScript规范解读this</a>
+            </p>
+            <p  style="text-align: left">参考一：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/this" target="_blank">this</a></p>
+        </section>
+        <section>
+            <h3>8.更多讨论</h3>
+        </section>
+        <section>
+            <h4>鸣谢</h4>
+            <p>
+                陈树威
+            </p>
+        </section>
+
+    </div>
+</div>
+
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+
+<script>
+
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: '../plugin/markdown/marked.js'},
+            {src: '../plugin/markdown/markdown.js'},
+            {src: '../plugin/notes/notes.js', async: true},
+            {
+                src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+    });
+</script>
+</body>
+</html>

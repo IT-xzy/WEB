@@ -1,0 +1,283 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    a    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+    <style>
+        .tl {
+            text-align: left!important;
+        }
+        .zxx_ul_image{
+            overflow:hidden;
+            zoom:1;
+        }
+        .zxx_ul_image li{
+            float:left;
+            width:150px;
+            height:150px;
+            text-align:center;
+            line-height:150px;
+            *font-size:125px;
+            list-style-type: none;
+        }
+        .zxx_ul_image li:after{
+            content:' ';
+            vertical-align:middle;
+        }
+        .zxx_ul_image li img{
+            vertical-align:middle;
+        }
+        .zxx_align_box_1 {
+            height: 600px;
+            line-height: 600px!important;
+            padding: 0 14px!important;
+            border: 4px solid #beceeb!important;
+        }
+        .zxx_align_box_2{
+            display:table-cell!important;
+            width:550px!important;
+            height:10em!important;
+            padding:0 0.1em!important;
+            border:4px solid #beceeb!important;
+            color: #006699 !important;
+            vertical-align:middle!important;
+        }
+        .zxx_align_box_2 span.zxx_align_word{
+            display:inline-block!important;
+            font-size: 1em!important;
+            vertical-align:middle!important;
+        }
+        li {
+            list-style-type: none!important;
+        }
+        .zxx_align_box_3 li{
+            width:128px;
+            height:128px;
+            padding:0.1em!important;
+            margin:0 0.1em 0 0!important;
+            font-size: 128px!important;
+            line-height: 1;
+            float:left!important;
+            border:1px solid #beceeb!important;
+        }
+        .zxx_align_box_3 li img{
+            display:block!important;
+            width:100%!important;
+            height:100%!important;
+            margin: 0!important;
+            background-color: transparent;!important;
+            border: 0!important;
+            box-shadow: none!important;
+            background-repeat:no-repeat!important;
+            background-position:center!important;
+        }
+    </style>
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+</head>
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>【css-02】</h2>
+            <h3>小课堂【深圳 第401期】如何基于git使用Sublime将代码上传至github？</h3>
+            <p>分享人：张峻</p>
+        </section>
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section>
+            <h3>1.背景介绍</h3>
+        </section>
+        <section>
+            <h4>Git介绍</h4>
+            <p>Git是开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。 分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆 （git clone），在本地机器上拷贝一个完整的Git仓库。</p>
+            <p>通俗的说，就是一个管理代码历史记录的工具,当多人协作时可以相互推送各自的修改。</p>
+        </section>
+        <section>
+            <h4>github介绍</h4>
+                <p>GitHub 是一个面向开源及私有软件项目的托管平台，因为只支持 Git 作为唯一的版本库格式进行托管，故名 GitHub。
+                付费用户可以建私人仓库，我们一般的免费用户只能使用公共仓库，也就是代码要公开。<p>
+            <img src="../img/css-02-How-to-upload-code-to-github-based-on-git-using-sublime/github.png" width="400" height="332">
+        </section>
+        <section>
+            <h4>为什么要使用Sublime将代码上传至github？</h4>
+            <p>因为每当我们要将代码上传到github时都会使用到git这个软件，然而使用git需要输入那些命令行来操作，是不是觉得很麻烦不方便？</p>
+            <p>但是我们可以使用Sublime就能很方便的将代码上传到github</p>
+        </section>
+        <section>
+            <h4>Sublime介绍</h4>
+            <p>Sublime Text 是一个代码编辑器，也是HTML和先进的文本编辑器。Sublime Text是由程序员Jon Skinner于2008年1月份所开发出来，它最初被设计为一个具有丰富扩展功能的Vim。</p>
+            <p>Sublime Text具有漂亮的用户界面和强大的功能，例如代码缩略图，Python的插件，代码段等。还可自定义键绑定，菜单和工具栏。Sublime Text 的主要功能包括：拼写检查，书签，完整的 Python API ， Goto 功能，即时项目切换，多选择，多窗口等等。</p>
+        </section>
+        <section>
+            <p>Sublime的优点</p>
+            <ol>
+                <li>主流前端开发编辑器</li>
+                <li>体积较小，运行速度快</li>
+                <li>文本功能强大</li>
+                <li>支持编译功能且可在控制台看到输出</li>
+                <li>内嵌python解释器支持插件开发以达到可扩展目的</li>
+                <li>Package Control：Sublime支持的大量插件可通过其进行管理</li>
+            </ol>
+        </section>
+        <section>
+            <h3>2.知识剖析</h3>
+        </section>
+        <section>
+            <h3>如何基于git使用Sublime将代码上传至github？</h3>
+        </section>
+         <section>
+            <ul>
+                <li>开始之前你需要做一些准备：</li>
+                <li>1、安装<a href="https://www.sublimetext.com/" target="_blank">Sublime</a>,然后通过<a href="https://packagecontrol.io/installation" target="_blank">Package control</a>这个拓展包管理器，装sublimeGit这个插件。</li>
+                <li>2、安装git并且搞定配置问题。</li>
+            </ul>
+        </section>
+        <section>
+            <h4>Package Control插件本身是一个为了方便管理插件的插件</h4>
+        </section>
+        <section>
+            <ul>
+                <li>安装方法:</li>
+                <li>1.登录Package Control网站：<a href="https://packagecontrol.io/installation" target="_blank">https://packagecontrol.io/installation</a></li>
+                <img src="../img/css-02-How-to-upload-code-to-github-based-on-git-using-sublime/packagecontrol.png" alt="" height="366">
+                <p>根据你的 Sublime Text 版本，复制相应的代码</p>
+            </ul>
+        </section>
+        <section>
+             <p>在 Sublime 中，点击菜单上的 "view -> show console" 或按 "Ctrl + `"快捷键，打开控制台。</p>
+            <img src="../img/css-02-How-to-upload-code-to-github-based-on-git-using-sublime/showconsole.png" alt="">
+        </section>
+        <section>
+            <p>在控制台命令输入栏，粘贴复制好的 Package Control 安装代码，回车运行。</p>
+            <img src="../img/css-02-How-to-upload-code-to-github-based-on-git-using-sublime/control.png" alt="">
+        </section>
+        <section>
+            <p>在菜单->preferences->Package Settings和package control选项，就说明安装package control成功了。</p>
+            <img src="../img/css-02-How-to-upload-code-to-github-based-on-git-using-sublime/package.png" alt="">
+        </section>
+        <section>
+            <h4>然后我们来安装SublimeGit这个插件</h4>
+            <p>通过快捷键 Ctrl+Shift+P（菜单 – Tools – Command Paletter），输入 install 选中Install Package并回车，输入SublimeGit找到这个插件回车就安装了（注意左下角的小文字变化，会提示安装成功）。</p>
+            <img src="../img/css-02-How-to-upload-code-to-github-based-on-git-using-sublime/install.png" alt="">
+            <img src="../img/css-02-How-to-upload-code-to-github-based-on-git-using-sublime/sublimegit.png" alt="">
+        </section>
+        <section>
+            <p>在菜单->preferences->Package Settings选项里面看到SublimeGit，就说明安装SublimeGit成功了。</p>
+            <img src="../img/css-02-How-to-upload-code-to-github-based-on-git-using-sublime/sublimegit1.png" alt="">
+        </section>
+        <section>
+            <h3>3.常见问题</h3>
+            <p>git有什么优缺点？</p>
+        </section>
+        <section>
+            <h3>4.解决方案</h3>
+        </section>
+        <section>
+            <p>Git优缺点</p>
+            <ul>
+                <li>优点：</li>
+                <li>1、适合分布式开发，强调个体。</li>
+                <li>2、公共服务器压力和数据量都不会太大。</li>
+                <li>3、速度快、灵活。</li>
+                <li>4、任意两个开发者之间可以很容易的解决冲突。</li>
+                <li>5、可以离线工作</li>
+            </ul>    
+        </section>
+        <section>
+            <ul>
+                <li>缺点：</li>
+                <li>1、学习周期相对而言比较长。</li>
+                <li>2、不符合常规思维。</li>
+                <li>3、代码保密性差，一旦开发者把整个库克隆下来就可以完全公开所有代码和版本信息。</li>
+                <li>4、不支持中文，图形界面支持差，使用难度大。不易推广</li>
+            </ul> 
+        </section>
+        <section>
+            <h3>5.代码实战</h3>
+        </section>
+        <section>
+            <h3>6.拓展思考</h3>
+            <p>如何使用Sublime将代码上传到SVN</p>
+        </section>
+        <section>
+            <h3>7.参考文献</h3>
+        </section>
+        <section>
+            <p>参考一:<a href="https://jingyan.baidu.com/article/f71d60379b20071ab641d181.html" target="_blank">在 Sublime Text 3 中安装 Package Control</a></p>
+            <p>参考二:<a href="https://segmentfault.com/a/1190000007200311" target="_blank">sublime Text3的插件sublimeGit</a></p>
+        </section>
+        <section>
+            <h3>8.更多讨论</h3>
+        </section>
+        <section>
+            <h4>鸣谢</h4>
+            <p>感谢大家观看</p>
+            <p><small>BY :颜彦 | 张峻</small></p>
+        </section>
+    </div>
+</div>
+
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            { src: '../plugin/markdown/marked.js' },
+            { src: '../plugin/markdown/markdown.js' },
+            { src: '../plugin/notes/notes.js', async: true },
+            { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+    });
+</script>
+</body>

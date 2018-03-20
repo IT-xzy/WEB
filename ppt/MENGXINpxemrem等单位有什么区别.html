@@ -1,0 +1,228 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>葡萄藤PPT</title>
+
+		<link rel="stylesheet" href="../css/reveal/reveal.css">
+
+		<!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+		<link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+		<!-- syntax highlighting 代码高亮主题 -->
+		<link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+		<!-- 打印和PDF输出样式 -->
+		<script>
+			var link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild(link);
+		</script>
+		<style>
+			.reveal pre code {
+				background-color: #120;
+			}
+		</style>
+	</head>
+
+	<body>
+		<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+		<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h4>小课堂【萌新】</h4>
+					<h4>【CSS】px、em、rem、%、vw、vh、vm等单位有什么区别？</h4>
+					<h4>分享人：赖骏锋</h4>
+
+				</section>
+				<section>
+					<p>目录</p>
+					<p>1.背景介绍</p>
+					<p>2.知识剖析</p>
+					<p>3.常见问题</p>
+					<p>4.解决方案</p>
+					<p>5.编码实战</p>
+					<p>6.扩展思考</p>
+					<p>7.参考文献</p>
+					<p>8.更多讨论</p>
+				</section>
+				<section>
+					<section>
+						<h3>1.背景介绍</h3>
+					</section>
+					<section>
+						<p>今天给大家讲讲在做css任务的时候经常会看到也会用到的一些长度单位。 传统的单位有：px、%、em，而随着技术的发展，css3增加了一些新的单位rem、vh、vw、vm等， 使我们的web页面能适应各种不同的终端显示，现在我们来看看这些单位的区别。
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>2.知识剖析</h3>
+					</section>
+					<section>
+						<p>px</p>
+
+							 <p> px是Pixel的缩写，表示像素，所谓像素就是呈现在我们显示器上的一个个小点，每个像素点都是大小等同的，所以像素为计量单位被分在了绝对长度单位中。</p>
+					</section>
+					<section>
+						<p>em</p>
+
+						  <p>相对长度单位。em是相对于当前对象内文本的字体尺寸而计算的。如果当前对行内文本的字体尺寸未被人为设置，则相对于浏览器的默认字体(16px)尺寸。也就是1em=16px。</p>
+					</section>
+<section>
+	<p>rem</p>
+	<p>rem和em很像，只不过一个计算的规则是依赖根元素一个是依赖父元素计算。</p>
+	<p>em是相对于其父元素来设置字体大小的，这样就会存在一个问题，进行任何元素设置，都有可能需要知道他父元素的大小。而rem是相对于根元素html，这样就意味着，我们只需要在根元素确定一个参考值，从而统一整个页面的长度，只要改动根元素HTML的</p>
+	<p> 需要注意的是，我们经常用的谷歌浏览器会强制页面的最小字体为12号，即使设置成 10px 最终都会显示成12px。既然html{font-size：62.5%}办不到，那换个思路，将html{font-size：625%}怎么样</p>
+</section>
+					<section>
+						<p>百分比%</p>
+						<p>百分比%就是相对于父元素尺寸来进行计算的，比如定义两个div元素,div1包含div2,设置父div1的width为100px,子div2的width为50%,则实际上计算的结果就是：子div2的宽度是100px*50% = 50px。</p>
+						<p>1、如果用来设置字体，相对的是父元素的字体大小，大多数浏览器中默认的字体尺寸是100%。</p>
+						<p>2、如果用来设置宽和高等非字体尺寸，则以百分比为单位的长度值是基于具有相同属性的父元素的长度值。</p>
+					</section>
+					<section>
+					<p>vw</p>
+					<p>vw是视窗宽度单位。1vw等于可视区宽度的百分之一。如果浏览器的宽是 500px, 1vw求得的值为 5px 。</p>
+				</section>
+					<section>
+						<p>vh</p>
+						<p>vh是视窗高度单位。1vh等于可视区高度的百分之一。如果浏览器的高是 800px, 1vh 求得的值为 8px。</p>
+					</section>
+					<section>
+						<p>vmax</p>
+						<p>vmax是相对于视窗的宽度或高度的百分之一，取决于哪个更大。在宽为500px高为800px分辨率的显示器下1vm=8px</p>
+					</section>
+                </section>
+				<section>
+					<section>
+						<h3>3.常见问题</h3>
+					</section>
+					<section>
+						<p>
+							自适应布局的时候为什么要给html的CSS样式设置font-size为62.5%或者625%?
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>4.解决方案</h3>
+					</section>
+					<section>
+						<p>任意浏览器的默认字体大小都是16px。所有未经调整的浏览器都符合: 1em=16px。不过em是相对于父元素的 有一定的限制 现在基本都使用rem 为了简化font-size的换算，所以需要在html根元素中声明Font-size=62.5%，这就使1rem值变为 16px*62.5%=10px, 这样12px=1.2rem, 也就是说只需要将你的原来的px数值除以10，然后换上rem作为单位就行了。</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>5.编码实战</h3>
+					</section>
+
+					<section>demo</section>
+
+				</section>
+				<section>
+					<section>
+						<h3>6.扩展思考</h3>
+					</section>
+					<section>
+						<p>css还有哪些长度单位？</p>
+					</section>
+					<section>
+						<p>ex：相对长度单位。相对于字符“x”的高度。此高度通常为字体尺寸的一半。如当前对行内文本的字体尺寸未被人为设置，则相对于浏览器的默认字体尺寸。
+
+							pt：点（Point），绝对长度单位。大约1/72寸.
+
+							pc：派卡（Pica），绝对长度单位。大约6pt，1/6寸,相当于我国新四号铅字的尺寸。
+
+							in：英寸（Inch），绝对长度单位。
+
+							mm：毫米（Millimeter），绝对长度单位。
+
+							cm：厘米（Centimeter），绝对长度单位。
+
+							1in = 2.54cm = 25.4 mm = 72pt = 6pc = 96px</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>7.参考文献</h3>
+					</section>
+					<section>
+					<a href="http://blog.csdn.net/jnshu_it/article/details/77161717">IT修真院</a>
+					</section>
+
+				</section>
+				<section>
+					<section>
+						<h3>8.更多讨论</h3>
+					</section>
+					<section>
+						<p>
+						</p>
+					</section>
+				</section>
+				<section>
+					<h4>鸣谢</h4>
+					<p>感谢大家观看</p>
+					<p>
+						By
+						<small style="vertical-align: middle">赖骏锋</small>
+					</p>
+				</section>
+			</div>
+		</div>
+		<script src="../lib/reveal/js/head.min.js"></script>
+		<script src="../lib/reveal/reveal.js"></script>
+		<script>
+			// 以下为常见配置属性的默认值
+			// {
+			// 	controls: true, // 是否在右下角展示控制条
+			// 	progress: true, // 是否显示演示的进度条
+			// 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+			// 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+			// 	keyboard: true, // 是否启用键盘快捷键来导航
+			// 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+			// 	center: true, // 是否将幻灯片垂直居中
+			// 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+			// 	loop: false, // 是否循环演示
+			// 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+			// 	fragments: true, // 全局开启和关闭碎片。
+			// 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+			// 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+			// 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+			// 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+			// }
+			// 初始化幻灯片
+			Reveal.initialize({
+				history: true,
+				dependencies: [{
+						src: '../plugin/markdown/marked.js'
+					},
+					{
+						src: '../plugin/markdown/markdown.js'
+					},
+					{
+						src: '../plugin/notes/notes.js',
+						async: true
+					},
+					{
+						src: '../plugin/highlight/highlight.js',
+						async: true,
+						callback: function() {
+							hljs.initHighlightingOnLoad();
+						}
+					}
+				]
+			});
+		</script>
+	</body>
+
+</html>

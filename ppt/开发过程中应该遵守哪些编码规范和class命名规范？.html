@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)https://ptteng.github.io/PPT/PPT/css-12-Code%20specification.html#/ -->
+<html class=" js no-mobile desktop no-ie chrome chrome62 ppt-section ppt-section gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions no-touch no-retina fontface domloaded w-1366 gt-240 gt-320 gt-480 gt-640 gt-768 gt-800 gt-1024 gt-1280 lt-1440 lt-1680 lt-1920 no-portrait landscape" id="css-12-code%20specification-page"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>开发过程中应该遵守哪些编码规范和class命名规范？</title>
+
+    <link rel="stylesheet" href="./开发过程中应该遵守哪些编码规范和class命名规范？_files/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="./开发过程中应该遵守哪些编码规范和class命名规范？_files/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="./开发过程中应该遵守哪些编码规范和class命名规范？_files/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'https://ptteng.github.io/PPT/css/reveal/print/pdf.css' : 'https://ptteng.github.io/PPT/css/reveal/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script><style type="text/css" abt="234"></style><link rel="stylesheet" type="text/css" href="./开发过程中应该遵守哪些编码规范和class命名规范？_files/paper.css"><script type="text/javascript" src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/marked.js.下载"></script><script type="text/javascript" src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/markdown.js.下载"></script>
+    <script>//console.log('a')
+    </script><script>doAdblock();
+    function doAdblock(){
+        (function() {
+            function A() {}
+            A.prototype = {
+                rules: {
+                    'pps_pps': {
+                        'find': /^http:\/\/www\.iqiyi\.com\/player\/cupid\/common\/pps_flvplay_s\.swf/,
+                        'replace': 'http://swf.adtchrome.com/pps_20140420.swf'
+                    },
+                    '17173_in':{
+                        'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFile(Customer)?\.swf/,
+                        'replace':"http://swf.adtchrome.com/17173_in_20150522.swf"
+                    },
+                    '17173_out':{
+                        'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFileFirstpage\.swf/,
+                        'replace':"http://swf.adtchrome.com/17173_out_20150522.swf"
+                    },
+                    '17173_live':{
+                        'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream(_firstpage)?\.swf/,
+                        'replace':"http://swf.adtchrome.com/17173_stream_20150522.swf"
+                    },
+                    '17173_live_out':{
+                        'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream_(custom)?Out\.swf/,
+                        'replace':"http://swf.adtchrome.com/17173.out.Live.swf"
+                    }
+                },
+                _done: null,
+                get done() {
+                    if(!this._done) {
+                        this._done = new Array();
+                    }
+                    return this._done;
+                },
+                addAnimations: function() {
+                    var style = document.createElement('style');
+                    style.type = 'text/css';
+                    style.innerHTML = 'object,embed{\
+                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;\
+                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;\
+                -o-animation-duration:.001s;-o-animation-name:playerInserted;\
+                animation-duration:.001s;animation-name:playerInserted;}\
+                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}';
+                    document.getElementsByTagName('head')[0].appendChild(style);
+                },
+                animationsHandler: function(e) {
+                    if(e.animationName === 'playerInserted') {
+                        this.replace(e.target);
+                    }
+                },
+                replace: function(elem) {
+                    if (/http:\/\/v.youku.com\/v_show\/.*/.test(window.location.href)){
+                        var tag = document.getElementById("playerBox").getAttribute("player")
+                        if (tag == "adt"){
+                            console.log("adt adv")
+                            return;
+                        }
+                    }
+                    if(this.done.indexOf(elem) != -1) return;
+                    this.done.push(elem);
+                    var player = elem.data || elem.src;
+                    if(!player) return;
+                    var i, find, replace = false;
+                    for(i in this.rules) {
+                        find = this.rules[i]['find'];
+                        if(find.test(player)) {
+                            replace = this.rules[i]['replace'];
+                            if('function' === typeof this.rules[i]['preHandle']) {
+                                this.rules[i]['preHandle'].bind(this, elem, find, replace, player)();
+                            }else{
+                                this.reallyReplace.bind(this, elem, find, replace)();
+                            }
+                            break;
+                        }
+                    }
+                },
+                reallyReplace: function(elem, find, replace) {
+                    elem.data && (elem.data = elem.data.replace(find, replace)) || elem.src && ((elem.src = elem.src.replace(find, replace)) && (elem.style.display = 'block'));
+                    var b = elem.querySelector("param[name='movie']");
+                    this.reloadPlugin(elem);
+                },
+                reloadPlugin: function(elem) {
+                    var nextSibling = elem.nextSibling;
+                    var parentNode = elem.parentNode;
+                    parentNode.removeChild(elem);
+                    var newElem = elem.cloneNode(true);
+                    this.done.push(newElem);
+                    if(nextSibling) {
+                        parentNode.insertBefore(newElem, nextSibling);
+                    } else {
+                        parentNode.appendChild(newElem);
+                    }
+                },
+                init: function() {
+                    var handler = this.animationsHandler.bind(this);
+                    document.body.addEventListener('webkitAnimationStart', handler, false);
+                    document.body.addEventListener('msAnimationStart', handler, false);
+                    document.body.addEventListener('oAnimationStart', handler, false);
+                    document.body.addEventListener('animationstart', handler, false);
+                    this.addAnimations();
+                }
+            };
+            new A().init();
+        })();
+    }
+    // 20140730
+    (function cnbeta() {
+        if (document.URL.indexOf('cnbeta.com') >= 0) {
+            var elms = document.body.querySelectorAll("p>embed");
+            Array.prototype.forEach.call(elms, function(elm) {
+                elm.style.marginLeft = "0px";
+            });
+        }
+    })();
+    //baidu
+    if(document.URL.indexOf('www.baidu.com') >= 0){
+        if(document && document.getElementsByTagName && document.getElementById && document.body){
+            var aa = function(){
+                var all = document.body.querySelectorAll("#content_left div,#content_left table");
+                for(var i = 0; i < all.length; i++){
+                    if(/display:\s?(table|block)\s!important/.test(all[i].getAttribute("style"))){all[i].style.display= "none";all[i].style.visibility='hidden';}
+                }
+                all = document.body.querySelectorAll('.result.c-container[id="1"]');
+                //if(all.length == 1) return;
+                for(var i = 0; i < all.length; i++){
+                    if(all[i].innerHTML && all[i].innerHTML.indexOf('广告')>-1){
+                        all[i].style.display= "none";all[i].style.visibility='hidden';
+                    }
+                }
+            }
+            aa();
+            document.getElementById('wrapper_wrapper').addEventListener('DOMSubtreeModified',aa)
+        };
+    }
+    // 20140922
+    (function kill_360() {
+        if (document.URL.indexOf('so.com') >= 0) {
+            document.getElementById("e_idea_pp").style.display = none;
+        }
+    })();
+    if (document.URL.indexOf("tv.sohu.com") >= 0){
+        if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+    }
+    if (document.URL.indexOf("56.com") >= 0){
+        if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+    }
+    if (document.URL.indexOf("iqiyi.com") >= 0){
+        if (document.cookie.indexOf("player_forcedType=h5_VOD")==-1){
+            document.cookie='player_forcedType=h5_VOD'
+            if(localStorage.reloadTime && Date.now() - parseInt(localStorage.reloadTime)<60000){
+                console.log('no reload')
+            }else{
+                location.reload()
+                localStorage.reloadTime = Date.now();
+            }
+        }
+    }
+    </script><script type="text/javascript" src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/notes.js.下载"></script><script type="text/javascript" src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/highlight.js.下载"></script><style type="text/css">object,embed{                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;                -o-animation-duration:.001s;-o-animation-name:playerInserted;                animation-duration:.001s;animation-name:playerInserted;}                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}</style></head>
+<body cz-shortcut-listen="true">
+<img src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com/" alt="" target="_blank">
+</map>
+<div class="reveal slide center" role="application" data-transition-speed="default" data-background-transition="fade">
+    <div class="slides" style="width: 960px; height: 700px; left: 50%; top: 50%; bottom: auto; right: auto; transform: translate(-50%, -50%) scale(0.756);">
+        <section class="present" style="top: 133px; display: block;">
+            <h2>开发过程中应该遵守哪些编码规范和class命名规范？</h2>
+
+            <h3>北京分院小课堂</h3>
+
+            <p style="text-align: center;">分享人：吴昊杰</p>
+        </section>
+        <section class="future" style="top: 3px; display: block;" hidden="" aria-hidden="true">
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section class="future" style="top: 267px; display: block;" hidden="" aria-hidden="true">
+            <h3>1.背景介绍</h3>
+        </section>
+        <section class="future" style="top: 96px; display: none;" hidden="" aria-hidden="true">
+            <p style="text-align: left">
+                规范，一个优秀的公司必然有一个优秀的团队，一个优秀的团队必然要有一个好的规范来约束和执行。国内基本各大互联网公司的前端都有自己的开发规范，但总的宗旨基本都是：代码简、易维护、性能高。对于一个大型项目经常会多人协作，这时必须要有一个好的规范才能顺利便捷地进行下去。
+            </p>
+            <p style="text-align: left">
+                总而言之：不管有多少人共同参与同一项目，一定要确保每一行代码都像是同一个人编写的。
+            </p>
+        </section>
+        <section class="future" style="top: 267px; display: none;" hidden="" aria-hidden="true">
+            <h3>2.知识剖析</h3>
+        </section>
+        <section class="future" style="top: 188px; display: none;" hidden="" aria-hidden="true">
+            <p style="text-align: center">基本准则</p>
+            <p style="text-align: left">
+                符合web标准,语义化html,结构表现行为分离,兼容性优良.页面性能方面,代码要求简洁明了有序,尽可能的减小服务器负载,保证最快的解析速度.
+            </p>
+        </section>
+        <section class="future" style="top: 0px; display: none;" hidden="" aria-hidden="true">
+            <p style="text-align: center">html规范</p>
+            <p style="text-align: left">页面的第一行添加标准模式声明!DOCTYPEhtml</p>
+            <p style="text-align: left">代码缩进：tab键设置四个空格（通常在软件右下角设置相应空格大小）</p>
+            <p style="text-align: left">html中除了开头的DOC和'UTF-8'或者head里特殊情况可以大写外，其他都为小写，css类都为小写</p>
+            <p style="text-align: left">建议为html根元素指定lang属性，从而为文档设置正确的语言lang="zh-CN" </p>
+            <p style="text-align: left">不同doctype在不同浏览器下会触发不同的渲染模式(<meta http-equiv="X-UA-Compatible" content="IE=Edge">)</p>
+            <p style="text-align: left">非特殊情况下样式文件必须外链至(…)之间;非特殊情况下JavaScript文件必须外链至页面底部</p>
+            <p style="text-align: left">尽可能减少div嵌套.</p>
+            <p style="text-align: left">在页面中尽量避免使用style属性,即style="…";写在相应的样式文件中</p>
+        </section>
+        <section class="future" style="top: 122px; display: none;" hidden="" aria-hidden="true">
+            <p style="text-align: left">meta标签一定是在title标签的前面。</p>
+            <p style="text-align: left">对于属性的定义，确保全部使用双引号，绝不要使用单引号。</p>
+            <p style="text-align: left">背景图片请尽可能使用sprite技术,减小http请求。</p>
+            <p style="text-align: left">给区块代码及重要功能(比如循环)加上注释,方便后台添加功能。</p>
+            <p style="text-align: left">不要使用@import,与&lt;link&gt;标签相比,@import指令要慢很多,不光增加了额外的请求次数,还会导致不可预料的问题。</p>
+        </section>
+        <section class="future" style="top: 56px; display: none;" hidden="" aria-hidden="true">
+            <p style="text-align: center">CSS书写顺序</p>
+            <p style="text-align: left">显示属性：display/list-style/position/float/clear…</p>
+            <p style="text-align: left">行高：line-height</p>
+            <p style="text-align: left">文本属性：color/font/text-decoration/text-align/text-indent/vertical-align/white-space/content…</p>
+            <p style="text-align: left">其他：cursor/z-index/zoom/overflow</p>
+            <p style="text-align: left">CSS3属性：transform/transition/animation/box-shadow/border-radius</p>
+        </section>
+        <section class="future" style="top: 79px; display: none;" hidden="" aria-hidden="true">
+            <p style="text-align: center">排版规范</p>
+            <p style="text-align: left">如果是在html中写内联的css，则必须写成单行</p>
+            <p style="text-align: left">每一条规则的大括号{前后加空格</p>
+            <p style="text-align: left">属性名冒号之前不加空格，冒号之后加空格</p>
+            <p style="text-align: left">每一个属性值后必须添加分号;并且分号后空格 </p>
+            <p style="text-align: left">多个selector共用一个样式集，则多个selector必须写成多行形式</p>
+        </section>
+        <section class="future" style="top: 33px; display: none;" hidden="" aria-hidden="true">
+            <p style="text-align: left">规则书写规范</p>
+            <p style="text-align: left">使用单引号，不允许使用双引号</p>
+            <p style="text-align: left">每个声明结束都应该带一个分号，不管是不是最后一个声明</p>
+            <p style="text-align: left">除16进制颜色和字体设置外，CSS文件中的所有的代码都应该小写。</p>
+            <p style="text-align: left">除了重置浏览器默认样式外，禁止直接为htmltag添加css样式设置</p>
+            <p style="text-align: left">每一条规则应该确保选择器唯一，禁止直接为全局.nav/.header/.body等类设置属性</p>
+        </section>
+        <section class="future" style="top: 0px; display: none;" hidden="" aria-hidden="true">
+            <p style="text-align: left">class命名</p>
+            <p style="text-align: left">规则命名中，一律采用小写加中划线的方式，不允许使用大写字母或_</p>
+            <p style="text-align: left">命名避免使用中文拼音，应该采用更简明有语义的英文单词进行组合+</p>
+            <p style="text-align: left">不允许通过1、2、3等序号进行命名；避免class与id重名</p>
+            <p style="text-align: left">class用于标识某一个类型的对象，命名必须言简意赅</p>
+            <p style="text-align: left">尽可能提高代码模块的复用，样式尽量用组合的方式</p>
+            <p style="text-align: left">规则名称中不应该包含颜色（red/blue）、定位（left/right）等与具体显示效果相关的信息。应该用意义命名，而不是样式显示结果命名</p>
+        </section>
+        <section class="future" style="top: 267px; display: none;" hidden="" aria-hidden="true">
+            <h3>3.常见问题</h3>
+        </section>
+        <section class="future" style="top: 267px; display: none;" hidden="" aria-hidden="true">
+            <p style="text-align: left">问题1:class命名有什么常用方式？</p>
+        </section>
+        <section class="future" style="top: 267px; display: none;" hidden="" aria-hidden="true">
+            <h3>4.解决方案</h3>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 221px; display: none;">
+            <p style="text-align: left">在实际编程中，命名问题一直是很麻烦的问题，要想代码可读性高，维护方便，就必须规范命名。这里介绍几种命名方法</p>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 234px; display: none;">
+            <p style="text-align: left">原子类命名规则</p>
+            <p style="text-align: left">将复用性高的单条属性直接命名成类</p>
+            <p style="text-align: left">.ml5{margin-left:5px;}</p>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <p style="text-align: center">模块命名规则</p>
+            <p style="text-align: center">按照职能划分命名规则</p>
+            <p style="text-align: left">例如，模块是nav，便可以命名nav-tittle、nav-left</p>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <p style="text-align: left">BEM</p>
+            <p style="text-align: left">BEM思想是由于项目开发中，每个组件都是唯一无二的，其名字也是独一无二的，组件内部元素的名字都加上组件名，并用元素的名字作为选择器，自然组件内的样式就不会与组件外的样式冲突了。这是通过组件名的唯一性来保证选择器的唯一性，从而保证样式不会污染到组件外。</p>
+            <p>BEM的命名规矩很容易记：block-name__element-name–modifier-name，也就是模块名 + 元素名 + 修饰器名</p>
+            <pre>
+                <code class="hljs dust">
+                    <span class="xml">
+                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"page-btn"</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"page-btn__prev"</span>&gt;</span>上一页<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                            <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"page-btn__next"</span>&gt;</span>下一页<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    </span>
+                </code>
+                </pre>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <h3>5.编码实战</h3>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <h3>6.扩展思考</h3>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <p>问题一:原子类的优劣？</p>
+            <p style="text-align: left">原子类在网上争议非常大，原子类简单方便，但是不宜维护，控制困难。原子类其实不是一种工具，而是一种编写CSS的思想，即：抽出高度复用的样式模块，独立成一个原子类，为对应的模块添加。但是不宜过度使用，负责就和直接添加style没有区别了，在涉及数值方面我的建议时不要使用原子类，否则修改起来超级麻烦。</p>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <h3>7.参考文献</h3>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <p style="text-align: left">
+                <a href="https://www.jianshu.com/p/3b9a1069c4cd" target="_blank">
+                    HTML标签书写规范那些事儿</a></p>
+            <p style="text-align: left">
+                <a href="http://blog.csdn.net/charlene0824/article/details/52451873" target="_blank">
+                    移动端适配之雪碧图(sprite)背景图片定位</a></p>
+            <p style="text-align: left">
+                <a href="https://www.w3cplus.com/blog/tags/325.html" target="_blank">
+                    编写模块化css：BEM</a></p>
+            <p style="text-align: left">
+                <a href="http://hax.iteye.com/blog/849826" target="_blank">
+                    css最佳实践</a></p>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <h3>8.更多讨论</h3>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <h4>感谢观看</h4>
+            <p><small>BY : 吴昊杰 </small></p>
+        </section>
+    </div>
+    <div class="backgrounds"><div class="slide-background present" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><button class="navigate-left" aria-label="previous slide"></button><button class="navigate-right enabled" aria-label="next slide"></button><button class="navigate-up" aria-label="above slide"></button><button class="navigate-down" aria-label="below slide"></button></aside><div class="slide-number" style="display: none;"></div><div class="speaker-notes" data-prevent-swipe=""></div><div class="pause-overlay"></div><div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px);">
+    开发过程中应该遵守哪些编码规范和class命名规范？
+            小课堂
+            分享人：吴昊杰
+</div></div>
+
+<script src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/head.min.js.下载"></script>
+<script src="./开发过程中应该遵守哪些编码规范和class命名规范？_files/reveal.js.下载"></script>
+
+<script>
+
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: 'https://ptteng.github.io/PPT/plugin/markdown/marked.js'},
+            {src: 'https://ptteng.github.io/PPT/plugin/markdown/markdown.js'},
+            {src: 'https://ptteng.github.io/PPT/plugin/notes/notes.js', async: true},
+            {
+                src: 'https://ptteng.github.io/PPT/plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+
+</body></html>

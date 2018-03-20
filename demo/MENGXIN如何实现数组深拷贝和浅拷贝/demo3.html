@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ui-view="">
+
+</div>
+<script src="https://cdn.bootcss.com/angular.js/1.6.8/angular.min.js"></script>
+<script src="https://cdn.bootcss.com/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+<script>
+    angular.module('app', ['ui.router'])
+        .constant('data', [
+            {
+                name: 'aaa',
+                id: 1
+            },
+            {
+                name: 'bbb',
+                id: 2
+            },
+            {
+                name: 'ccc',
+                id: 3
+            }
+        ])
+        .config(function ($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise('/a');
+            $stateProvider
+                .state('a', {
+                    url: '/a',
+                    controller: 'test1',
+                    template: '<select ng-options="item.id as item.name for item in data" ng-model="ii"></select>'
+                })
+                .state('b', {
+                    url: '/b',
+                    controller: 'test2',
+                    template: '<select ng-options="item.id as item.name for item in data" ng-model="ii"></select>'
+                })
+        })
+        .controller('test1', function ($scope, data) {
+            $scope.data = data;
+            $scope.v;
+        })
+        .controller('test2', function ($scope, data) {
+            $scope.data = data;
+            $scope.v;
+
+        });
+    var cloneArr = function (arr) {
+        return JSON.parse(JSON.stringify(arr));
+    }
+    var a = [1, 2, 3];
+    var b = cloneArr(a);
+    b[2] = 'aa';
+    console.log(a);
+    console.log(b);
+</script>
+</body>
+</html>

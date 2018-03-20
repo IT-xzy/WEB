@@ -1,0 +1,308 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>angular js自定义指令 directive 如何使用？为什么要使用封装的自定义指令？</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides" style="text-align: left">
+        <section>
+            <h2>【JS-8】</h2>
+            <h3>如何理解angular自定义指令directive的scope属性？</h3>
+            <p>分享人：蓝裕伟</p>
+        </section>
+
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section>
+            <h3>一.背景介绍</h3>
+        </section>
+        <section>
+            <p>指令定义</p>
+            <p style="text-align:left">
+                AngularJS与JQuery最大的区别表现在数据双向绑定，实质就是DOM的操作形式不一样。 <br>
+                JQuery通过选择器找到DOM元素，再赋予元素的行为； <br>
+                而AngularJS则是，将指令与DOM绑定在一起，再扩展指令的行为。</p>
+            <p style="text-align:left">例如， ng-click 可以让一个元素能够监听 click 事件，并在接收到事件的时候执行AngularJS表
+                达式。我们可以自己创造新的指令。使用angular的directive( )这个模块是用来定义指令的。</p>
+        </section>
+        <section>
+            <h3>二.知识剖析</h3>
+        </section>
+        <section>
+            <p>directive( )模块解析</p>
+        </section>
+        <section>
+            <P>directive( )方法可以接受两个参数：</P>
+            <p style="text-align:left">1. name （字符串）</p>
+            <p style="text-align:left">指令的名字，用来在视图中引用特定的指令。</p>
+            <p style="text-align:left">2. factory_function （函数）</p>
+            <p style="text-align:left">这个函数返回一个对象，其中定义了指令的全部行为。 $compile 服务利用这个方法返回的对
+                象，在DOM调用指令时来构造指令的行为。</p>
+            <pre>
+                <code>
+angular.application('myApp', [])
+    .directive('myDirective', function() {
+    // 一个指令定义对象
+    return {
+    // 通过设置项来定义指令，在这里进行覆写
+    };
+});
+
+             <div my-directive></div>
+                </code>
+            </pre>
+
+        </section>
+        <section>
+            <p style="text-align:left">为了避免与未来的HTML标准冲突，给自定义的指令加入前缀来代表自定义的
+                命名空间。AngularJS本身已经使用了 ng- 前缀，所以可以选择除此以外的名字。
+                在例子中我们使用 my- 前缀（比如 my-derictive ）。</p>
+            <p style="text-align:left">当模板在上面代码中返回时，你可以把以下的属性列表应用于指令定义返回的对象</p>
+        </section>
+        <section>
+            <p>restrict（字符串）</p>
+            <p style="text-align:left">restrict 是一个可选的参数。它告诉AngularJS这个指令在DOM中可以何种形式被声明。默
+                认AngularJS认为 restrict 的值是 A ，即以属性的形式来进行声明。</p>
+            <p style="text-align:left">可选值如下：</p>
+            restrict 值可以是以下几种: <br>
+            E 作为元素名使用<br>
+            A 作为属性使用<br>
+            C 作为类名使用<br>
+            M 作为注释使用<br>
+        </section>
+        <section>
+            <p> template （字符串或函数）</p>
+            <p style="text-align:left">template 参数是可选的，必须被设置为以下两种形式之一：</p>
+            <p style="text-align:left"> 一段HTML文本；</p>
+            <p style="text-align:left"> 一个可以接受两个参数的函数，参数为 tElement 和 tAttrs ，并返回一个代表模板的字符
+                串。
+        </section>
+        <section>
+            <p>templateUrl （字符串或函数）</p>
+            <p style="text-align:left">templateUrl 是可选的参数，可以是以下类型：</p>
+            <p style="text-align:left"> 一个代表外部HTML文件路径的字符串；</p>
+        </section>
+        <section>
+            <section>
+                <h5>指令中的scope</h5>
+                <p>directive 默认能共享父 scope 中定义的属性，例如在模版中直接使用父 scope 中的对象和属性。
+                    通常使用这种直接共享的方式可以实现一些简单的 directive 功能。但是当要创建一个可以重复使用的directive的时候，
+                    就不能依赖于父scope了，因为在不同的地方使用directive对应的父scope不一样。所以需要一个隔离的scope，我们可以向
+                    下面这样来定义我们的scope。</p>
+            </section>
+            <section>
+                <h5>scope = false</h5>
+                <p>在指令模板中可以直接使用父作用域中的变量，函数。指令继承了父作用域的一切属性和方法，这也使得在指令的模板中我们可以使用这些属性和方法。
+                    将scope设置为false的时候,我们创建的指令和父作用域（其实是同一个作用域）共享同一个model模型，所以在指令中修改模型数据，它会反映到父作用域的模型中</p>
+                <h2>scope = true</h2>
+                <p>当把scope属性设置为true时，表明我们创建的指令要创建一个新的作用域，这个作用域是继承了父作用域。</p>
+                <h5>scope = {}</h5>
+                <p>指令将创建完全独立的作用域</p>
+            </section>
+            <section>
+                <p>当我们将scope设置为{}时，意味着我们创建的一个新的与父作用域隔离的新的作用域，这使我们在不知道外部环境的情况下，
+                    就可以正常工作，不依赖外部环境。指令的这个属性让AngularJS变得最强，它可以构建组建，无论放在哪里都是可以使用。
+                </p>
+                <p>但是我们使用了隔离的作用域，不代表我们不可以使用父作用域的属性和方法。我们可以通过向scope的{}中传入特殊的前缀标识符（即prefix），来进行数据的绑定。</p>
+            </section>
+            <section>
+                @ <br>
+                这是一个单项绑定的前缀标识符  <br>
+                使用方法：在元素中使用属性，好比这样 my-name="{{name}}"，注意，属性的名字要用-将两个单词连接，因为是数据的单项绑定所以要通过使用{{}}来绑定数据。 <br>
+
+                =  <br>
+                这是一个双向数据绑定前缀标识符 <br>
+                使用方法：在元素中使用属性，好比这样  my-age="age",注意，数据的双向绑定要通过=前缀标识符实现，所以不可以使用{{}}。 <br>
+
+                & <br>
+                这是一个绑定函数方法的前缀标识符 <br>
+                使用方法：在元素中使用属性，好比这样 my-change="changeAge()"，注意，属性的名字要用-将多个个单词连接。 <br>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h4>指令中的 controller , compile , link函数</h4>
+                <p>AngularJs 的生命周期;分为两个阶段: <br>
+                    第一个阶段是编译阶段:
+                    在编译阶段，AngularJS会遍历整个HTML文档并根据JavaScript中的指令定义来处理页面上声明的指令。每一个指令的模板中都可能含
+                    有另外一个指令，另外一个指令也可能会有自己的模板。当AngularJS调用HTML文档根部的指令时，会遍历其中所有的模板，模板中也可能包
+                    含带有模板的指令.一旦对指令和其中的子模板进行遍历或编译，编译后的模板会返回一个叫做模板函数的函数。我们有机会在指令的模板函
+                    数被返回前，对编译后的DOM树进行修改。</p>
+            </section>
+            <section>
+                第二个阶段是链接阶段:链接函数来将模板与作用域链接起来;负责设置事件监听器，监视数据变化和实时的操作DOM.链接函数是可选的。
+                如果定义了编译函数，它会返回链接函数，因此当两个函数都定义了时，编译函数会重载链接函数
+                <p>指令的控制器和link函数可以进行互换。控制器主要是用来提供可在指令间复用的行为，但链接函数只能在当前内部指令中定义行为，
+                    且无法在指令间复用.link函数可以将指令互相隔离开来，而controller则定义可复用的行为。</p>
+            </section>
+        </section>
+        <section>
+            <h3>三.常见问题</h3>
+        </section>
+        <section>
+            <p>如何创建指令？</p>
+        </section>
+        <section>
+            <h3>四.解决方案</h3>
+        </section>
+        <section>
+            <pre>
+                <code>
+                     angular.module('myApp', [])
+                      .directive('myDirective',[ function(){
+        return {
+            // scope:{
+            //     single:'@',
+            //     double:'=',
+            //     fn:'&'
+            // },
+            restrict:'AE',
+            template:'The name is : {{name}} {{age}}',
+            controller:function($scope, $element, $attrs, $transclude) {
+                console.log("controller");
+                $scope.name = "controller属性";
+                $scope.age = 23;
+                console.log($scope.age)
+            },
+            link:function($scope, iElement, iAttrs, controller){
+                console.log("link"+name);
+                $scope.name = "link属性"
+            },
+            compile:function(tElement, tAttrs, transclude){
+                return{
+                    pre:function($scope, iElement, iAttrs, controller){
+                        console.log("pre");
+                        $scope.name = "pre属性";
+                    },
+                    post:function($scope, iElement, iAttrs, controller){
+                        console.log("post");
+                        $scope.name = "post属性";
+                    }
+                }
+            }
+        };
+    }])
+
+                </code>
+            </pre>
+
+        </section>
+        <section>
+
+        </section>
+        <section>
+            <h3>五.编码实战</h3>
+        </section>
+        <section>
+            <pre>
+                <code>
+
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>六.拓展思考</h3>
+            <p>创建一个包含其他元素的指令</p>
+            <pre>
+                <code>
+
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>七.参考文献</h3>
+        </section>
+        <section>
+            <p><a href="https://code.angularjs.org/1.6.6/docs/guide/directive">angular自定义指令官方指南</a></p>
+            <p><a href="https://segmentfault.com/a/1190000002773689">一招制敌 - 玩转 AngularJS 指令的 Scope (作用域)</a></p>
+        </section>
+        <section>
+            <h3>八.更多讨论</h3>
+            <p>为什么不推荐Angular和JQuery混合使用？</p>
+        </section>
+        <section>
+            <h4>鸣谢</h4>
+            <p>感谢大家观看</p>
+            <p>BY : 郭健锋 | 蓝裕伟</p>
+        </section>
+
+    </div>
+</div>
+
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+
+<script>
+
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: '../plugin/markdown/marked.js'},
+            {src: '../plugin/markdown/markdown.js'},
+            {src: '../plugin/notes/notes.js', async: true},
+            {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>

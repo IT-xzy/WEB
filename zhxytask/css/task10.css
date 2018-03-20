@@ -1,0 +1,27 @@
+.face {
+	background-color: blue;
+	/*padding: 2% 0;*/
+}
+
+.server {
+	color: white;
+	float: left;
+}
+
+.disembark {
+	float: right;
+}
+
+.disembark a {
+	text-decoration: none;
+	color: white;
+}
+
+.clear:after {
+	content: ".";
+	clear: both;
+	display: block;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}

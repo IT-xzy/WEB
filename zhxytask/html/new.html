@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<!--<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>-->
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+		<title>表单示例</title>
+		<link href="../css/new.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<!--导航栏部分-->
+		<header>
+			<nav class="navbar navbar-default container" role="navigation">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                   </button>
+						<a class="navbar-brand" href="#">客服热线：010-594-78634</a>
+					</div>
+					<div class="collapse navbar-collapse" id="example-navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="#">登录</a>
+							</li>
+							<li>
+								<a href="#">注册</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<!--按钮部分-->
+		<div class="butt container">
+			<div class="row">
+				<button type="button" class="btn btn-default pull-right">品质保证</button>
+				<button type="button" class="btn btn-default pull-right">标准箱</button>
+				<button type="button" class="btn btn-default pull-right">在线定制</button>
+				<button type="button" class="btn btn-default pull-right">首页</button>
+			</div>
+		</div>
+		<!--正文部分-->
+		<div class="bd">
+			<div class="content container">
+				<!--顺序部分-->
+				<div class="line-circle row">
+					<ul class="box-process">
+						<li class="box-step box-step-0"><span>1.定制纸箱</span></li>
+						<li class="box-step"><span>2.选择数量</span></li>
+						<li class="box-step"><span>3.上传附件</span></li>
+						<li class="box-step"><span>4.确认下单</span></li>
+					</ul>
+				</div>
+				<!--提示部分-->
+				<div class="tips row">
+					<p>请您按照以下步骤来制定您的纸箱</p>
+				</div>
+				<!--"中心"部分-->
+				<div class="ct row">
+					<div class="titles ">
+						<img src="../img/suitcase.png">
+						<span>选择箱型</span>
+					</div>
+					<div class="sold">
+						<div class="volume">
+							<label>
+                            	<input type="radio" name="type"><i></i><span>对口箱</span>
+                        	</label>
+							<label>
+                           	 	<input type="radio" name="type"><i></i><span>飞机盒</span>
+                       		</label>
+							<label>
+                           		 <input type="radio" name="type"><i></i><span>天地盖</span>
+                       		 </label>
+						</div>
+						<div class="detail pick">
+							<select>
+								<option value="查看详情">查看详情</option>
+								<option value="对口箱">对口箱</option>
+								<option value="飞机箱">飞机箱</option>
+								<option value="天地盖">天地盖</option>
+							</select>
+						</div>
+					</div>
+					<div class="titles ">
+						<img src="../img/ruler.png">
+						<span>确定尺寸</span>
+					</div>
+					<div class="steal">
+						<div class="out">
+							<div class="part">
+								<label>
+                          			<input type="radio" name="type2">
+                         			 <i></i><span>外径</span>
+                          		</label>
+							</div>
+							<div class="part">
+								<label>
+                                  	<span>长</span>
+                                  	<input type="text">
+                                  	<span>mm</span>
+                         	 	</label>
+							</div>
+							<div class="part">
+								<label>
+                              		<span>宽</span>
+                              		<input type="text">
+                              		<span>mm</span>
+                         	 	</label>
+							</div>
+							<div class="part">
+								<label>
+                              		<span>高</span>
+                              		<input type="text">
+                              		<span>mm</span>
+                          		</label>
+							</div>
+						</div>
+						<div class="in">
+							<div class="part">
+								<label>
+                              		<input type="radio" name="type2">
+                              		<i></i><span>内径</span>
+                         		</label>
+							</div>
+							<div class="part">
+								<label>
+                              		<span>长</span>
+                              		<input type="text">
+                              		<span>mm</span>
+                          		</label>
+							</div>
+							<div class="part">
+								<label>
+                              		<span>宽</span>
+                              		<input type="text">
+                              		<span>mm</span>
+                          		</label>
+							</div>
+							<div class="part">
+								<label>
+                              		<span>高</span>
+                              		<input type="text">
+                              		<span>mm</span>
+                          		</label>
+							</div>
+						</div>
+						<div class="detail picking">
+							<select>
+								<option value="查看详情">查看详情</option>
+								<option value="对口箱">对口箱</option>
+								<option value="飞机箱">飞机箱</option>
+								<option value="天地盖">天地盖</option>
+							</select>
+						</div>
+					</div>
+					<div class="titles ">
+						<img src="../img/scissors.png">
+						<span>选择材质</span>
+					</div>
+					<div class="cry">
+						<div class="part">
+							<label>
+                    		 	<input type="radio" name="type3">
+                      			<i></i><span>三层A瓦优质</span>
+                     		</label>
+						</div>
+						<div class="part">
+							<label>
+                          		<input type="radio" name="type3">
+                        	  	<i></i><span>三层A瓦优质</span>
+                     		</label>
+						</div>
+						<div class="part">
+							<label>
+                          		<input type="radio" name="type3">
+                          		<i></i><span>三层A瓦优质</span>
+                     		</label>
+						</div>
+						<div class="part">
+							<label>
+                          		<input type="radio" name="type3">
+                          		<i></i><span>三层A瓦优质</span>
+                      		</label>
+						</div>
+						<div class="part">
+							<label>
+                         		<input type="radio" name="type3">
+                         		<i></i><span>三层A瓦优质</span>
+                     		</label>
+						</div>
+						<div class="detail">
+							<select>
+								<option value="查看详情">查看详情</option>
+								<option value="对口箱">对口箱</option>
+								<option value="飞机箱">飞机箱</option>
+								<option value="天地盖">天地盖</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<!--下一步部分-->
+				<div class="next">
+					<button type="button">下一步</button>
+				</div>
+			</div>
+		</div>
+		<!--footer部分-->
+		<footer>
+			<div class=" container">
+				<div class="row">
+					<div class="patform col-xs-12 col-md-4">
+						<p>51包装箱 一 纸箱包装首选服务平台</p>
+					</div>
+					<div class="about col-xs-12 col-md-4">
+						<a href="#">关于我们</a>
+						<a href="#">配送流程</a>
+						<a href="#">联系我们</a><br>
+						<a href="#">下单指南</a>
+						<a href="#">媒体介绍</a>
+					</div>
+					<div class="enterprise col-xs-12 col-md-4">
+						<img src="../img/qrcode.png">
+						<div class="footer-3-p">
+							<p>TEL:400-800-8848</p>
+							<p>企业QQ：1162553773</p>
+							<p>微信号：real-shit</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="punish text-center">
+				<p>北京五一包装科技有限公司Copyright ©2015 51baozhuang.com015 All rights reserved. 京icp备1325687645-1</p>
+			</div>
+		</footer>
+	</body>
+
+</html>
