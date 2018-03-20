@@ -1,0 +1,266 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>葡萄藤PPT</title>
+
+		<link rel="stylesheet" href="../css/reveal/reveal.css">
+
+		<!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+		<link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+		<!-- syntax highlighting 代码高亮主题 -->
+		<link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+		<!-- 打印和PDF输出样式 -->
+		<script>
+			var link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild(link);
+		</script>
+		<style>
+			.reveal pre code {
+				background-color: #120;
+			}
+		</style>
+	</head>
+
+	<body>
+		<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+		<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h4>小课堂【萌新】</h4>
+					<h4>【CSS】如何使用less？</h4>
+					<h4>分享人：计翔于</h4>
+
+				</section>
+				<section>
+					<p>目录</p>
+					<p>1.背景介绍</p>
+					<p>2.知识剖析</p>
+					<p>3.常见问题</p>
+					<p>4.解决方案</p>
+					<p>5.编码实战</p>
+					<p>6.扩展思考</p>
+					<p>7.参考文献</p>
+					<p>8.更多讨论</p>
+				</section>
+				<section>
+					<section>
+						<h3>1.背景介绍</h3>
+					</section>
+					<section>
+						<p>什么是less？<br>
+							是一种动态样式语言，属于CSS预处理语言的一种，它使用类似CSS的语法，为CSS的赋予了动态语言的特性，如变量、继承、运算、函数等，更方便CSS的编写和维护。可以在多种语言环境中使用，包括浏览器端、桌面客户端、服务端。
+						</p>
+					</section>
+
+				</section>
+				<section>
+					<section>
+						<h3>2.知识剖析</h3>
+					</section>
+					<section>
+						<p>如何使用less</p>
+					</section>
+					<section>
+						<strong></strong>
+						<p>
+							可以通过npm在命令行上使用较少的内容，作为浏览器的脚本文件下载或用于各种第三方工具。请参阅使用部分以获取更多详细信息。
+
+							安装
+							在服务器上安装Less的最简单方法是通过node.js包管理器npm ，如下所示：<br>
+
+							$ npm install -g less <br>
+							命令行用法
+							安装完成后，您可以从命令行调用编译器，如下所示：<br>
+
+							$ lessc styles.less <br>
+							这将输出编译的CSS stdout。要将CSS结果保存到您选择的文件，请使用：<br>
+
+							$ lessc styles.less styles.css <br>
+							要输出缩小，你可以使用CSS clean-css插件。当安装插件时，缩小的CSS输出用--clean-css选项指定：<br>
+
+							$ lessc --clean-css styles.less styles.min.css <br>
+							要查看所有命令行选项，请运行lessc不带参数或查看用法。
+						</p>
+					</section>
+					<section>
+						<strong></strong>
+						<p>使用工具进行编译
+
+							监测指定的less文件的变化，如果检测到变化，则自动将less文件输出成相应的css文件。并且大多数工具都提供一定的debug功能。
+
+							例如使用koala对less文件进行编译
+						</p>
+                </section>
+					<section>
+						<strong></strong>
+						<p>
+
+						</p>
+					</section>
+					<section>
+						<strong></strong>
+
+
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>3.常见问题</h3>
+					</section>
+					<section>
+						<p>
+							LESS包含了什么
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>4.解决方案</h3>
+					</section>
+					<section>
+						<p>
+
+							Less在CSS语法的基础上进行了扩展，主要包含： 变量、嵌套、混合、操作符、函数等等. <br>
+						</p>
+					</section>
+					<section>
+						<p>
+
+
+							<img src="../../../AppData/Local/Temp/b7eca61a-d3ba-4e65-92e2-0a347bac0cf5.png"/> <br>
+							变量允许我们单独定义一系列通用的样式，然后在需要的时候去调用。所以在做全局样式调整的时候我们可能只需要修改几行代码就可以了。
+						</p>
+					</section>
+					<section>
+						<p>
+
+
+				<img src="../../../AppData/Local/Temp/b7eca61a-d3ba-4e65-92e2-0a347bac0cf5.png"/> <br>
+							混合可以将一个定义好的class A轻松的引入到另一个class B中，从而简单实现class B继承class A中的所有属性。我们还可以带参数地调用，就像使用函数一样。
+						</p>
+					</section>
+					<section>
+						<p>
+
+
+							<img src="../../../AppData/Local/Temp/7784231d-44b5-4af6-96a9-7fd6656eb15e.png"/><br>
+							我们可以在一个选择器中嵌套另一个选择器来实现继承，这样很大程度减少了代码量，并且代码看起来更加的清晰。
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>5.编码实战</h3>
+					</section>
+
+					<section><a href="">demo</a></section>
+
+				</section>
+				<section>
+					<section>
+						<h3>6.扩展思考</h3>
+					</section>
+					<section>
+						<p>less和sass你会选哪个来使用？</p>
+					</section>
+					<section>
+						<p>1、LESS环境较Sass简单 <br>
+							２、有同学说LESS使用较Sass简单 <br>
+							３、相对而言，国内前端团队使用LESS的同学会略多于Sass <br>
+							４、从功能出发，Sass较LESS略强大一些</p>
+					</section>
+					<section>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>7.参考文献</h3>
+					</section>
+					<section>
+						参考一：<a href="http://blog.csdn.net/qq_36263601/article/details/74178166">博客一</a><br>
+						参考二：<a href="http://blog.csdn.net/sigangjun/article/details/48441459">博客二</a><br>
+						参考二：<a href="http://lesscss.cn/">less中文网</a><br>
+					</section>
+
+				</section>
+				<section>
+					<section>
+						<h3>8.更多讨论</h3>
+					</section>
+					<section>
+						<p>
+							1.less的三种引入方式有什么优缺点？<br>
+							2.你比较喜欢less还是sass？
+						</p>
+					</section>
+				</section>
+				<section>
+					<h4>鸣谢</h4>
+					<p>感谢大家观看</p>
+					<p>
+						By
+						<small style="    vertical-align: middle">计翔于</small>
+					</p>
+				</section>
+			</div>
+		</div>
+		<script src="../lib/reveal/js/head.min.js"></script>
+		<script src="../lib/reveal/reveal.js"></script>
+		<script>
+			// 以下为常见配置属性的默认值
+			// {
+			// 	controls: true, // 是否在右下角展示控制条
+			// 	progress: true, // 是否显示演示的进度条
+			// 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+			// 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+			// 	keyboard: true, // 是否启用键盘快捷键来导航
+			// 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+			// 	center: true, // 是否将幻灯片垂直居中
+			// 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+			// 	loop: false, // 是否循环演示
+			// 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+			// 	fragments: true, // 全局开启和关闭碎片。
+			// 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+			// 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+			// 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+			// 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+			// }
+			// 初始化幻灯片
+			Reveal.initialize({
+				history: true,
+				dependencies: [{
+						src: '../plugin/markdown/marked.js'
+					},
+					{
+						src: '../plugin/markdown/markdown.js'
+					},
+					{
+						src: '../plugin/notes/notes.js',
+						async: true
+					},
+					{
+						src: '../plugin/highlight/highlight.js',
+						async: true,
+						callback: function() {
+							hljs.initHighlightingOnLoad();
+						}
+					}
+				]
+			});
+		</script>
+	</body>
+
+</html>
