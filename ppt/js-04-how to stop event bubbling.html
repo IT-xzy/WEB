@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)https://ptteng.github.io/WEB/ppt/JS-02-shuffle%20algorithm-ZCJ.html#/6/6 -->
+<html class=" js no-mobile desktop no-ie chrome chrome64 web-section ppt-section gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions no-touch retina fontface domloaded w-1195 gt-240 gt-320 gt-480 gt-640 gt-768 gt-800 gt-1024 lt-1280 lt-1440 lt-1680 lt-1920 no-portrait landscape"
+    id="js-02-shuffle%20algorithm-zcj-page">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' :
+            '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <link rel="stylesheet" type="text/css" href="./葡萄藤PPT2_files/paper.css">
+    <script type="text/javascript" src="./葡萄藤PPT2_files/marked.js.下载"></script>
+    <script type="text/javascript" src="./葡萄藤PPT2_files/markdown.js.下载"></script>
+    <script type="text/javascript" src="./葡萄藤PPT2_files/notes.js.下载"></script>
+    <script type="text/javascript" src="./葡萄藤PPT2_files/highlight.js.下载"></script>
+    <link rel="stylesheet" type="text/css" href="./葡萄藤PPT2_files/paper.css">
+</head>
+
+<body>
+    <img src="./葡萄藤PPT2_files/logo.png" alt="" usemap="#pttmap" class="base-logo">
+
+
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>reveal.js</title>
+    <link rel="stylesheet" href="./葡萄藤PPT2_files/reveal.css">
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题 -->
+    <link rel="stylesheet" href="./葡萄藤PPT2_files/ptt.css">
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="./葡萄藤PPT2_files/zenburn.css">
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' :
+            '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+
+
+    <div class="reveal slide center" role="application" data-transition-speed="default" data-background-transition="fade">
+        <div class="slides" style="width: 960px; height: 700px; left: 50%; top: 50%; bottom: auto; right: auto; transform: translate(-50%, -50%) scale(0.718714);">
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="past">
+                <h3>如何阻止事件冒泡和默认事件</h3>
+                <p>武汉分院</p>
+                <p style="text-align: center;">分享人：朱垚</p>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="past">
+                <p>目录</p>
+                <p>1.背景介绍</p>
+                <p>2.知识剖析</p>
+                <p>3.常见问题</p>
+                <p>4.解决方案</p>
+                <p>5.编码实战</p>
+                <p>6.扩展思考</p>
+                <p>7.参考文献</p>
+                <p>8.更多讨论</p>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="past">
+                <h3>一、背景介绍</h3>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="past">
+                <p style="text-align:left;font-size: 47px;text-indent:2em;">
+                    IE的事件流叫做事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深的那个节点）接收，
+                    然后逐级向上传播到较为不具体的节点（文档）。也就是子级元素先触发，父级元素后触发。
+                </p>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="past">
+                <p style="text-align:left;font-size: 47px;text-indent:2em;">
+                    网景团队提出的另一种事件流叫事件捕获（event capturing)。
+                    事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。
+                    也就是父级元素先触发，子级元素后触发。
+                </p>
+            </section>
+            <section style="top: 266.5px; display: block;" hidden="" aria-hidden="true" class="past">
+                <h3>二、知识剖析</h3>
+            </section>
+            <section style="top: 0px; display: block;" class="stack present">
+                <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="past">
+                    <h4>如何阻止事件冒泡和默认事件</h4>
+                </section>
+                <section class="past" aria-hidden="true" style="text-align: left; font-size: 30px; top: 0px; display: block;" hidden="">
+                    <p>阻止事件冒泡</p>
+                    <p>在W3c中，使用event.stopPropagation()方法</p>
+                    <p>在IE下设置event.cancelBubble = true</p>
+                </section>
+                <section class="past" aria-hidden="true" style="text-align: left; font-size: 30px; top: 0px; display: block;" hidden="">
+                    <p>阻止默认事件</p>
+                    <p>设置return false，或者用event.preventDefault()方法都可以阻止默认事件</p>
+                </section>
+            <section style="top: 266.5px; display: block;" hidden="" aria-hidden="true" class="future">
+                <h3>三、常见问题</h3>
+            </section>
+            <section style="top: 266.5px; display: block;" hidden="" aria-hidden="true" class="future">
+                <p>浏览器的兼容性如何？</p>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+                <h3>四、解决方案</h3>
+            </section>
+            <section style="text-align: left; font-size: 30px; top: 0px; display: block;" hidden="" aria-hidden="true" class="future">
+                <p>在IE下设置event.cancelBubble = true</p>
+                <p>不要使用returnValue属性，查询MDN</p>
+                <p>该特性已经从 Web 标准中删除，虽然一些浏览器目前仍然支持它，但也许会在未来的某个时间停止支持，请尽量不要使用该特性。</p>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+                <h3>五、编码实战</h3>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+                <h3>六、拓展思考</h3>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+                <h4>关于事件委托</h4>
+            </section>
+            <section style="text-align: left; font-size: 30px; top: 0px; display: block;" hidden="" aria-hidden="true" class="future">
+                <p>事件委托呢？它还有一个名字叫事件代理，JavaScript高级程序设计上讲：事件委托就是利用事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。
+                    通俗地来讲，就是把一个元素响应事件（click、keydown......）的函数委托到另一个元素；一般来讲，会把一个或者一组元素的事件委托到它的父层或者更外层元素上，
+                    真正绑定事件的是外层元素，当事件响应到需要绑定的元素上时，会通过事件冒泡机制从而触发它的外层元素的绑定事件上，然后在外层元素上去执行函数。
+                </p>
+            </section>
+            <section style="text-align: left; font-size: 30px; top: 0px; display: block;" hidden="" aria-hidden="true" class="future">
+                <p>有三个同事预计会在周一收到快递。为签收快递，有两种办法：一是三个人在公司门口等快递；二是委托给前台MM代为签收。现实当中，我们大都采用委托的方案（公司也不会容忍那么多员工站在门口就为了等快递）。
+                    前台MM收到快递后，她会判断收件人是谁，然后按照收件人的要求签收，甚至代为付款。这种方案还有一个优势，那就是即使公司里来了新员工（不管多少），前台MM也会在收到寄给新员工的快递后核实并代为签收。
+                    这里其实还有2层意思的：
+                    第一，现在委托前台的同事是可以代为签收的，即程序中的现有的dom节点是有事件的；
+                    第二，新员工也是可以被前台MM代为签收的，即程序中新添加的dom节点也是有事件的。
+                </p>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+                <h3>七、参考文献</h3>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+                <p>参考1：<a href="http://www.cnblogs.com/starof/p/4066381.html">javaScript事件（一）事件流</a></p>
+                <p>参考2：<a href="http://www.jb51.net/article/42492.htm">js之事件冒泡和事件捕获详细介绍</a></p>
+                <p>参考3：<a href="https://zhuanlan.zhihu.com/p/26536815">JavaScript 事件委托详解</a></p>
+                <p>参考2：<a href="http://www.cnblogs.com/liugang-vip/p/5616484.html">js中的事件委托或是事件代理详解</a></p>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+                <h3>八、更多讨论</h3>
+            </section>
+            <section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+                <h4>鸣谢</h4>
+                <h3>感谢观看</h3>
+                <p>
+                    <small>BY ︱朱垚</small>
+                </p>
+            </section>
+        </div>
+        <div class="backgrounds">
+            <div class="slide-background past" style="display: none;"></div>
+            <div class="slide-background past" style="display: none;"></div>
+            <div class="slide-background past" style="display: none;"></div>
+            <div class="slide-background past" style="display: none;"></div>
+            <div class="slide-background past" data-loaded="true" style="display: block;"></div>
+            <div class="slide-background stack past" data-loaded="true" style="display: block;">
+                <div class="slide-background past" data-loaded="true" style="display: block;"></div>
+                <div class="slide-background past" data-loaded="true" style="display: block;"></div>
+                <div class="slide-background past" style="display: none;"></div>
+            </div>
+            <div class="slide-background stack present" data-loaded="true" style="display: block;">
+                <div class="slide-background past" style="display: none;"></div>
+                <div class="slide-background past" style="display: none;"></div>
+                <div class="slide-background past" style="display: none;"></div>
+                <div class="slide-background past" style="display: none;"></div>
+                <div class="slide-background past" data-loaded="true" style="display: block;"></div>
+                <div class="slide-background past" data-loaded="true" style="display: block;"></div>
+                <div class="slide-background present" data-loaded="true" style="display: block;"></div>
+            </div>
+            <div class="slide-background future" data-loaded="true" style="display: block;"></div>
+            <div class="slide-background future" data-loaded="true" style="display: block;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+            <div class="slide-background future" style="display: none;"></div>
+        </div>
+        <div class="progress" style="display: block;">
+            <span style="width: 620.148px;"></span>
+        </div>
+        <aside class="controls" style="display: block;">
+            <button class="navigate-left enabled" aria-label="previous slide"></button>
+            <button class="navigate-right enabled" aria-label="next slide"></button>
+            <button class="navigate-up enabled" aria-label="above slide"></button>
+            <button class="navigate-down" aria-label="below slide"></button>
+        </aside>
+        <div class="slide-number" style="display: none;"></div>
+        <div class="speaker-notes" data-prevent-swipe=""></div>
+        <div class="pause-overlay"></div>
+        <div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);">
+
+            Array.prototype.shuffle = function() { var input = this; for (var i = input.length - 1; i &gt;= 0; i--) { var randomIndex
+            = Math.floor(Math.random() * (i + 1));//获取小于this.length的随机整数 var itemAtIdex = input[randomIndex]; input[randomIndex]
+            = input[i]; input[i] = itemAtIdex;//input[randomIndex]和input[i]交换值 } return input; }
+
+
+        </div>
+    </div>
+    <script src="../lib/reveal/js/head.min.js"></script>
+    <script src="../lib/reveal/reveal.js"></script>
+    <script>
+        // 初始化幻灯片
+        Reveal.initialize({
+            history: true,
+            dependencies: [{
+                src: '../plugin/markdown/marked.js'
+            }, {
+                src: '../plugin/markdown/markdown.js'
+            }, {
+                src: '../plugin/notes/notes.js',
+                async: true
+            }, {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }]
+        });
+    </script>
+
+
+
+</body>
+
+</html>
