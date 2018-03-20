@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://ptteng.github.io/PPT/PPT/js-4-FSM#/ -->
+<html class=" js no-mobile desktop no-ie chrome chrome63 ppt-section ppt-section gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions no-touch retina fontface domloaded w-675 gt-240 gt-320 gt-480 gt-640 lt-768 lt-800 lt-1024 lt-1280 lt-1440 lt-1680 lt-1920 no-portrait landscape" id="js-4-fsm-page"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Javascript Finite State Machine</title>
+
+    <link rel="stylesheet" href="./Javascript Finite State Machine_files/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="./Javascript Finite State Machine_files/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="./Javascript Finite State Machine_files/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script><link rel="stylesheet" type="text/css" href="./Javascript Finite State Machine_files/paper.css">
+    <style>
+        pre {
+            margin: 0 auto !important;
+        }
+
+        p {
+            text-align: left !important;
+            white-space: pre-line !important;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+    </style><script type="text/javascript" src="./Javascript Finite State Machine_files/marked.js.下载"></script><script type="text/javascript" src="./Javascript Finite State Machine_files/markdown.js.下载"></script><script type="text/javascript" src="./Javascript Finite State Machine_files/notes.js.下载"></script><script type="text/javascript" src="./Javascript Finite State Machine_files/highlight.js.下载"></script>
+
+</head>
+<body>
+<img src="./Javascript Finite State Machine_files/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com/" alt="" target="_blank">
+</map>
+<div class="reveal slide center" role="application" data-transition-speed="default" data-background-transition="fade">
+    <div class="slides" style="width: 960px; height: 700px; left: 50%; top: 50%; bottom: auto; right: auto; transform: translate(-50%, -50%) scale(0.387);">
+        <section class="present" style="top: 202px; display: block;">
+            <h3>北京小课堂</h3>
+            <h4>【JS-task4】使用有限状态机实现任务四</h4>
+
+            <p class="text-center">分享人：黄苏威</p>
+        </section>
+        <section class="future" style="top: 0.5px; display: block;" hidden="" aria-hidden="true">
+            <p class="text-center">目录</p>
+            <p class="text-center">1.背景介绍</p>
+            <p class="text-center">2.知识剖析</p>
+            <p class="text-center">3.常见问题</p>
+            <p class="text-center">4.解决方案</p>
+            <p class="text-center">5.编码实战</p>
+            <p class="text-center">6.扩展思考</p>
+            <p class="text-center">7.参考文献</p>
+            <p class="text-center">8.更多讨论</p>
+        </section>
+        <section style="text-align: left; top: 0px; display: block;" class="stack future" data-previous-indexv="0" hidden="" aria-hidden="true">
+            <section hidden="" aria-hidden="true" class="past" style="top: 330px; display: none;">
+                <h3>1.背景介绍</h3>
+            </section>
+            <section class="past" aria-hidden="true" hidden="" style="top: 330px; display: none;">
+                <p>
+                    有限状态机，（英语：Finite-state machine, FSM），又称为有限状态自动机，简称状态机，
+                    是一个数学模型。是一个抽象机器，在任何时候都可以处于有限数量的状态之一。响应某些外部输入，
+                    FSM可以从一个状态转换到另一个状态; 从一种状态到另一种状态的变化称为过渡。
+                    状态机的行为可以在现代社会中的许多设备中观察到，这些设备根据它们呈现的事件序列执行预定的一系列行为。
+                    例如自动售货机，当存放适当的硬币组合时分配产品，当车辆等待时改变顺序的交通灯等。
+                </p>
+              </section>
+            <section style="font-size: 30px; top: 26.5px; display: none;" class="past" aria-hidden="true" hidden="">
+                <p>有限状态机最初应用在数字系统的涉及，它对数字系统的设计具有十分重要的作用。有限状态机是指输出取决于过去输入部分和当前输入部分的时序逻辑电路。，除了输入部分和输出部分外，有限状态机还含有一组具有“记忆”功能的寄存器，这些寄存器的功能是记忆有限状态机的内部状态，它们常被称为状态寄存器。
+                    在有限状态机中，状态寄存器的的下一个状态不仅与输入信号有关，而且还与该寄存器的当前状态有关，因此有限状态机又可以认为是组合逻辑和寄存器逻辑的一种组合。其中，寄存器逻辑的功能是存储有限状态机的内部状态；而组合逻辑又可以分为次态逻辑和输出逻辑两部分，次态逻辑的功能是确定有限状态机的下一个状态，输出逻辑的功能是确定有限状态机的输出。</p>
+                <p>在我们前端开发中，我们可以套用有限状态机模型，将业务流程状态化，划分状态和相应的触发事件与动作，利用生命周期事件进行控制与执行。</p>
+            </section>
+            <section class="past" aria-hidden="true" hidden="" style="top: 159.5px; display: none;">
+                <p> 非常多的游戏都于用到到了有限状态机，比如说像电子宠物，还有之前的旅行蛙 ，炉石传说，还有三国杀
+                都用到了有限状态机的理论，有限状态机是一种理论，不单单基于js的理论。很多有逻辑的问题都可以用有限状态机完成</p>
+
+            </section>
+            <section class="" style="top: 7.5px; display: block;" aria-hidden="true">
+
+            </section>
+            <section class="future" aria-hidden="true" hidden="" style="top: 98.5px; display: none;">
+                <img src="./Javascript Finite State Machine_files/287-140110164946.jpg" height="143" width="330">模拟人生中疯狂的运用了有限状态机
+            </section>
+        </section>
+        <section hidden="" aria-hidden="true" class="stack future" style="top: 0px; display: none;" data-previous-indexv="0">
+            <section style="top: 266.5px; display: none;">
+                <h3>2.知识剖析</h3>
+            </section>
+            <section class="future" aria-hidden="true" style="top: 70.5px; display: none;">
+                <h3>2.1特点</h3>
+                <p>  有限状态机fsm一般有以下特点：
+                    *）可以用状态来描述事物，并且任一时刻，事物总是处于一种状态；
+                    *）事物拥有的状态总数是有限的；
+                    *）通过触发事物的某些行为，可以导致事物从一种状态过渡到另一种状态；
+                    *）同一种行为，可以将事物从多种状态变成同种状态，但是不能从同种状态变成多种状态。
+                </p>
+            </section>
+            <section class="future" aria-hidden="true" style="top: 330px; display: none;">
+                <p>
+                    状态机由一组状态和转换组成：
+
+                    状态 : 固体 、 液体 、 气体。
+                    转换 ：融化 、汽化 、 冷凝 、 冻结。
+                    <img src="./Javascript Finite State Machine_files/matter.png" height="120" width="468"> <br>
+
+                  </p>
+            </section>
+            <section class="future" aria-hidden="true" style="top: 330px; display: none;">
+                <p>有限状态机长什么样？ </p>
+                <p>需要的函数库：<a href="https://github.com/jakesgordon/javascript-state-machine" target="_blank">javascript-state-machine插件</a></p>
+                <pre style="height: 400px">                    <code style="height: 100%" class="hljs javascript">
+<span class="hljs-keyword">var</span> fsm = <span class="hljs-keyword">new</span> StateMachine({
+    init: <span class="hljs-string">'solid'</span>,
+    transitions: [
+        {name: <span class="hljs-string">'Melt'</span>, <span class="hljs-keyword">from</span>: <span class="hljs-string">'solid'</span>, to: <span class="hljs-string">'liquid'</span>},
+        {name: <span class="hljs-string">'Vaporize'</span>, <span class="hljs-keyword">from</span>: <span class="hljs-string">'liquid'</span>, to: <span class="hljs-string">'gas'</span>},
+        {name: <span class="hljs-string">'Condense'</span>, <span class="hljs-keyword">from</span>: <span class="hljs-string">'gas'</span>, to: <span class="hljs-string">'liquid'</span>},
+        {name: <span class="hljs-string">'Freeze'</span>, <span class="hljs-keyword">from</span>: <span class="hljs-string">'liquid'</span>, to: <span class="hljs-string">'solid'</span>}
+    ],
+methods: {
+                        onBeforeMelt:         <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onBeforeVaporize:     <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onBeforeCondense:     <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onBeforeFreeze:       <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onLeaveSolid:         <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onLeaveLiquid:        <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onLeaveGas:           <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onEnterLiquid:        <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onEnterGas:           <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onEnterSolid:         <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onAfterMelt:          <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onAfterVaporise:      <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> },
+                        onAfterCondense:      <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> }
+                        onAfterFreeze:        <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-comment">/* ... */</span> }
+   }
+
+});
+                        <span class="hljs-comment">//方法调用</span>
+                        <span class="hljs-comment">//1，自执行方法：</span>
+                        fsm.onMelt();
+                        fsm.onVaporize();
+                        fsm.onCondense();
+                        fsm.onFreeze();
+
+                        <span class="hljs-comment">//1、触发调用方式：</span>
+                         fsm.Melt();
+                         fsm.Vaporize();
+                         fsm.Condense();
+                         fsm.Freeze();
+                    </code>
+                </pre>
+            </section>
+            <section class="future" aria-hidden="true" style="top: 330px; display: none;">
+                <p>
+                    init选项用来表示fsm对象的初始状态，
+                    transitions选项用来描述fsm对象所有状态的变化规则，每一种变化规则对应一种行为。
+                    methods方法为实例的每一种行为都添加了一个方法，调用这个方法就相当于触发对象的某种行为，当对象行为发生时，对象的状态就可以发生变化。如以上例子创建的实例将拥有如下行为方法：
+
+                    fsm.Melt() : 调用该方法，实例状态将从'solid'变为'liquid'
+                    fsm.Freeze() : 调用该方法，实例状态将从'liquid'变为'solid'
+                    fsm.Vaporize() : 调用该方法，实例状态将从'liquid'变为'gas'
+                    fsm.Condense() : 调用该方法，实例状态将从'gas'变为'liquid'
+                </p>
+            </section>
+            <section class="future" aria-hidden="true" style="top: 330px; display: none;">
+                <p>
+                    Javascript Finite State Machine允许为每个事件指定两个自定义方法，以Melt事件为例:
+
+                    onbeforeMelt：在warn事件发生之前触发
+                    onafterMelt ：在warn事件发生之后触发。
+
+                    每个状态指定两个自定义方法，以solid状态为例：
+
+                    onleaveSolid ：在离开solid状态时触发
+                    onenterLiquid ：在进入liquid状态时触发。
+                </p>
+            </section>
+            <section class="future" aria-hidden="true" style="top: 330px; display: none;">
+               <p>
+                                为了在发生转换时跟踪或执行操作，有以下五个通用的生命周期事件：
+
+                                // onBeforeTransition - 在任何转换之前触发
+                                // onLeaveState - 离开任何状态被触发
+                                // onTransition - 在任何过渡期间被触发
+                                // onEnterState - 进入任何状态被触发
+                                // onAfterTransition - 任何转换后触发
+
+
+               </p>
+
+            </section>
+            <section class="future" aria-hidden="true" style="top: 330px; display: none;">
+                <p>
+                    除了通用事件之外，还可以使用特定的转换和状态来观察转换：
+                    // onBefore - 在特定的转换之前触发
+                    // onBefore - 在特定的转换之前触发
+                    // onAfter - 在特定的TRANSITION后触发
+                    // onLeave - 离开特定的状态触发
+                    // onEnter - 进入特定状态触发
+                    // on - 简写 onAfter
+                    // on - 简写 onEnter
+                </p>
+            </section>
+            <section class="future" aria-hidden="true" style="top: 330px; display: none;">
+                <p>
+                    ...辅助方法：
+                    // fsm.is(s) - 如果状态s是当前状态，则返回true
+                    // fsm.can(t) - 如果t从当前状态发生转换，则返回true
+                    // fsm.cannot(t) - 如果t从当前状态不能发生转换，则返回true
+                    // fsm.transitions() - 返回当前状态允许的转换列表
+                    // fsm.allTransitions() - 返回所有可能的转换的列表
+                    // fsm.allStates() - 返回所有可能状态的列表
+                    //Cancelling a Transition  取消转换
+
+                </p>
+            </section>
+            <section class="future" aria-hidden="true" style="top: 330px; display: none;">
+                <p>可以通过false在以下任何生命周期事件中显式返回来取消转换：</p>
+                <p>
+                    在方法中return false可以取消当前触发的行为：
+                    // onBeforeTransition
+                    // onBefore
+                    // onLeaveState
+                    // onLeave
+                    // onTransition
+                    // 所有随后的生命周期事件将被取消，状态将保持不变。
+                </p>
+
+            </section>
+        </section>
+        <section hidden="" aria-hidden="true" class="stack future" style="top: 0px; display: none;" data-previous-indexv="0">
+            <section style="top: 266.5px; display: none;">
+                <h3>3.常见问题</h3>
+            </section>
+            <section class="future" aria-hidden="true" style="top: 330px; display: none;">
+                <p>如何使用有限状态机实现杀人游戏？</p>
+            </section>
+        </section>
+        <section hidden="" aria-hidden="true" class="stack future" style="top: 330px; display: none;" data-previous-indexv="0">
+            <section style="top: 330px; display: none;">
+                <h3>4.解决方法</h3>
+            </section>
+            <section class="future" aria-hidden="true" style="top: 330px; display: none;">
+                <p>将杀人游戏逻辑模型化，划分状态和相应的触发事件与动作，利用生命周期事件进行控制与执行。</p>
+            </section>
+        </section>
+
+        <section hidden="" aria-hidden="true" class="stack future" style="top: 330px; display: none;" data-previous-indexv="0">
+            <section style="top: 330px; display: none;">
+                <h3>5.编码实战</h3>
+            </section>
+        </section>
+        <section hidden="" aria-hidden="true" class="stack future" style="top: 330px; display: none;" data-previous-indexv="0">
+            <section style="text-align: left; top: 330px; display: none;">
+                <h3>6.扩展思考</h3>
+                <!--<p> Javascript Finite State Machine 的异步转换</p>-->
+                <p>如何保存玩家状态？</p>
+                通过webStorage，保存玩家状态，在需要的时候再取出。
+                localStorage.setItem("key","value");//以“key”为名称存储一个值“value”
+                localStorage.getItem("key");//获取名称为“key”的值
+                <!--localStorage.setItem('array',JSON.stringify(array));-->
+                <!--JSON.parse(localStorage.getItem('array'));-->
+            </section>
+            <!--<section>-->
+                <!--&lt;!&ndash;<p>&ndash;&gt;-->
+                    <!--&lt;!&ndash;有时，我们需要在状态转换期间执行一些异步代码，并确保在代码完成之前不会输入新状态。&ndash;&gt;-->
+                    <!--&lt;!&ndash;举个栗子:当我们从一个状态转换出来并想逐渐淡入一个UI组件，或者将它从屏幕上滑出来，而且不想在动画完成之后转换到下一个状态。&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;就可以通过 从任何生命周期事件中返回Promise对象来实现此目的。&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;从生命周期事件返回Promise将导致该转换的生命周期暂停。可以继续解决，也可以拒绝承诺。&ndash;&gt;-->
+                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+            <!--</section>-->
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <h3>7.参考文献</h3>
+            <p>参考一：<a href="https://github.com/jakesgordon/javascript-state-machine">javascript-state-machine官方文档</a></p>
+            <p>参考二：<a href="https://segmentfault.com/a/1190000007032448#articleHeader8">初探Promise</a></p>
+            <p>参考三：百度百科,维基百科</p>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <h3>8.更多讨论</h3>
+            <p></p>
+        </section>
+        <section hidden="" aria-hidden="true" class="future" style="top: 330px; display: none;">
+            <h4>鸣谢</h4>
+            <p class="text-center">感谢大家观看</p>
+            <p class="text-center">
+                <small>BY : 黄苏威 </small>
+            </p>
+        </section>
+    </div>
+<div class="backgrounds"><div class="slide-background present" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: block;"></div><div class="slide-background stack future" data-loaded="true" style="display: block;"><div class="slide-background past" style="display: none;"></div><div class="slide-background past" style="display: none;"></div><div class="slide-background past" data-loaded="true" style="display: none;"></div><div class="slide-background past" data-loaded="true" style="display: none;"></div><div class="slide-background present" data-loaded="true" style="display: block;"></div><div class="slide-background future" data-loaded="true" style="display: none;"></div></div><div class="slide-background stack future" data-loaded="true" style="display: none;"><div class="slide-background past" data-loaded="true" style="display: none;"></div><div class="slide-background past" data-loaded="true" style="display: none;"></div><div class="slide-background past" style="display: none;"></div><div class="slide-background past" style="display: none;"></div><div class="slide-background present" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="slide-background stack future" data-loaded="true" style="display: none;"><div class="slide-background past" data-loaded="true" style="display: none;"></div><div class="slide-background past" style="display: none;"></div></div><div class="slide-background stack future" style="display: none;"><div class="slide-background past" style="display: none;"></div><div class="slide-background past" style="display: none;"></div></div><div class="slide-background stack future" style="display: none;"><div class="slide-background past" style="display: none;"></div></div><div class="slide-background stack future" style="display: none;"><div class="slide-background past" style="display: none;"></div></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><button class="navigate-left" aria-label="previous slide"></button><button class="navigate-right enabled" aria-label="next slide"></button><button class="navigate-up" aria-label="above slide"></button><button class="navigate-down" aria-label="below slide"></button></aside><div class="slide-number" style="display: none;"></div><div class="speaker-notes" data-prevent-swipe=""></div><div class="pause-overlay"></div><div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px);">
+            北京小课堂
+            【JS-task4】有限状态机的实际运用
+
+            分享人：黄苏威
+        </div></div>
+<script src="./Javascript Finite State Machine_files/head.min.js.下载"></script>
+<script src="./Javascript Finite State Machine_files/reveal.js.下载"></script>
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            {src: '../plugin/markdown/marked.js'},
+            {src: '../plugin/markdown/markdown.js'},
+            {src: '../plugin/notes/notes.js', async: true},
+            {
+                src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+    });
+</script>
+
+
+Contact GitHub API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Status He
+</body></html>
