@@ -1,0 +1,481 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>angularJS的两种路由ng-router和ui-router的差异？</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<!--<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">-->
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>【JS-6】</h2>
+            <h3>angularJS的两种路由ng-router和ui-router的差异？</h3>
+            <p>分享人：黄诚翰</p>
+        </section>
+
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section>
+            <h3>一.背景介绍</h3>
+        </section>
+
+
+        <section>
+            <p>angular路由</p>
+
+            <p style="text-align:left">AngularJS 路由允许我们通过不同的 URL 访问不同的内容。</p>
+
+            <p style="text-align:left">通过 AngularJS 可以实现多视图的单页Web应用（single page web application，SPA）。</p>
+
+            <p style="text-align:left">说了那么多，那么，什么是路由呢？</p>
+
+            <p style="text-align:left">AngularJs中的路由，应用比较广泛，主要是允许我们通过不同的url访问不同的内容，可实现多视图的单页web应用。下面看看具体怎么使用。</p>
+
+        </section>
+
+        <section>
+            <p style="text-align:left">通常我们的URL形式为http://jtjds.cn/first/page，但在单页web应用中angularjs通过#+标记实现，比如下面的页面，将是下文中的路由列子：</p>
+            <pre>
+    <code>
+http://192.168.1.109:8000/angular-program/src/main.html#/pagetable/page1
+http://192.168.1.109:8000/angular-program/src/main.html#/pagetable/page2
+http://192.168.1.109:8000/angular-program/src/main.html#/pagetable/page3
+
+    </code>
+</pre>
+
+            <p style="text-align:left">当我们点击以上任一一个链接时，向服务器请求的地址都是http://192.168.1.109:8000/angular-program/src/main.html ，而＃号之后的内容在向服务器端请求时会被浏览器忽略掉，所以我们在客户端实现＃号后面的功能实现即可。简单来说，路由通过＃＋标记帮助我们区分不同逻辑页面，并将其绑定到对应的控制器上。</p>
+
+            <p style="text-align:left">
+            </p>
+        </section>
+        <section>
+
+            <img src="https://images2015.cnblogs.com/blog/905548/201608/905548-20160806142738497-614875041.png">
+
+            <p style="text-align:left">每个页面均有一个控制器控制，通过路由，从而将不同的页面展示出来。</p>
+
+            <p style="text-align:left"></p>
+
+            <p style="text-align:left"></p>
+
+        </section>
+        <section>
+            <h3>二.知识剖析</h3>
+        </section>
+        <section>
+          <h3>ng-Route</h3>
+<p>使用方法
+
+1) 引入 angular-route lib<p><br/>
+
+无论是 ngRoute 还是 ui.router ，作为框架额外的附加功能，都必须以 模块依赖 的形式被引入,而且要注意，需要先引用angular,这是因为angular-router.js需要传入window.angular这个参数，这个参数只有在加载angular才会出现。
+<pre>
+    <code>
+<script src="../../bower_components/angular/angular.js"></script>
+<script src="lib/angular-route.js"></script>
+
+      </code>
+  </pre>
+</section>
+<section>
+      <p>配置路由</p>
+      <pre>
+      <code>
+          var app = angular.module('ngRouteApp', ['ngRoute']);
+          app.config(function($routeProvider){
+    $routeProvider
+        .when('/Main', {
+            templateUrl: "main.html",
+            controller: 'MainCtrl'
+        })
+        .otherwise({ redirectTo: '/tabs' });
+      </code>
+</pre>
+        </section>
+
+        <section>
+            <p style="text-align:left">服务与指令</p>
+
+            <p style="text-align:left">ngRoute 路由模块名
+            </p>
+
+            <p style="text-align:left">$routeProvider 服务提供者，用来定义一个路由表，即地址栏与视图模板的映射，对应于 ui.router 中的 urlRouterProvider 和 stateProvider</p>
+
+            <p style="text-align:left">$route 服务，完成路由匹配，并且提供路由相关的属性访问及事件，如访问当前路由对应的 Controller，对应于下面的 $urlRouter 和 $state</p>
+            <p style="text-align:left">$routeParams 服务，保存了地址栏中的参数，对应于下面的 $stateParams</p>
+            <p style="text-align:left">ng-view 指令，用来在主视图中指定加载子视图的区域，对应于下面的 ui-view</p>
+        </section>
+        <section>
+            <h3>ui-router</h3>
+            <p style="text-align:left">使用方法</p>
+            <p>1、引入js文件</p>
+            <pre>
+                <code>
+<script type="text/javascript" src="JS/angular.min.js"></script>
+<script type="text/javascript" src="JS/angular-ui-router.min.js"></script>
+                </code>
+            </pre>
+        </section>
+        <section>
+            <p>注入ui-router模块</p>
+            <pre>
+                <code>
+var app = angular.module('myApp', ['ui.router']);
+app.config(function($urlRouterProvider, $stateProvider) {
+    $urlRouterProvider.otherwise("/index");  //这条是相当于报错的时候跳转
+    $stateProvider
+        .state("Main", {
+            url: "/main",
+            templateUrl: "main.html",
+            controller: 'MainCtrl'
+        })
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>服务与指令</h3>
+            <p>
+<p>ui.router 路由模块名</p>
+
+<p>$urlRouterProvider 服务提供者，用来配置路由重定向</p>
+<p>$stateProvider 服务提供者，用来配置路由</p>
+
+<h3>$urlRouter 服务</h3>
+<p>$state 服务，用来显示当前路由状态信息，以及一些路由方法（如：跳转）</p>
+$stateParams 服务，用来存储路由匹配时的参数</p><br>
+
+ui-view 指令，路由模板渲染，对应的 dom 相关联<br>
+ui-sref 指令，链接到特定状态<br>
+            </p>
+        </section>
+        <section>
+            <h3>三.常见问题</h3>
+        </section>
+        <section>
+            <p style="text-align:left">多视图</p>
+
+            <img src="多样化视图.jpg">
+        </section>
+
+        <section>
+            <p style="text-align:left">大多数的应用程序都可以分解为一个一个区块。最简单的情况，一个应用程序有头部（header）,主体内容（main content area），以及一个尾部（footer）。</p>
+
+            <p style="text-align:left">通常一个应用程序会有一个额外的侧边栏（sidebar ）在页面的左边或者右边。</p>
+        </section>
+        <section>
+            <p style="text-align:left">大多数用例中，这些区块将同时显示在页面上。Angular.js 的内置路由ngRoute只允许一个视图（ng-view）出现在页面上。</p>
+            <pre>
+                <code>
+<div ng-view></div>
+        <div ng-view></div>
+                </code>
+            </pre>
+            <p>因为ng-router无法命名ng-view，而ui-router则可以通过命名ui-view来实现显示不同的视图出现在页面上</p>
+        </section>
+        <section>
+
+            <pre>
+                <code>
+                    //html部分
+<div ui-view></div>
+<div ui-view="login"></div>
+                    //js部分
+.state("login.page1",{
+            url:"/page1",
+            views:{
+                '':{template:"page2"},
+                'login':{template:"hello"}
+            }
+        })
+                </code>
+            </pre>
+            <p style="text-align:left">可以给视图命名，如：ui-view=”status”。</p>
+            <p style="text-align:left">可以在路由配置中根据视图名字(如：status)，配置不同的模板（其实还有controller等）。</p>
+
+
+
+        </section>
+
+        <section>
+            <p style="text-align:left">嵌套视图</p>
+
+            <p style="text-align:left">嵌套视图：页面某个动态变化区块中，嵌套着另一个可以动态变化的区块。</p>
+            <img src="嵌入式视图.jpg">
+        </section>
+
+
+        <section>
+        <p style="text-align:left">其实，嵌套视图，在html中的最终表现就像这样：</p>
+        <pre>
+        <code>
+        <div ng-view>
+        session
+        <div ng-view>article</div>
+        </div>
+
+        转成javascript，我们会在程序里这样写：
+        .when('/error', {
+        template: '<div ng-view>error</div>'
+    })
+        </code>
+        </pre>
+
+        </section>
+
+        <section>
+        <p style="text-align:left">一运行，报了一个这样的错误：</p>
+
+        <p style="text-align:left">RangeError: Maximum call stack size exceeded</p>
+
+        <p style="text-align:left">发现浏览器崩溃了，因为 ng-view 会陷入死循环，无限递归下去。</p>
+        <p>使用 ui.router 能很容易解决这个问题，因为它定义的路由有明确的父子关系，并通过 ui-view 指令将子路由模版插入到父路由模板的
+        
+        ui-view中去，从而实现视图嵌套。看代码：</p>
+
+
+        <!--<pre>-->
+        <!--<code>-->
+        <!--$stateProvider-->
+        <!--.state('parent', {-->
+        <!--abstract: true,-->
+        <!--url: '/',-->
+        <!--template: 'I am parent <div ui-view></div>'-->
+        <!--})-->
+        <!--.state('parent.child', {-->
+        <!--url: '',-->
+        <!--template: 'I am child'-->
+        <!--});        -->
+        <!--</code>-->
+        <!--</pre>-->
+
+        </section>
+
+        <section>
+        <pre>
+            <code>
+$stateProvider
+        .state("login",{
+            url:"/login",
+            templateUrl:"login.html"
+            //controller: 'loginCtr' //选择控制器 也能写成 loginCtr as login
+        })
+        .state("login.page1",{
+            url:"/page1",
+            template:"page1"
+        })
+        .state("login.page2",{
+            url:"/page2",
+            template:"page2"
+        })
+        .state("login.page3",{
+            url:"/page3",
+            template:"page3"
+        })
+            </code>
+        </pre>
+
+        <!--<p style="text-align:left">记住下面是ui.router用到的所有指令</p>-->
+        <!--<pre>-->
+        <!--<code>-->
+        <!--ui.router-->
+        <!--$urlRouterProvider(服务提供者) ——— 用来配置路由重定向-->
+        <!--$urlRouter(服务)-->
+        <!--$stateProvider(服务提供者) ——— 用来配置路由-->
+        <!--$state(服务) ——— 用来显示当前路由状态信息，以及一些路由方法（如：跳转）-->
+        <!--$stateParams(服务) ——— 用来存储路由匹配时的参数-->
+        <!--ui-view(指令) ——— 路由模板渲染，对应的dom相关联-->
+        <!--ui-sref(指令)        -->
+        <!--</code>-->
+        <!--</pre>-->
+
+        </section>
+        <section>
+            <h3>四.解决方案</h3>
+        </section>
+
+
+        <section>
+
+需要澄清的是，这样的要求可以使用ngRoute来完成。但是你需要让两个控制器（一个用于列表，一个用于显示和隐藏详情）共享一个视图。这样的结果不是理想的，因为我们想要列表和详情页面有各自的控制器和视图，并且职责单一（显示列表或者显示列表项目的详情）。封装这些用户接口模块到它们各自的视图，这样我们就有更多的“可组合UI”，允许我们将各个区块整合到一起，或者根据需求拆分。嵌入式视图，不仅能够让这些视图同时出现，还能让一个视图嵌入到另一个视图中。
+        </section>
+
+
+        <section>
+            <h3>五.代码实战</h3>
+        </section>
+
+
+        <section>
+            <h3>六.拓展思考</h3>
+        </section>
+        <section>
+            <h3>单页web应用（SPA）的简单介绍</h3>
+            <p>单页 Web 应用 (single-page application 简称为 SPA) 是一种特殊的 Web 应用。它将所有的活动局限于一个Web页面中，仅在该Web页面初始化时加载相应的HTML、JavaScript 和 CSS。一旦页面加载完成了，SPA不会因为用户的操作而进行页面的重新加载或跳转。而是利用 JavaScript 动态的变换HTML的内（采用的是div切换显示和隐藏），从而实现UI与用户的交互。由于避免了页面的重新加载，SPA 可以提供较为流畅的用户体验。得益于ajax，我们可以实现无跳转刷新，又多亏了浏览器的histroy机制，我们用hash的变化从而可以实现推动界面变化。</p>
+
+        </section>
+        <section>
+            <h3>为了单页面应用的要求（改变视图的同时不会向后端发出请求。），浏览器当前提供了以下两种支持hash和history：</h3>
+            <p>hash —— 即地址栏 URL 中的 # 符号（此 hash 不是密码学里的散列运算）。</p>
+
+<p>比如这个 URL：http://www.abc.com/#/hello，hash 的值为 #/hello。它的特点在于：hash 虽然出现在 URL 中，但不会被包括在 HTTP 请求中，对后端完全没有影响，因此改变 hash 不会重新加载页面。</p>
+        </section>
+        <section>
+            <p>history —— 利用了 HTML5 History Interface 中新增的 pushState() 和 replaceState() 方法。（需要特定浏览器支持）</p>
+            <p>这两个方法应用于浏览器的历史记录栈，在当前已有的 back、forward、go 的基础之上，它们提供了对历史记录进行修改的功能。只是当它们执行修改时，虽然改变了当前的 URL，但浏览器不会立即向后端发送请求。</p>
+            <p>如果不想要很丑的 hash，我们可以用路由的 history 模式，这种模式充分利用 history.pushState API 来完成
+
+URL 跳转而无须重新加载页面。—— Vue-router 官网。</p>
+        </section>
+        <section>
+            <h3>router去掉#</h3>
+            <p>ui.router原理是改变location.hash的值，而location.hash 本来就是指 URL 里 # 符号及其后的部分，如果你是要做路由映射并且不想用基于 hash 的方案，那你应该考虑 HTML5 的 History API。</p>
+            <p>$location服务支持配置两种URL格式：Hashbang模式（默认）和HTML5模式。两种模式下的API都是通用的。如下图</p>
+            <p>静态网站，我们需要修改的地方包含三个文件</p>
+            <p>index.html : ng-app的定义文件</p>
+            <p>app.js : 对应ng-app的控制文件</p>
+            <p>nginx.conf : nginx的网站配置文件</p>
+        </section>
+        <section>
+            <h3>编辑 index.html，增加base标签。</h3>
+            <p>在head标签里增加一行</p>
+<pre>
+    <code>
+        <!--<base href="/工程名/">-->
+    </code>
+</pre>
+            
+        </section>
+        <section>
+            <h3>编辑app.js，增加 $locationProvider.html5Mode(true)</h3>
+            <pre>
+                <code>
+book.config(['$routeProvider', '$locationProvider', '$sceProvider', 'tplProvider', function ($routeProvider, $locationProvider, $sceProvider, tplProvider) {
+    $routeProvider
+        .when('/', {templateUrl: tplProvider.html('welcome'), controller: 'WelcomeCtrl'})
+        .when('/book', {templateUrl: tplProvider.html('book'), controller: 'BookCtrl'})             //图书
+        .when('/book-r1', {templateUrl: tplProvider.html('book-r1'), controller: 'BookR1Ctrl'})   //R的极客理想
+        .when('/video', {templateUrl: tplProvider.html('video'), controller: 'VideoCtrl'})         //视频
+        .when('/about', {templateUrl: tplProvider.html('about'), controller: 'AboutCtrl'})         //关于作者
+        .otherwise({redirectTo: '/'});
+    $locationProvider.html5Mode(true);
+}]);
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h3>
+                编辑nginx的配置文件，增加try_files配置。
+            </h3>
+            <pre>
+                <code>
+server {
+        set $htdocs /www/deploy/mysite/onbook;
+        listen 80;
+        server_name onbook.me;
+        location / {
+            root $htdocs;
+            try_files $uri $uri/ /工程名/index.html =404;
+        }
+}
+                </code>
+            </pre>
+        </section>
+        <section>
+
+            <h3>七.参考文献</h3>
+        </section>
+        <section>
+
+            <p><a href="http://www.cnblogs.com/xing901022/p/5154358.html">AngularJs ng-route路由详解</a></p>
+            <p><a href="http://blog.csdn.net/zcl_love_wx/article/details/52034193">深究AngularJS——ui-router详解
+</a></p>
+            <p><a href="http://blog.csdn.net/nuanxiasuiyuan/article/details/71156137">AngularJS中ngRouter和uiRouter的区别</a></p>
+            <p><a href="http://blog.csdn.net/wolifun_fry/article/details/52262426">多样化视图与嵌套视图 </a></p>
+        </section>
+        <section>
+            <h3>八.更多讨论</h3>
+        </section>
+        <section>
+            <h3>关于ui-router与ng-rouer还有什么想了解的</h3>
+        </section>
+        <section>
+            <p>感谢大家观看</p>
+        </section>
+
+    </div>
+</div>
+
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+
+<script>
+
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+
+    // 初始化幻灯片
+    Reveal.initialize({
+        history : true,
+        dependencies : [
+            {src : '../plugin/markdown/marked.js'},
+            {src : '../plugin/markdown/markdown.js'},
+            {src : '../plugin/notes/notes.js', async : true},
+            {
+                src : '../plugin/highlight/highlight.js',
+                async : true,
+                callback : function(){ hljs.initHighlightingOnLoad(); }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
