@@ -1,0 +1,33 @@
+<div class="box">
+    <form id="form" enctype="multipart/form-data">
+        <label for="imgFile">上传:</label>
+        <label for="imgFile" class="btn btn-primary btn-md" ng-disabled="upDisabled">上传图片</label>
+        <!--<span>图片最大为2000000byte(约2MB)</span>-->
+        <input type="file" style="display: none" id="imgFile">
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>名字</th>
+            <th>大小</th>
+            <th>进度</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr ng-if="hasImg">
+            <td>{{name}}</td>
+            <td>{{size}}</td>
+            <td><progress id="progress" ng-value="progress" max="100"></progress><span>{{progress}}</span></td>
+            <td>{{status}}</td>
+            <td>
+                <div class="btn-group">
+                    <button class='btn btn-success' ng-disabled="upDisabled" ng-click="upLoad()">上传</button>
+                    <button class="btn btn-danger" ng-click="delete()">删除</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
