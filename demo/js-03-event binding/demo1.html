@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>bind to on</title>
+  <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js">
+  </script>
+  <script>
+    $(document).ready(function () {
+      $("#div1").on("click", function () {
+        $(this).css("background-color", "red");
+      });
+      $("#div2").bind("click", function () {
+        $(this).css("background-color", "red");
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+  <h4 style="color:green;">这个例子演示了如何使用on（）和bind（）实现相同的效果。</h4>
+
+  <div id="div1" style="border:1px solid black;">
+    <p>点击使用on（）方法设置背景颜色。</p>
+  </div>
+  <br>
+
+  <div id="div2" style="border:1px solid black;">
+    <p>点击使用bind（）方法设置背景颜色</p>
+  </div>
+
+</body>
+
+</html>
