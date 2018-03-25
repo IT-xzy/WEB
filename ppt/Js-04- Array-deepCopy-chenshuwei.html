@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>如何实现数组的深拷贝和浅拷贝？</title>
+
+    <link rel="stylesheet" href="../css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="../css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="../lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? '../css/reveal/print/pdf.css' :
+            '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+
+<body>
+<img src="../img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>【JS-task04】如何实现数组的深拷贝和浅拷贝?</h3>
+            <h3>小课堂【深圳】</h3>
+            <p>分享人：陈树威</p>
+        </section>
+        <section>
+            <p>目录</p>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多提问</p>
+        </section>
+        <section>
+            <section>
+                <h3>1.背景介绍</h3>
+            </section>
+            <section>
+                <h4> 1.深复制和浅复制</h4>
+                <p style="text-align: left">
+                    在JavaScript中，对于Object和Array这类引用类型值，他的复制有两种情况：深复制、浅复制。</p>
+                <p style="text-align: left"> 浅复制：浅复制是复制引用，复制后的引用都是指向同一个对象的实例，彼此之间的操作会互相影响</p>
+                <p style="text-align: left">
+                    深复制：深复制不是简单的复制引用，而是在堆中重新分配内存，并且把源对象实例的所有属性都进行新建复制，以保证深复制的对象的引用图不包含任何原有对象或对象图上的任何对象，复制后的对象与原来的对象是完全隔离的</p>
+
+            </section>
+            <section>
+                <img src="../img/Js-04-Array-deepCopy/shallowCopy.png" alt="">
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>2.知识剖析</h3>
+            </section>
+            <section>
+                <h4>浅拷贝</h4>
+                <p style="text-align: left">Js的数据类型分为两种，基本类型和引用类型</p>
+                <ul>
+                    <li>基本类型:是指Number、String、Boolean、null、undefined</li>
+                    <li>引用类型:是指对象、数组等，就是像这样的东西<br/>{ name: 'Larry', skill: 'Node.js' }</li>
+                    <li>引用类型跟基本类型型別最大的区别就在于他们的传值方式</li>
+                </ul>
+            </section>
+            <section>
+                <h4>基本型別是传 value，像是这样</h4>
+                <pre><code>
+                    var a = 10;
+                    var b = a;
+                    b = 20;
+
+                    console.log(a); // 10
+                    console.log(b); // 20
+                </code></pre>
+                <p>在修改b时并不会改到a</p>
+            </section>
+            <section>
+                <h4>但引用类型不同，引用类型传的是引用指针</h4>
+                <pre><code>
+                    var array1 = [0,1,2,3];
+                    var array2 = array1;
+                    array2[0] = 100;
+
+                    console.log(array1); // [100,1,2,3] <-- 数组第一位 被改到了
+                    console.log(array2); // [100,1,2,3]
+                </code></pre>
+                <ul style="text-align: left;display:block">
+                    <li>复制一份array1叫做array2</li>
+                    <li>然後把array2[0]改成100</li>
+                    <li>但卻不小心改到array1[0]</li>
+                    <li>因为他们根本就是同一个对象</li>
+                    <li>这就是所谓的浅拷贝</li>
+                    </ul>
+            </section>
+            <section>
+                <p>为了避免这种错误发生就要写成这样</p>
+                <pre><code>
+                    var array1 = [0,1,2,3];
+                    var array2 = [array1[0],array1[1],array1[2],array1[3]];
+                    array2[0] = 100;
+
+                    console.log(array1); // [0,1,2,3] <-- 数组第一位没被改到了
+                    console.log(array2); // [100,1,2,3]
+                </code></pre>
+                <p style="text-align: left">
+                    这就是深拷贝，改变复制后的值并不会影响之前的值
+                </p>
+            </section>
+            <section>
+                <img style="width: 700px;height: auto" src="../img/Js-04-Array-deepCopy/shallowCopy-vs-DeepCopy.png" alt="">
+            </section>
+            <section>
+                <h4>如何实现数组的深拷贝？</h4>
+                <p style="text-align: left">一、Object.assign</p>
+                <pre><code>
+                    var array1 = [0,1,2,3];
+                    var array2 = Object.assign([], array1);
+                    array2[0] = 100;
+
+                    console.log(array1); // [0,1,2,3] <-- 沒被改到
+                    console.log(array2); // [100,1,2,3]
+                </code></pre>
+                <p style="text-align: left">Object.assign是 ES6 的新函式可以实现跟上面一样的效果</p>
+                <p style="text-align: left">Object.assign([], obj1)的意思是先建议一个对象（数组）[]
+                    接著把array1中所有的属性复制过去
+                    所以array2会长得跟array1一样
+                    这时候再修改array2[0]也不會影响array[1]
+
+                    因为Object.assign跟我们手动复制的效果相同
+                    所以一样只能处理深度只有一层的对象
+                    沒办法做到真正的 Deep Copy
+                    不过如果要复制的对象只有一层的話可以考虑使用他</p>
+            </section>
+            <section>
+                <p>Jq的$.map和$.extend</p>
+                 <pre><code>
+                     var x = [{b:0},1,2,3];
+                    var b=Object.assign([],x);
+                    b[0].b=2;
+                    console.log(x[0].b);
+                    console.log(b[0].b);
+
+                    var y = $.map(x,function (obj) {
+                        return $.extend(true,{},obj)//深复制
+                    });
+                    y[0].b=1;
+                    console.log(x[0].b);
+                    console.log(y[0].b);
+                 </code></pre>
+                <p>使用jq的方法可以实现深复制，无论数组里面嵌套了几层都可以深复制出来</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>3.常见问题</h3>
+            </section>
+            <section>
+                <div style="text-align:left ; padding:0% 12% ;font-size:30px">
+                    <p>除了以上方法还有其他深复制数组的方法吗？</p>
+                </div>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>4.解决办法</h3>
+            </section>
+            <section>
+                <h4>Json转换的方法</h4>
+                <pre><code>
+                   var x = [{b:0},1,2,3];
+                    function jsonClone(obj) {
+                        return JSON.parse(JSON.stringify(obj));
+                    }
+                    var clone = jsonClone(x);
+                    clone[0].b=2
+                    console.log(x[0].b)
+                    console.log(clone[0].b)
+                </code></pre>
+                <p></p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>6、扩展思考</h3>
+            </section>
+            <section>
+                <h4 style="text-align: left">使用Json深复制数组的方法有哪些缺点</h4>
+                <p style="text-align: left">Json方法深复制的缺点：Json的方法只能用于引用类型中的Number, String, Boolean, Array, 扁平对象，
+                    对于像function这种对象无法复制</p>
+            </section>
+
+        </section>
+        <section>
+            <section>
+                <h3>7、参考文献：</h3>
+                <div style="text-align:left ; padding:0% 12% ;font-size:34px">
+                    <p>参考一：
+                        <a href="http://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/" target="_blank">
+                            [Javascript] 關於 JS 中的淺拷貝和深拷貝
+                        </a>
+                    </p>
+                    <p>参考二：
+                        <a href="http://jerryzou.com/posts/dive-into-deep-clone-in-javascript/" target="_blank">深入剖析 JavaScript 的深复制</a>
+                    </p>
+                </div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>8、更多提问</h3>
+            </section>
+        </section>
+        <section>
+            <p>谢谢大家</p>
+            <p>制作人：陈树威</p>
+        </section>
+
+    </div>
+</div>
+
+<script src="../lib/reveal/js/head.min.js"></script>
+<script src="../lib/reveal/reveal.js"></script>
+
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: false, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        transition: 'convex',
+
+
+        dependencies: [{
+            src: '../plugin/markdown/marked.js'
+        },
+            {
+                src: '../plugin/markdown/markdown.js'
+            },
+            {
+                src: '../plugin/notes/notes.js',
+                async: true
+            },
+            {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+
+</html>
