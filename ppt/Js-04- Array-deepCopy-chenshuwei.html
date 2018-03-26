@@ -76,11 +76,11 @@
                 <ul>
                     <li>基本类型:是指Number、String、Boolean、null、undefined</li>
                     <li>引用类型:是指对象、数组等，就是像这样的东西<br/>{ name: 'Larry', skill: 'Node.js' }</li>
-                    <li>引用类型跟基本类型型別最大的区别就在于他们的传值方式</li>
+                    <li>引用类型跟基本类型最大的区别就在于他们的传值方式</li>
                 </ul>
             </section>
             <section>
-                <h4>基本型別是传 value，像是这样</h4>
+                <h4>基本类型是传 value，像是这样</h4>
                 <pre><code>
                     var a = 10;
                     var b = a;
@@ -106,7 +106,7 @@
                     <li>然後把array2[0]改成100</li>
                     <li>但卻不小心改到array1[0]</li>
                     <li>因为他们根本就是同一个对象</li>
-                    <li>这就是所谓的浅拷贝</li>
+                    <li>这就是所谓的浅复制</li>
                     </ul>
             </section>
             <section>
@@ -127,7 +127,7 @@
                 <img style="width: 700px;height: auto" src="../img/Js-04-Array-deepCopy/shallowCopy-vs-DeepCopy.png" alt="">
             </section>
             <section>
-                <h4>如何实现数组的深拷贝？</h4>
+                <h4>如何实现数组的深复制？</h4>
                 <p style="text-align: left">一、Object.assign</p>
                 <pre><code>
                     var array1 = [0,1,2,3];
@@ -196,6 +196,9 @@
                 </code></pre>
                 <p></p>
             </section>
+        </section>
+        <section>
+            <h3>5.编码实战</h3>
         </section>
         <section>
             <section>
